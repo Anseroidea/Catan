@@ -5,20 +5,37 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class CatanApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
+        List<Tile> tiles = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 3; j++){
+                tiles.add(new Tile(i));
+            }
+        }
+        tiles.add(new Tile(2));
+        tiles.stream().map(Tile::getType).forEach(System.out::println);
+        Collections.shuffle(tiles);
         HexGridPane<Tile> hexGridPane = new HexGridPane<>(50);
+        for (int r = -2; r < 3; r++){
+            for (int c = 0; c < 5 - Math.abs(r); c++){
+                hexGridPane.add(tiles.remove(0), r, c);
+            }
+        }
         for (int i = -3; i < 4; i++) {
             if (Math.abs(i) == 3){
                 for (int j = 0; j < 7 - Math.abs(i); j++){
-                    hexGridPane.add(new Tile(SwingFXUtils.toFXImage(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("Water.png"))), null)), i, j);
+                    hexGridPane.add(new Tile(5), i, j);
                 }
             }
-            hexGridPane.add(new Tile(SwingFXUtils.toFXImage(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("Water.png"))), null)), i, 0);
-            hexGridPane.add(new Tile(SwingFXUtils.toFXImage(ImageIO.read(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("Water.png"))), null)), i, 7 - Math.abs(i) - 1);
+            hexGridPane.add(new Tile(5), i, 0);
+            hexGridPane.add(new Tile(5), i, 7 - Math.abs(i) - 1);
         }
         primaryStage.setScene(new Scene(new StackPane(hexGridPane.toPane())));
         primaryStage.show();
