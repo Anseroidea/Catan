@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.util.Objects;
 
-public class HexPaneApplication extends Application {
+public class CatanApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         HexGridPane<Tile> hexGridPane = new HexGridPane<>(50);
