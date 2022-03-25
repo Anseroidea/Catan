@@ -23,7 +23,7 @@ public class CatanApplication extends Application {
         Collections.shuffle(tiles);
         HexGridPane<Tile> hexGridPane = new HexGridPane<>(50);
         for (int r = -2; r < 3; r++){
-            for (int c = 0; c < 2; c++){
+            for (int c = 1; c <= 5 - Math.abs(r); c++){
                 tiles.stream().map(Tile::getType).forEach(System.out::print);
                 System.out.println();
                 hexGridPane.add(tiles.remove(0), r, c);

@@ -22,6 +22,8 @@ public class HexGridPane<T extends Displayable> extends HexGrid<T>{
         for (Integer r : map.keySet()){
             for (int c = 0; c < map.get(r).size(); c++){
                 if (map.get(r).get(c) != null){
+                    System.out.println("r = " + r);
+                    System.out.println("c = " + c);
                     double rowCoord = (r + maxR) * (radius + radius/2.);
                     double colCoord = Math.abs(r) * 0.9 * radius + radius * Math.sqrt(3) * c;
                     ImageView im = new ImageView(map.get(r).get(c).getImage());
