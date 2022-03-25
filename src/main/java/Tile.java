@@ -10,8 +10,8 @@ import java.util.Objects;
 
 public class Tile implements Displayable{
 
-    public final static String[] tileTypes = {"Brick", "Desert", "Ore", "Sheep", "Wheat", "Water"};
-    public final static BufferedImage[] graphics = new BufferedImage[6];
+    public final static String[] tileTypes = {"Brick", "Desert", "Forest", "Ore", "Sheep", "Wheat", "Water"};
+    public final static BufferedImage[] graphics = new BufferedImage[7];
     private Integer id;
     private String type;
 
