@@ -9,7 +9,7 @@ public class HexGridPane<T extends Displayable> extends HexGrid<T>{
 
     public <T> HexGridPane(int r){
         super();
-        radius = r;
+        radius = r - 4;
     }
 
     public AnchorPane toPane(){
@@ -22,13 +22,11 @@ public class HexGridPane<T extends Displayable> extends HexGrid<T>{
         for (Integer r : map.keySet()){
             for (int c = 0; c < map.get(r).size(); c++){
                 if (map.get(r).get(c) != null){
-                    System.out.println("r = " + r);
-                    System.out.println("c = " + c);
                     double rowCoord = (r + maxR) * (radius + radius/2.);
-                    double colCoord = Math.abs(r) * 0.9 * radius + radius * Math.sqrt(3) * c;
+                    double colCoord = Math.abs(r) * 0.85 * radius + radius * Math.sqrt(3) * c;
                     ImageView im = new ImageView(map.get(r).get(c).getImage());
-                    im.setFitHeight(radius * 2);
-                    im.setFitWidth(radius * 2);
+                    im.setFitHeight(radius * 1.9);
+                    im.setFitWidth(radius * 1.9);
                     im.setLayoutY(rowCoord);
                     im.setLayoutX(colCoord);
                     ap.getChildren().add(im);
