@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -7,11 +6,10 @@ public class ResourceDeck {
     public Map<Resource, Integer> resource;
 
     public ResourceDeck() {
-
     }
 
-   public boolean getResource(Resource r, Integer i) {
-        int count = getResource(this.r);
+   public boolean getResource(Resource resou, Integer i) {
+        int count = getResource(resou);
 
         if (count >= i) {
             return true;
