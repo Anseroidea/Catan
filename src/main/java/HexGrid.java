@@ -4,9 +4,11 @@ import java.util.stream.IntStream;
 public class HexGrid<T> {
 
     private Map<Integer, List<T>> map;
+    private VertexManager vertexManager;
 
     public <T> HexGrid(){
          map = new TreeMap<>();
+         vertexManager = new VertexManager();
     }
 
     public void add(T t, int r, int c){

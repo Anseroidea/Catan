@@ -1,3 +1,4 @@
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -24,9 +25,11 @@ public class HexGridPane<T extends Displayable> extends HexGrid<T>{
                 if (map.get(r).get(c) != null){
                     double rowCoord = (r + maxR) * (radius + radius/2.);
                     double colCoord = Math.abs(r) * 0.85 * radius + radius * Math.sqrt(3) * c;
-                    ImageView im = new ImageView(map.get(r).get(c).getImage());
-                    im.setFitHeight(radius * 1.9);
-                    im.setFitWidth(radius * 1.9);
+                    Image i = map.get(r).get(c).getImage();
+                    ImageView im = new ImageView(i);
+                    double factor = radius * 2 / i.getHeight();
+                    im.setFitHeight(radius * 2);
+                    im.setFitWidth(i.getWidth() * factor);
                     im.setLayoutY(rowCoord);
                     im.setLayoutX(colCoord);
                     ap.getChildren().add(im);

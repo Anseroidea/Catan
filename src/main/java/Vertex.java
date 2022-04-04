@@ -11,7 +11,7 @@ public class Vertex {
 
     public Map<Integer, Tile> adjacentTiles;
     public Map<Integer, Edge> adjacentEdges;
-    public settlement Settlement;
+    public Settlement settlement;
 
     public int getPaneX() {
         return 0;
@@ -21,12 +21,12 @@ public class Vertex {
         return 0;
     }
 
-    public settlement getSettlement() {
-        return Settlement;
+    public Settlement getSettlement() {
+        return settlement;
     }
 
     public Map<Integer, Tile> getAdjacentTiles() {
-
+        return null;
     }
 
 }
