@@ -25,7 +25,7 @@ public class Vertex {
     }
 
     public Map<Integer, Tile> getAdjacentTiles() {
-
+        return adjacentTiles;
     }
 
 }
