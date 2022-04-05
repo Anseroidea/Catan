@@ -1,6 +1,5 @@
 import java.util.Map;
 
-
 public class ResourceDeck {
 
     public Map<Resource, Integer> resource;
@@ -9,8 +8,7 @@ public class ResourceDeck {
     }
 
    public boolean getResource(Resource resou, Integer i) {
-        int count = getResource(resou);
-
+        int count = resource.get(resou);
         if (count >= i) {
             return true;
         }

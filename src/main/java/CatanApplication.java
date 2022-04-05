@@ -21,14 +21,16 @@ public class CatanApplication extends Application {
         }
         tiles.stream().map(Tile::getType).forEach(System.out::println);
         Collections.shuffle(tiles);
-        HexGridPane<Tile> hexGridPane = new HexGridPane<>(50);
+        HexGridPane hexGridPane = new HexGridPane(50);
+
+        /*
         for (int r = -2; r < 3; r++){
             for (int c = 1; c <= 5 - Math.abs(r); c++){
-                tiles.stream().map(Tile::getType).forEach(System.out::print);
-                System.out.println();
                 hexGridPane.add(tiles.remove(0), r, c);
             }
         }
+
+         */
         for (int i = -3; i < 4; i++) {
             if (Math.abs(i) == 3){
                 for (int j = 0; j < 7 - Math.abs(i); j++){

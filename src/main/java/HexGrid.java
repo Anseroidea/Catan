@@ -35,6 +35,10 @@ public class HexGrid<T> {
         return map.toString();
     }
 
+    public boolean contains(int r, int c){
+        return map.containsKey(r) && c < map.get(r).size() && map.get(r).get(c) != null;
+    }
+
     protected Map<Integer, List<T>> getMap(){
         return map;
     }
