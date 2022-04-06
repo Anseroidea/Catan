@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Vertex {
 
-    public Map<Integer, Tile> adjacentTiles;
-    public Map<Integer, Edge> adjacentEdges;
-    public Settlement settlement;
+    private Map<Integer, Tile> adjacentTiles;
+    private Map<Integer, Edge> adjacentEdges;
+    private Settlement settlement;
 
     public Vertex() {
 
