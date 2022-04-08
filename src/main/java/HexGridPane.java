@@ -35,7 +35,7 @@ public class HexGridPane extends HexGrid{
                     im.setFitWidth(i.getWidth() * factor);
                     StackPane sp = new StackPane(im);
                     if (map.get(r).get(c).getWeightLetter() != null){
-                        sp.getChildren().add(new Label(map.get(r).get(c).getWeightLetter()));
+                        sp.getChildren().addAll(new Circle(r), new Label(map.get(r).get(c).getWeightLetter()));
                     }
                     sp.setLayoutY(rowCoord);
                     sp.setLayoutX(colCoord);

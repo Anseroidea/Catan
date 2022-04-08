@@ -30,7 +30,9 @@ public class CatanApplication extends Application {
             }
         }
         Collections.shuffle(selectableTiles);
-        Tile start = selectableTiles.get(0);
+        Tile start = null;
+        while (start == null || start.getId() == 1)
+            start = selectableTiles.get(0);
         Set<String> weights = Tile.weights.keySet();
         Iterator<String> it = weights.iterator();
         int r = start.getR();
@@ -59,30 +61,36 @@ public class CatanApplication extends Application {
             }
             r += rDir;
             c += cDir;
-            //System.out.println("(r + \",\" + c) = " + (r + "," + c));
+            System.out.println("(r + \",\" + c) = " + (r + "," + c));
             if (hexGridPane.get(r, c).getWeightLetter() != null){
-                //System.out.println("Going in...");
-                //System.out.println("(r + \",\" + c) = " + (r + "," + c));
+                System.out.println("Going in...");
+                System.out.println("(r + \",\" + c) = " + (r + "," + c));
                 if (r == -2 + loopsIn && c < 5 - Math.abs(r) - loopsIn){
-                    r -= rDir + 1;
-                    c++;
+                    System.out.println("a");
+                    r += rDir + 1;
+                    c -= rDir;
                 } else if (c == 5 - Math.abs(r) - loopsIn && r < 0) {
+                    System.out.println("b");
                     r -= (-rDir - 1);
                     c += rDir;
                 } else if (c == 5 - Math.abs(r) - loopsIn && r >= 0 && r < 2 - loopsIn){
+                    System.out.println("c");
                     r += (cDir - 1)/2;
                     c -= (cDir + 1)/2;
                 } else if (r == 2 - loopsIn && c > 1 + loopsIn){
+                    System.out.println("d");
                     r--;
-                    c += rDir + 1;
+                    c -= rDir - 1;
                 } else if (c == 1 + loopsIn && r > 0){
-                    r += rDir + 1;
+                    System.out.println("e");
+                    r -= rDir + 1;
                     c++;
                 } else {
+                    System.out.println("f");
                     r = 0;
                     c++;
                 }
-                //System.out.println("(r + \",\" + c) = " + (r + "," + c));
+                System.out.println("(r + \",\" + c) = " + (r + "," + c));
                 loopsIn++;
                 if (hexGridPane.get(r, c).getWeightLetter() != null){
                     break;
