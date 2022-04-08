@@ -8,7 +8,7 @@ public class ResourceDeck {
     }
 
    public boolean getResource(Resource resou, Integer i) {
-        int count = resource.get(resou);
+        int count = getCount(resou);
         if (count >= i) {
             return true;
         }
