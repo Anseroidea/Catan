@@ -5,10 +5,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class CatanApplication extends Application {
     @Override
@@ -22,15 +19,52 @@ public class CatanApplication extends Application {
         tiles.stream().map(Tile::getType).forEach(System.out::println);
         Collections.shuffle(tiles);
         HexGridPane hexGridPane = new HexGridPane(50);
-
-        /*
+        List<Tile> selectableTiles = new ArrayList<>();
         for (int r = -2; r < 3; r++){
             for (int c = 1; c <= 5 - Math.abs(r); c++){
-                hexGridPane.add(tiles.remove(0), r, c);
+                Tile t = tiles.remove(0);
+                hexGridPane.add(t, r, c);
+                if (Math.abs(r) == 2 || c == 1 || c == 5 - Math.abs(r)){
+                    selectableTiles.add(t);
+                }
             }
         }
-
-         */
+        Collections.shuffle(selectableTiles);
+        Tile start = selectableTiles.get(0);
+        Set<String> weights = Tile.weights.keySet();
+        Iterator<String> it = weights.iterator();
+        int r = start.getR();
+        int c = start.getC();
+        int loopsIn = 0;
+        System.out.println("(r + \",\" + c) = " + (r + "," + c));
+        while(true){
+            int rDir = 0;
+            int cDir = 0;
+            if (r == 2 && c != 1) {
+                cDir = -1;
+            } else if (r == -2 && c != 3){
+                cDir = 1;
+            } else if (c == 1){
+                rDir = -1;
+            } else if (c == 5 - Math.abs(r) - 2 * loopsIn) {
+                rDir = 1;
+                if (r >= 0){
+                    cDir = -1;
+                } else {
+                    cDir = 1;
+                }
+            } else {
+                System.out.println("This shouldn't happen");
+            }
+            r += rDir;
+            c += cDir;
+            System.out.println("(r + \",\" + c) = " + (r + "," + c));
+            if (hexGridPane.get(r, c).getWeightLetter() != null){
+                break;
+            } else {
+                hexGridPane.get(r, c).setWeightLetter(it.next());
+            }
+        }
         for (int i = -3; i < 4; i++) {
             if (Math.abs(i) == 3){
                 for (int j = 0; j < 7 - Math.abs(i); j++){

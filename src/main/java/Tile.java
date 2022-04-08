@@ -4,16 +4,22 @@ import javafx.scene.image.Image;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Tile implements Displayable{
 
     public final static String[] tileTypes = {"Brick", "Desert", "Forest", "Ore", "Sheep", "Wheat", "Water"};
     public final static Map<String, Integer> weights = new TreeMap<>();
     public final static BufferedImage[] graphics = new BufferedImage[7];
+    private final Map<Integer, Tile> nearbyTiles = new HashMap<>();
+    public static final int NORTHEAST = 0;
+    public static final int NORTHWEST = 1;
+    public static final int EAST = 2;
+    public static final int SOUTHEAST = 3;
+    public static final int SOUTHWEST = 4;
+    public static final int WEST = 5;
+    private int r;
+    private int c;
     private Integer id;
     private String type;
     private String weightLetter;
@@ -69,5 +75,40 @@ public class Tile implements Displayable{
 
     public void setWeightLetter(String s){
         weightLetter = s;
+    }
+
+    public Map<Integer, Tile> getNearbyTiles() {
+        return nearbyTiles;
+    }
+
+    public boolean setNearbyTile(Integer i, Tile t){
+        if (i < 0 || i >= 6){
+            return false;
+        } else {
+            if (t.getId() >= 5) return false;
+            nearbyTiles.put(i, t);
+            return true;
+        }
+    }
+
+    public void setPos(int r, int c){
+        this.r = r;
+        this.c = c;
+    }
+
+    public int getR(){
+        return r;
+    }
+
+    public int getC(){
+        return c;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tile tile = (Tile) o;
+        return r == tile.r && c == tile.c;
     }
 }

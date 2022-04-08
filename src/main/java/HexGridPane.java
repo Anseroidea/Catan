@@ -1,11 +1,13 @@
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 
 import java.util.*;
 
-public class HexGridPane extends HexGrid<Tile>{
+public class HexGridPane extends HexGrid{
 
     private int radius;
 
@@ -32,6 +34,9 @@ public class HexGridPane extends HexGrid<Tile>{
                     im.setFitHeight(radius * 2);
                     im.setFitWidth(i.getWidth() * factor);
                     StackPane sp = new StackPane(im);
+                    if (map.get(r).get(c).getWeightLetter() != null){
+                        sp.getChildren().add(new Label(map.get(r).get(c).getWeightLetter()));
+                    }
                     sp.setLayoutY(rowCoord);
                     sp.setLayoutX(colCoord);
                     ap.getChildren().add(sp);
