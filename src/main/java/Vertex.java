@@ -4,15 +4,9 @@ import java.util.Objects;
 
 public class Vertex {
 
-    private Map<Integer, Tile> adjacentTiles;
-    private Map<Integer, Edge> adjacentEdges;
-    private Settlement settlement;
-    public static final int NORTHEAST = 0;
-    public static final int NORTHWEST = 1;
-    public static final int EAST = 2;
-    public static final int SOUTHEAST = 3;
-    public static final int SOUTHWEST = 4;
-    public static final int WEST = 5;
+    public Map<Integer, Tile> adjacentTiles;
+    public Map<Integer, Edge> adjacentEdges;
+    public Settlement settlement;
 
     public Vertex() {
 
