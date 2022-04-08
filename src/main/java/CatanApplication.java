@@ -36,17 +36,18 @@ public class CatanApplication extends Application {
         int r = start.getR();
         int c = start.getC();
         int loopsIn = 0;
-        System.out.println("(r + \",\" + c) = " + (r + "," + c));
+        start.setWeightLetter(it.next());
+        //System.out.println("(r + \",\" + c) = " + (r + "," + c));
         while(true){
             int rDir = 0;
             int cDir = 0;
-            if (r == 2 && c != 1) {
+            if (r == 2 - loopsIn && c != 1 + loopsIn) {
                 cDir = -1;
-            } else if (r == -2 && c != 3){
+            } else if (r == -2 + loopsIn && c != 5 - Math.abs(r) - loopsIn){
                 cDir = 1;
-            } else if (c == 1){
+            } else if (c == 1 + loopsIn){
                 rDir = -1;
-            } else if (c == 5 - Math.abs(r) - 2 * loopsIn) {
+            } else if (c == 5 - Math.abs(r) - loopsIn) {
                 rDir = 1;
                 if (r >= 0){
                     cDir = -1;
@@ -58,12 +59,37 @@ public class CatanApplication extends Application {
             }
             r += rDir;
             c += cDir;
-            System.out.println("(r + \",\" + c) = " + (r + "," + c));
+            //System.out.println("(r + \",\" + c) = " + (r + "," + c));
             if (hexGridPane.get(r, c).getWeightLetter() != null){
-                break;
-            } else {
-                hexGridPane.get(r, c).setWeightLetter(it.next());
+                //System.out.println("Going in...");
+                //System.out.println("(r + \",\" + c) = " + (r + "," + c));
+                if (r == -2 + loopsIn && c < 5 - Math.abs(r) - loopsIn){
+                    r -= rDir + 1;
+                    c++;
+                } else if (c == 5 - Math.abs(r) - loopsIn && r < 0) {
+                    r -= (-rDir - 1);
+                    c += rDir;
+                } else if (c == 5 - Math.abs(r) - loopsIn && r >= 0 && r < 2 - loopsIn){
+                    r += (cDir - 1)/2;
+                    c -= (cDir + 1)/2;
+                } else if (r == 2 - loopsIn && c > 1 + loopsIn){
+                    r--;
+                    c += rDir + 1;
+                } else if (c == 1 + loopsIn && r > 0){
+                    r += rDir + 1;
+                    c++;
+                } else {
+                    r = 0;
+                    c++;
+                }
+                //System.out.println("(r + \",\" + c) = " + (r + "," + c));
+                loopsIn++;
+                if (hexGridPane.get(r, c).getWeightLetter() != null){
+                    break;
+                }
             }
+            if (hexGridPane.get(r, c).getId() != 1)
+                hexGridPane.get(r, c).setWeightLetter(it.next());
         }
         for (int i = -3; i < 4; i++) {
             if (Math.abs(i) == 3){
