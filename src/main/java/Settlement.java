@@ -14,12 +14,12 @@ public class Settlement {
     public Settlement () {
     }
 
-    public getPlayer Player() {
-
+    public Player getPlayer() {
+        return null;
     }
 
     public Image getGraphic() {
-
+        return null;
     }
 
     public Vertex getVertex() {

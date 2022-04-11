@@ -1,5 +1,6 @@
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -22,10 +23,13 @@ public class Player
     public List<Vertex> getBuildableVertices()
     {
         List<Vertex> buildable = new ArrayList<>();
+        /*
         for(int i = 0; i < roads.size(); i++)
             for(Vertex k : roads.get(i).getEdge().getAdjacentVertices())
                 if(k.getSettlement() == null)
                     buildable.add(k);
+
+         */
         return buildable;
     }
 
@@ -113,11 +117,14 @@ public class Player
 
     public void getLongestRoad()
     {
+        /*
         curRoads = getRoads();
         longestRoad = 0;
         for(int i = 0; i < roads.size(); i++)
             for(Vertex k : roads.get(i).getEdge().getAdjacentVertices())
                 findLongestRoad(k, 0);
+
+         */
     }
 
     private void findLongestRoad(Vertex cur, int len)
@@ -126,7 +133,7 @@ public class Player
             longestRoad = len;
         if(cur.getSettlement() != null && !settlements.contains(cur.getSettlement()))
             return;
-
+        /*
         for(Iterator<Map.Entry<Integer, Edge>> i = cur.getAdjacentEdges().entrySet().iterator(); i.hasNext();)
         {
             Map.Entry<Integer, Edge> e = i.next();
@@ -138,6 +145,8 @@ public class Player
                 curRoads.add(r.toString());
             }
         }
+
+         */
     }
 
     private HashSet<String> getRoads()

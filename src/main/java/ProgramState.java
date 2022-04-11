@@ -4,16 +4,17 @@ public enum ProgramState {
     MAIN, INPUT, PLAY, WIN, RULES;
 
     private Pane p;
+    private static ProgramState currentState;
 
-    void setProgramState(ProgramState ps) {
-
+    public static void setCurrentState(ProgramState ps) {
+        currentState = ps;
     }
 
-    ProgramState getProgramState() {
-
+    public static ProgramState getCurrentState() {
+        return currentState;
     }
 
-    void setPane(Pane pane) {
+    public void setPane(Pane pane) {
         p = pane;
     }
 

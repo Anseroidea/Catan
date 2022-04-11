@@ -1,8 +1,11 @@
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -36,9 +39,19 @@ public class HexGridPane extends HexGrid{
                     im.setFitWidth(i.getWidth() * factor);
                     StackPane sp = new StackPane(im);
                     if (map.get(r).get(c).getWeightLetter() != null){
-                        Label l = new Label(map.get(r).get(c).getWeightLetter());
-                        l.setTextFill(Color.WHITE);
-                        sp.getChildren().addAll(new Circle(radius, Color.BLACK), l);
+                        int weight = map.get(r).get(c).getWeight();
+                        Color col = (weight == 6 || weight == 8) ? Color.RED : Color.BLACK;
+                        Label l = new Label("" + weight);
+                        l.setTextFill(col);
+                        HBox h = new HBox();
+                        for (int ind = 0; ind < 6 - Math.abs(7 - weight); ind++){
+                            h.getChildren().add(new Circle(radius/40., col));
+                        }
+                        h.setAlignment(Pos.CENTER);
+                        l.setAlignment(Pos.CENTER);
+                        VBox v = new VBox(l, h);
+                        v.setAlignment(Pos.CENTER);
+                        sp.getChildren().addAll(new Circle(radius/2., Color.rgb(255, 201, 130)), v);
                     }
                     sp.setLayoutY(rowCoord);
                     sp.setLayoutX(colCoord);

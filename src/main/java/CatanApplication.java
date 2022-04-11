@@ -8,8 +8,12 @@ import javax.imageio.ImageIO;
 import java.util.*;
 
 public class CatanApplication extends Application {
+
+    private static Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+        CatanApplication.primaryStage = primaryStage;
         List<Tile> tiles = new ArrayList<>();
         for (int i = 0; i <= 5; i++) {
             for (int j = 0; j < (i <= 3 ? (i == 1) ? 1 : (i == 2) ? 4 : 3 : 4); j++){
@@ -65,7 +69,10 @@ public class CatanApplication extends Application {
             if (hexGridPane.get(r, c).getWeightLetter() != null){
                 System.out.println("Going in...");
                 System.out.println("(r + \",\" + c) = " + (r + "," + c));
-                if (r == -2 + loopsIn && c < 5 - Math.abs(r) - loopsIn){
+                if (loopsIn == 1){
+                    r = 0;
+                    c = 3;
+                } else if (r == -2 + loopsIn && c < 5 - Math.abs(r) - loopsIn){
                     System.out.println("a");
                     r += rDir + 1;
                     c -= rDir;
@@ -110,6 +117,10 @@ public class CatanApplication extends Application {
         }
         primaryStage.setScene(new Scene(new StackPane(hexGridPane.toPane())));
         primaryStage.show();
+    }
+
+    public void updateDisplay(){
+        primaryStage.setScene(new Scene(ProgramState.getCurrentState().getPane(), 1920, 1080));
     }
 
     public static void main(String[] args){

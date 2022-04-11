@@ -73,6 +73,10 @@ public class Tile implements Displayable{
         return weightLetter;
     }
 
+    public int getWeight(){
+        return weights.get(weightLetter);
+    }
+
     public void setWeightLetter(String s){
         weightLetter = s;
     }
