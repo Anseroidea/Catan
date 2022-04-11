@@ -1,9 +1,11 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class Vertex {
 
-    public ArrayList<Tile> adjacentTiles;
-    public ArrayList<Edge> adjacentEdges;
+    public Map<Integer, Tile> adjacentTiles;
+    public Map<Integer, Edge> adjacentEdges;
     public Settlement settlement;
 
     public Vertex() {
@@ -22,7 +24,7 @@ public class Vertex {
         return settlement;
     }
 
-    public ArrayList<Tile> getAdjacentTiles() {
+    public Map<Integer, Tile> getAdjacentTiles() {
         return adjacentTiles;
     }
 
