@@ -3,6 +3,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.util.*;
@@ -35,7 +36,9 @@ public class HexGridPane extends HexGrid{
                     im.setFitWidth(i.getWidth() * factor);
                     StackPane sp = new StackPane(im);
                     if (map.get(r).get(c).getWeightLetter() != null){
-                        sp.getChildren().addAll(new Circle(r), new Label(map.get(r).get(c).getWeightLetter()));
+                        Label l = new Label(map.get(r).get(c).getWeightLetter());
+                        l.setTextFill(Color.WHITE);
+                        sp.getChildren().addAll(new Circle(radius, Color.BLACK), l);
                     }
                     sp.setLayoutY(rowCoord);
                     sp.setLayoutX(colCoord);

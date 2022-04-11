@@ -71,8 +71,8 @@ public class CatanApplication extends Application {
                     c -= rDir;
                 } else if (c == 5 - Math.abs(r) - loopsIn && r < 0) {
                     System.out.println("b");
-                    r -= (-rDir - 1);
-                    c += rDir;
+                    r -= (rDir - 1);
+                    c -= rDir;
                 } else if (c == 5 - Math.abs(r) - loopsIn && r >= 0 && r < 2 - loopsIn){
                     System.out.println("c");
                     r += (cDir - 1)/2;
