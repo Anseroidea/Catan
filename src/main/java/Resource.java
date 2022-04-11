@@ -12,7 +12,7 @@ public class Resource {
     public String name;
 
     public Resource () {
-
+        name = " ";
     }
 
     public String getResource() {

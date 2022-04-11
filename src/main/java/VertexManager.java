@@ -21,9 +21,12 @@ public class VertexManager {
         while (list.size() <= c){
             list.add(null);
         }
+
         list.set(r, v);
         return true;
     }
+
+
 
 
 }
