@@ -50,7 +50,7 @@ public class Edge {
         return r;
     }
 
-    public HashMap getAdjacentVertices() {
+    public ArrayList<Vertex> getAdjacentVertices() {
         return null;
     }
 }
