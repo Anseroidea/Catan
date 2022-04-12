@@ -1,7 +1,10 @@
 import java.util.*;
 
-public class Road extends Edge{
-    public Road(){
-        super();
+public class Road{
+    public Road(Edge a, Player b){
+    }
+
+    public Edge getEdge() {
+        return null;
     }
 }

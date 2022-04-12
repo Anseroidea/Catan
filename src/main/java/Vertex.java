@@ -28,4 +28,7 @@ public class Vertex {
         return adjacentTiles;
     }
 
+    public Map<Object, Object> getAdjacentEdges() {
+        return null;
+    }
 }
