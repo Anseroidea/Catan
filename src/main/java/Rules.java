@@ -7,11 +7,12 @@ import javafx.scene.input.MouseEvent;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 public class Rules
 {
     private static BufferedImage[] pages;
-    private static int index;
+    private static int index = 0;
     @FXML
     private Button backButton, nextButton, exitButton, pdfButton;
 
@@ -23,11 +24,13 @@ public class Rules
         pages = new BufferedImage[16];
         for(int i = 0; i < pages.length; i++)
             try {
-                pages[i] = ImageIO.read(Rules.class.getResource("/resources/images/rules/rules-" + (i + 1) + ".png"));
+                pages[i] = ImageIO.read(Objects.requireNonNull(Rules.class.getResource("/rules/rules-1.png")));
             }
             catch(Exception e) {
-                System.out.println("Oh no");
+                e.printStackTrace();
             }
+
+        page.setImage(SwingFXUtils.toFXImage(pages[0], null));
     }
     private void updateButtons()
     {
