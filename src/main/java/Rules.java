@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 public class Rules
@@ -17,6 +18,17 @@ public class Rules
     @FXML
     private ImageView page;
 
+    public Rules()
+    {
+        pages = new BufferedImage[16];
+        for(int i = 0; i < pages.length; i++)
+            try {
+                pages[i] = ImageIO.read(Rules.class.getResource("/resources/images/rules/rules-" + (i + 1) + ".png"));
+            }
+            catch(Exception e) {
+                System.out.println("Oh no");
+            }
+    }
     private void updateButtons()
     {
         nextButton.setVisible(!(index == pages.length - 1));
