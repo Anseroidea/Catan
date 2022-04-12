@@ -9,6 +9,7 @@ import java.util.*;
 public class Settlement {
     private int player;
     private Vertex vertex;
+    Player a,b,c,d;
     private Map<Integer, Image> graphic;
 
     public Settlement () {
