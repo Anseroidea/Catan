@@ -28,7 +28,7 @@ public class CatanApplication extends Application {
             for (int c = 1; c <= 5 - Math.abs(r); c++){
                 Tile t = tiles.remove(0);
                 hexGridPane.add(t, r, c);
-                if (Math.abs(r) == 2 || c == 1 || c == 5 - Math.abs(r)){
+                if ((Math.abs(r) == 2) && (c == 1 || c == 5 - Math.abs(r))){
                     selectableTiles.add(t);
                 }
             }

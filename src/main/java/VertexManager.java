@@ -21,11 +21,13 @@ public class VertexManager {
         while (list.size() <= c){
             list.add(null);
         }
-
-        list.set(r, v);
+        list.set(c, v);
         return true;
     }
 
+    public Vertex getVertex(int r, int c){
+        return vertices.get(r).get(c);
+    }
 
 
 
