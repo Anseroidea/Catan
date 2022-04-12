@@ -29,6 +29,14 @@ public class VertexManager {
         return vertices.get(r).get(c);
     }
 
+    public List<Vertex> getAllVertices(){
+        List<Vertex> results = new ArrayList<>();
+        for (Integer i : vertices.keySet()){
+            results.addAll(vertices.get(i));
+        }
+        return results;
+    }
+
 
 
 }

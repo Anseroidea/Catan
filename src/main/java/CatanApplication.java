@@ -74,7 +74,7 @@ public class CatanApplication extends Application {
                     c = 3;
                 } else if (r == -2 + loopsIn && c < 5 - Math.abs(r) - loopsIn){
                     System.out.println("a");
-                    r += rDir + 1;
+                    r += 1;
                     c -= rDir;
                 } else if (c == 5 - Math.abs(r) - loopsIn && r < 0) {
                     System.out.println("b");
@@ -107,14 +107,16 @@ public class CatanApplication extends Application {
                 hexGridPane.get(r, c).setWeightLetter(it.next());
         }
         for (int i = -3; i < 4; i++) {
-            if (Math.abs(i) == 3){
-                for (int j = 0; j < 7 - Math.abs(i); j++){
+            if (Math.abs(i) == 3) {
+                for (int j = 0; j < 7 - Math.abs(i); j++) {
                     hexGridPane.add(new Tile(6), i, j);
                 }
             }
             hexGridPane.add(new Tile(6), i, 0);
             hexGridPane.add(new Tile(6), i, 7 - Math.abs(i) - 1);
         }
+        hexGridPane.setAdjacencies();
+        hexGridPane.initializeVertices();
         primaryStage.setScene(new Scene(new StackPane(hexGridPane.toPane())));
         primaryStage.show();
     }

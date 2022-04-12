@@ -1,24 +1,26 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Vertex {
 
     public Map<Integer, Tile> adjacentTiles;
     public Map<Integer, Edge> adjacentEdges;
     public Settlement settlement;
-    int px, py;
+    int r, c;
 
     public Vertex(int x, int y) {
-        px=x;py=y;
+        r=x;
+        c =y;
+        adjacentTiles = new HashMap<>();
+        adjacentEdges = new HashMap<>();
     }
 
-    public int getPaneX() {
-        return px;
+    public int getR() {
+        return r;
     }
 
-    public int getPaneY() {
-        return py;
+    public int getC() {
+        return c;
     }
 
     public Settlement getSettlement() {
@@ -27,6 +29,10 @@ public class Vertex {
 
     public Map<Integer, Tile> getAdjacentTiles() {
         return adjacentTiles;
+    }
+
+    public void addAdjacentTile(int pos, Tile t){
+        adjacentTiles.put(pos, t);
     }
 
     public Map<Integer, Edge> getAdjacentEdges() {

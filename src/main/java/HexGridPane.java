@@ -17,7 +17,7 @@ public class HexGridPane extends HexGrid{
 
     public HexGridPane(int r){
         super();
-        radius = r - 4;
+        radius = r;
     }
 
     public AnchorPane toPane(){
@@ -58,6 +58,19 @@ public class HexGridPane extends HexGrid{
                     ap.getChildren().add(sp);
                 }
             }
+        }
+        double vertRadius = radius/10.;
+        for (Vertex v : getVertexManager().getAllVertices()){
+            System.out.println("r, c = " + v.getR() + ", " + v.getC());
+            double rowCoord = maxR * (radius + radius/2.) + radius + v.getR() * radius/2. + v.getR() / (double) Math.abs(v.getR()) * (v.getC() % 2 + (Math.abs(v.getR()) - 1) * 2) * radius/2. - vertRadius;
+            double colCoord = radius * Math.sqrt(3) + (Math.abs(v.getR()) - 1 + v.getC()) * radius * Math.sqrt(3) / 2. - vertRadius;
+            StackPane sp = new StackPane(new Circle(vertRadius, Color.TRANSPARENT));
+            sp.setOnMouseClicked((event) -> {
+                System.out.println("r, c = " + v.getR() + ", " + v.getC());
+            });
+            sp.setLayoutY(rowCoord);
+            sp.setLayoutX(colCoord);
+            ap.getChildren().add(sp);
         }
         return ap;
     }
