@@ -7,17 +7,18 @@ public class Vertex {
     public Map<Integer, Tile> adjacentTiles;
     public Map<Integer, Edge> adjacentEdges;
     public Settlement settlement;
+    int px, py;
 
-    public Vertex() {
-
+    public Vertex(int x, int y) {
+        px=x;py=y;
     }
 
     public int getPaneX() {
-        return 0;
+        return px;
     }
 
     public int getPaneY() {
-        return 0;
+        return py;
     }
 
     public Settlement getSettlement() {
