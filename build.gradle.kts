@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.antai"
-version = ""
+version = "1"
 
 repositories {
     mavenCentral()

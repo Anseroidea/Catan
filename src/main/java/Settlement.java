@@ -2,6 +2,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
@@ -9,7 +10,8 @@ import java.util.*;
 public class Settlement {
     private Player player;
     private Vertex vertex;
-    private Map<Integer, Image> graphic;
+    private HashMap graphic=new HashMap<Color, Image[]>();
+    boolean city=false;
 
     public Settlement (Player p, Vertex v) {
         player=p;vertex=v;
@@ -20,7 +22,10 @@ public class Settlement {
     }
 
     public Image getGraphic() {
-        return null;
+        Image[] a= (Image[]) graphic.get(player.getColor());
+        if(city==false)
+            return a[0];
+        return a[1];
     }
 
     public Vertex getVertex() {
@@ -28,6 +33,8 @@ public class Settlement {
     }
 
     public boolean isSettlement() {
-        return true;
+        return !city;
     }
+
+    public void upGrade(){city=true;}
 }
