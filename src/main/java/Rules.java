@@ -24,14 +24,21 @@ public class Rules
         pages = new BufferedImage[16];
         for(int i = 0; i < pages.length; i++)
             try {
-                pages[i] = ImageIO.read(Objects.requireNonNull(Rules.class.getResource("/rules/rules-1.png")));
+                pages[i] = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/rules/rules-" + (i + 1) + ".png")));
             }
             catch(Exception e) {
                 e.printStackTrace();
             }
-
-        page.setImage(SwingFXUtils.toFXImage(pages[0], null));
     }
+
+    @FXML
+    public void initialize()
+    {
+        Image image = SwingFXUtils.toFXImage(pages[0], null);
+        page.setImage(image);
+        updateButtons();
+    }
+
     private void updateButtons()
     {
         nextButton.setVisible(!(index == pages.length - 1));
