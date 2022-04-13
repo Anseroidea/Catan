@@ -1,33 +1,37 @@
 import java.util.*;
 
 public class TurnManager {
-    private Map<String, String> moveMap;
-    private Queue<Player> playerQueue;
-    private Stack<String> actionStrings;
-    private boolean hasBuilt;
+    private static Map<String, String> moveMap;
+    private static Queue<Player> playerQueue;
+    private static Stack<String> actionStrings;
+    private static boolean hasBuilt;
 
-    public void nextTurn(){
+    public static void nextTurn(){
 
     }
 
-    public void addAction(String s) {
+    public static void addAction(String s) {
         actionStrings.add(s);
     }
 
-    public void undo() {
+    public static void undo() {
         actionStrings.pop();
     }
 
-    public Player getCurrentPlayer() {
+    public static Player getCurrentPlayer() {
         return playerQueue.peek();
     }
 
-    public List<Player> getPlayerList() {
+    public static List<Player> getPlayerList() {
         List p = (List) playerQueue;
         return p;
     }
 
-    public boolean hasBuilt() {
+    public static boolean hasBuilt() {
         return hasBuilt;
+    }
+
+    public static void initialize(Player[] players) {
+        playerQueue.addAll(Arrays.stream(players).toList());
     }
 }

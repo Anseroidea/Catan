@@ -22,7 +22,7 @@ public class CatanApplication extends Application {
         }
         tiles.stream().map(Tile::getType).forEach(System.out::println);
         Collections.shuffle(tiles);
-        HexGridPane hexGridPane = new HexGridPane(50);
+        HexGridPane hexGridPane = new HexGridPane(108);
         List<Tile> selectableTiles = new ArrayList<>();
         for (int r = -2; r < 3; r++){
             for (int c = 1; c <= 5 - Math.abs(r); c++){
@@ -117,8 +117,9 @@ public class CatanApplication extends Application {
         }
         hexGridPane.setAdjacencies();
         hexGridPane.initializeVertices();
-        primaryStage.setScene(new Scene(new StackPane(hexGridPane.toPane())));
+        primaryStage.setScene(new Scene(new StackPane(hexGridPane.toPane(false))));
         primaryStage.show();
+        primaryStage.setFullScreen(true);
     }
 
     public void updateDisplay(){

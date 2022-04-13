@@ -11,7 +11,7 @@ public class Settlement {
     private Player player;
     private Vertex vertex;
     private HashMap graphic=new HashMap<Color, Image[]>();
-    boolean city=false;
+    boolean city = false;
 
     public Settlement (Player p, Vertex v) {
         player=p;vertex=v;

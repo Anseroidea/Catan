@@ -6,9 +6,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
 
-public class City{
-    Settlement s;
-    public City(Settlement s, Vertex v) {
-
+public class City extends Settlement{
+    public City(Settlement s) {
+        super(s.getPlayer(), s.getVertex());
     }
 }

@@ -36,6 +36,9 @@ public class HexGrid {
         for (Integer r : map.keySet()){
             for (int c = 0; c < map.get(r).size(); c++) {
                 Tile t = map.get(r).get(c);
+                if (t == null){
+                    continue;
+                }
                 if (map.containsKey(r - 1)){
                     if (map.get(r - 1).size() > c - 1 && c > 0) {
                         t.setNearbyTile(Tile.SOUTHWEST, map.get(r - 1).get(c - 1));
@@ -75,46 +78,58 @@ public class HexGrid {
                     if (map.get(r).get(c/2).getId() != 6) {
                         if (r < 0) {
                             v.addAdjacentTile(Tile.NORTH, map.get(r).get(c / 2));
+                            map.get(r).get(c / 2).addAdjacentVertex(Vertex.SOUTH, v);
                         } else {
                             v.addAdjacentTile(Tile.SOUTH, map.get(r).get(c / 2));
+                            map.get(r).get(c / 2).addAdjacentVertex(Vertex.NORTH, v);
                         }
                     }
                     int r1 = r - r / Math.abs(r);
                     if (map.get(r1).get(c/2).getId() != 6){
                         if (r < 0){
                             v.addAdjacentTile(Tile.SOUTHWEST, map.get(r1).get(c/2));
+                            map.get(r1).get(c / 2).addAdjacentVertex(Vertex.NORTHEAST, v);
                         } else {
                             v.addAdjacentTile(Tile.NORTHWEST, map.get(r1).get(c/2));
+                            map.get(r1).get(c / 2).addAdjacentVertex(Vertex.SOUTHEAST, v);
                         }
                     }
                     if (map.get(r1).get(c/2 + 1).getId() != 6){
                         if (r < 0){
                             v.addAdjacentTile(Tile.SOUTHEAST, map.get(r1).get(c/2 + 1));
+                            map.get(r1).get(c/2 + 1).addAdjacentVertex(Vertex.NORTHWEST, v);
                         } else {
                             v.addAdjacentTile(Tile.NORTHEAST, map.get(r1).get(c/2 + 1));
+                            map.get(r1).get(c/2 + 1).addAdjacentVertex(Vertex.SOUTHWEST, v);
                         }
                     }
                 } else {
                     if (map.get(r).get((c-1)/2).getId() != 6){
                         if (r < 0){
                             v.addAdjacentTile(Tile.NORTHWEST, map.get(r).get((c-1)/2));
+                            map.get(r).get((c-1)/2).addAdjacentVertex(Vertex.SOUTHEAST, v);
                         } else {
                             v.addAdjacentTile(Tile.SOUTHWEST, map.get(r).get((c-1)/2));
+                            map.get(r).get((c-1)/2).addAdjacentVertex(Vertex.NORTHEAST, v);
                         }
                     }
                     if (map.get(r).get((c+1)/2).getId() != 6){
                         if (r < 0){
                             v.addAdjacentTile(Tile.NORTHEAST, map.get(r).get((c+1)/2));
+                            map.get(r).get((c+1)/2).addAdjacentVertex(Vertex.SOUTHWEST, v);
                         } else {
                             v.addAdjacentTile(Tile.SOUTHEAST, map.get(r).get((c+1)/2));
+                            map.get(r).get((c+1)/2).addAdjacentVertex(Vertex.NORTHWEST, v);
                         }
                     }
                     int r1 = r - r / Math.abs(r);
-                    if (map.get(r).get((c + 1)/2).getId() != 6){
+                    if (map.get(r1).get((c + 1)/2).getId() != 6){
                         if (r < 0){
-                            v.addAdjacentTile(Tile.SOUTH, map.get(r).get((c + 1)/2));
+                            v.addAdjacentTile(Tile.SOUTH, map.get(r1).get((c + 1)/2));
+                            map.get(r1).get((c + 1)/2).addAdjacentVertex(Tile.NORTH, v);
                         } else {
-                            v.addAdjacentTile(Tile.NORTH, map.get(r).get((c + 1)/2));
+                            v.addAdjacentTile(Tile.NORTH, map.get(r1).get((c + 1)/2));
+                            map.get(r1).get((c + 1)/2).addAdjacentVertex(Tile.SOUTH, v);
                         }
                     }
                 }

@@ -11,7 +11,8 @@ public class Tile implements Displayable{
     public final static String[] tileTypes = {"Brick", "Desert", "Forest", "Ore", "Sheep", "Wheat", "Water"};
     public final static Map<String, Integer> weights = new TreeMap<>();
     public final static BufferedImage[] graphics = new BufferedImage[7];
-    private final Map<Integer, Tile> nearbyTiles = new HashMap<>();
+    private final Map<Integer, Tile> adjacentTiles = new HashMap<>();
+    private final Map<Integer, Vertex> adjacentVertices = new HashMap<>();
 
     public static final int NORTH = 0;
     public static final int NORTHEAST = 1;
@@ -21,6 +22,8 @@ public class Tile implements Displayable{
     public static final int SOUTHWEST = 5;
     public static final int WEST = 6;
     public static final int NORTHWEST = 7;
+    public static final String[] directions = {"NORTH", "NORTHEAST", "EAST", "SOUTHEAST", "SOUTH", "SOUTHWEST", "WEST", "NORTHWEST"};
+
     private int r;
     private int c;
     private Integer id;
@@ -85,15 +88,15 @@ public class Tile implements Displayable{
     }
 
     public Map<Integer, Tile> getNearbyTiles() {
-        return nearbyTiles;
+        return adjacentTiles;
     }
 
     public boolean setNearbyTile(Integer i, Tile t){
-        if (i < 0 || i >= 6){
+        if (i < 0 || i >= 6 || t == null) {
             return false;
         } else {
             if (t.getId() >= 5) return false;
-            nearbyTiles.put(i, t);
+            adjacentTiles.put(i, t);
             return true;
         }
     }
@@ -117,5 +120,9 @@ public class Tile implements Displayable{
         if (o == null || getClass() != o.getClass()) return false;
         Tile tile = (Tile) o;
         return r == tile.r && c == tile.c;
+    }
+
+    public void addAdjacentVertex(Integer i, Vertex v) {
+        adjacentVertices.put(i, v);
     }
 }
