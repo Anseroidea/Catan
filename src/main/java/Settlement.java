@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.util.*;
 
 public class Settlement {
-    private int player;
+    private Player player;
     private Vertex vertex;
-    Player a,b,c,d;
     private Map<Integer, Image> graphic;
 
-    public Settlement () {
+    public Settlement (Player p, Vertex v) {
+        player=p;vertex=v;
     }
 
     public Player getPlayer() {
-        return null;
+        return player;
     }
 
     public Image getGraphic() {

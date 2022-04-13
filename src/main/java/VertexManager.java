@@ -21,11 +21,21 @@ public class VertexManager {
         while (list.size() <= c){
             list.add(null);
         }
-
-        list.set(r, v);
+        list.set(c, v);
         return true;
     }
 
+    public Vertex getVertex(int r, int c){
+        return vertices.get(r).get(c);
+    }
+
+    public List<Vertex> getAllVertices(){
+        List<Vertex> results = new ArrayList<>();
+        for (Integer i : vertices.keySet()){
+            results.addAll(vertices.get(i));
+        }
+        return results;
+    }
 
 
 
