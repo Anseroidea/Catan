@@ -11,6 +11,10 @@ public class Resource {
 
     public String name;
 
+    public Resource(String s)
+    {
+        name = s;
+    }
     public Resource () {
         name = " ";
     }
