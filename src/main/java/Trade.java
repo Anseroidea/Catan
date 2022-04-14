@@ -11,4 +11,12 @@ public class Trade {
 
     public void toTradeOthers(ActionEvent actionEvent) {
     }
+
+    public void tradeWithOthers(MouseEvent mouseEvent) {
+
+    }
+
+    public void tradeWithBank(MouseEvent mouseEvent) {
+
+    }
 }
