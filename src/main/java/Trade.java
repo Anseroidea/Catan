@@ -3,6 +3,7 @@ import javafx.scene.input.MouseEvent;
 
 public class Trade {
     public void toTradeBank(ActionEvent actionEvent) {
+
     }
 
     public void back(MouseEvent mouseEvent) {
