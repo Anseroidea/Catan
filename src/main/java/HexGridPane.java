@@ -72,7 +72,6 @@ public class HexGridPane extends HexGrid{
                 }
             }
         }
-        /*
         double vertRadius = radius/10.;
         for (Vertex v : getVertexManager().getAllVertices()){
             System.out.println("r, c = " + v.getR() + ", " + v.getC());
@@ -93,8 +92,6 @@ public class HexGridPane extends HexGrid{
             sp.setLayoutX(colCoord);
             ap.getChildren().add(sp);
         }
-
-         */
         return ap;
     }
 

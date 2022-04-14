@@ -7,7 +7,7 @@ public class BoardGame {
     private static HexGridPane hexGridPane;
 
     public static void initialize(Player[] players){
-        TurnManager.initialize(players);
+        //TurnManager.initialize(players);
         initializeTiles();
     }
 
@@ -20,7 +20,7 @@ public class BoardGame {
         }
         tiles.stream().map(Tile::getType).forEach(System.out::println);
         Collections.shuffle(tiles);
-        HexGridPane hexGridPane = new HexGridPane(108);
+        hexGridPane = new HexGridPane(108);
         List<Tile> selectableTiles = new ArrayList<>();
         for (int r = -2; r < 3; r++){
             for (int c = 1; c <= 5 - Math.abs(r); c++){

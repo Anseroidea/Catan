@@ -16,7 +16,8 @@ public class CatanApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         CatanApplication.primaryStage = primaryStage;
         ProgramState.setCurrentState(ProgramState.PLAY);
-        primaryStage.setScene(new Scene(BoardGame.getHexGridPane().toPane()));
+        BoardGame.initialize(new Player[1]);
+        primaryStage.setScene(new Scene(BoardGame.getHexGridPane().toPane(false)));
         primaryStage.show();
         primaryStage.setFullScreen(true);
 
