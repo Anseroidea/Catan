@@ -16,11 +16,26 @@ public class Player
     private List<DevelopmentCard> developmentCards;
     private List<Settlement> settlements;
     private List<Road> roads;
+    private ArrayList<City> cities;
     private int id;
     private HashMap<String, Integer> victoryPoints;
     private Color color;
     private HashSet<String> curRoads;
     private int longestRoad;
+
+    public Player(String n, int ID, Color c){
+        resources = new HashMap<Resource, Integer>();
+        developmentCards =new ArrayList<DevelopmentCard>();
+        settlements = new ArrayList<Settlement>();
+        roads = new ArrayList<Road>();
+        cities = new ArrayList<City>();
+        victoryPoints=new HashMap<String, Integer>();
+        curRoads=new HashSet<String>();
+        longestRoad=0;
+        name=n;
+        id=ID;
+        color=c;
+    }
 
     public List<Vertex> getBuildableVertices()
     {

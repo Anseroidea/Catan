@@ -44,7 +44,7 @@ public class HexGridPane extends HexGrid{
             for (int c = (showWater ? 0 : 1); c < map.get(r).size() - (showWater ? 0 : 1); c++){
                 if (map.get(r).get(c) != null && (showWater || map.get(r).get(c).getId() != 6)){
                     double rowCoord = (r + maxR) * (radius + radius/2.);
-                    double colCoord = Math.abs(r) * 0.85 * radius + radius * Math.sqrt(3) * (c - (showWater ? 0 : 1));
+                    double colCoord = Math.abs(r) * radius * Math.sqrt(3)/2. + radius * Math.sqrt(3) * (c - (showWater ? 0 : 1));
                     Image i = map.get(r).get(c).getImage();
                     ImageView im = new ImageView(i);
                     double factor = radius * 2 / i.getHeight();
@@ -76,10 +76,17 @@ public class HexGridPane extends HexGrid{
         for (Vertex v : getVertexManager().getAllVertices()){
             System.out.println("r, c = " + v.getR() + ", " + v.getC());
             double rowCoord = maxR * (radius + radius/2.) + radius + v.getR() * radius/2. + v.getR() / (double) Math.abs(v.getR()) * (v.getC() % 2 + (Math.abs(v.getR()) - 1) * 2) * radius/2. - vertRadius;
-            double colCoord = radius * Math.sqrt(3) + (Math.abs(v.getR()) - 1 + v.getC()) * radius * Math.sqrt(3) / 2. - vertRadius;
-            StackPane sp = new StackPane(new Circle(vertRadius, Color.TRANSPARENT));
-            sp.setOnMouseClicked((event) -> {
+            double colCoord = (showWater ? 1 : 0) * radius * Math.sqrt(3) + (Math.abs(v.getR()) - 1 + v.getC()) * radius * Math.sqrt(3) / 2. - vertRadius;
+            Circle circle = new Circle(vertRadius, Color.TRANSPARENT);
+            StackPane sp = new StackPane(circle);
+            circle.setOnMouseClicked((event) -> {
                 v.getAdjacentTiles().entrySet().stream().forEach(e -> System.out.println(Tile.directions[e.getKey()] + ": " + e.getValue().getWeight()));
+            });
+            circle.setOnMouseEntered(event -> {
+                circle.setFill(Color.BLACK);
+            });
+            circle.setOnMouseExited(event -> {
+                circle.setFill(Color.TRANSPARENT);
             });
             sp.setLayoutY(rowCoord);
             sp.setLayoutX(colCoord);
