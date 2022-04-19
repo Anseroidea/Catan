@@ -22,6 +22,7 @@ public class Player
     private Color color;
     private HashSet<String> curRoads;
     private int longestRoad;
+    static HashMap<Color, Image> p;
 
     public Player(String n, int ID, Color c){
         resources = new HashMap<Resource, Integer>();

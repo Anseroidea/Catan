@@ -8,9 +8,10 @@ public class Road{
     Edge e;
     BufferedImage b;
 
-    public Road(Edge a, Player b){
+    public Road(Edge a, Player be){
         e=a;
-        p=b;
+        p=be;
+
     }
 
     public Edge getEdge() {

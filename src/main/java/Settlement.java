@@ -14,7 +14,8 @@ public class Settlement {
     boolean city = false;
 
     public Settlement (Player p, Vertex v) {
-        player=p;vertex=v;
+        player=p;
+        vertex=v;
     }
 
     public Player getPlayer() {
