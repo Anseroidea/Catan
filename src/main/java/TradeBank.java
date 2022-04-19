@@ -26,28 +26,31 @@ public class TradeBank
     public TradeBank() throws Exception
     {
         cardGraphics = new HashMap<>();
-        System.out.println(1);
+        //System.out.println(1);
         String[] temp = Tile.tileTypes;
-        System.out.println(2);
+        //System.out.println(2);
         for(int i = 0; i < temp.length; i++)
         {
             if (i == 1 || i == 6)
                 continue;
+            //System.out.println(i + " ho");
             BufferedImage im = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/cards/resources--" + temp[i].toLowerCase() + ".png")));
+            //System.out.println("li");
             cardGraphics.put(temp[i].toLowerCase(), SwingFXUtils.toFXImage(im, null));
+            //System.out.println("day");
         }
-        System.out.println(3);
+        //System.out.println(3);
     }
     @FXML
     public void initialize()
     {
-        System.out.println(4);
+        //System.out.println(4);
         ((ImageView)a.getChildren().get(0)).setImage(cardGraphics.get("brick"));
-        ((ImageView)b.getChildren().get(0)).setImage(cardGraphics.get("grain"));
-        ((ImageView)c.getChildren().get(0)).setImage(cardGraphics.get("lumber"));
+        ((ImageView)b.getChildren().get(0)).setImage(cardGraphics.get("wheat"));
+        ((ImageView)c.getChildren().get(0)).setImage(cardGraphics.get("forest"));
         ((ImageView)d.getChildren().get(0)).setImage(cardGraphics.get("ore"));
-        ((ImageView)e.getChildren().get(0)).setImage(cardGraphics.get("wool"));
-        System.out.println(5);
+        ((ImageView)e.getChildren().get(0)).setImage(cardGraphics.get("sheep"));
+        //System.out.println(5);
     }
 
     public void confirmBankTrade(MouseEvent mouseEvent)
