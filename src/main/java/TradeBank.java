@@ -21,6 +21,8 @@ public class TradeBank
     @FXML
     private StackPane a, b, c, d, e;
 
+    private String give, get;
+
     public static Map<String, Image> cardGraphics;
 
     public TradeBank() throws Exception
@@ -55,7 +57,10 @@ public class TradeBank
 
     public void confirmBankTrade(MouseEvent mouseEvent)
     {
-
+        Player p = TurnManager.getCurrentPlayer();
+        Map<Resource, Integer> res = p.getResources();
+        Resource temp = new Resource(get);
+        res.put(temp, res.get(temp) + 1);
     }
 
     public void addBorder(MouseEvent mouseEvent)
