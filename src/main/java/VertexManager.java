@@ -37,6 +37,10 @@ public class VertexManager {
         return results;
     }
 
+    public Map<Integer, List<Vertex>> getMap(){
+        return vertices;
+    }
+
 
 
 }

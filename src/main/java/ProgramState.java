@@ -1,7 +1,11 @@
 import javafx.scene.layout.Pane;
 
 public enum ProgramState {
-    MAIN, INPUT, PLAY, WIN, RULES;
+    MAIN,
+    INPUT,
+    BOARD,
+    WIN,
+    RULES;
 
     private Pane p;
     private static ProgramState currentState;

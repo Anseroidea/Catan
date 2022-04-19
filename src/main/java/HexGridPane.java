@@ -72,26 +72,6 @@ public class HexGridPane extends HexGrid{
                 }
             }
         }
-        double vertRadius = radius/10.;
-        for (Vertex v : getVertexManager().getAllVertices()){
-            System.out.println("r, c = " + v.getR() + ", " + v.getC());
-            double rowCoord = maxR * (radius + radius/2.) + radius + v.getR() * radius/2. + v.getR() / (double) Math.abs(v.getR()) * (v.getC() % 2 + (Math.abs(v.getR()) - 1) * 2) * radius/2. - vertRadius;
-            double colCoord = (showWater ? 1 : 0) * radius * Math.sqrt(3) + (Math.abs(v.getR()) - 1 + v.getC()) * radius * Math.sqrt(3) / 2. - vertRadius;
-            Circle circle = new Circle(vertRadius, Color.TRANSPARENT);
-            StackPane sp = new StackPane(circle);
-            circle.setOnMouseClicked((event) -> {
-                v.getAdjacentTiles().entrySet().stream().forEach(e -> System.out.println(Tile.directions[e.getKey()] + ": " + e.getValue().getWeight()));
-            });
-            circle.setOnMouseEntered(event -> {
-                circle.setFill(Color.BLACK);
-            });
-            circle.setOnMouseExited(event -> {
-                circle.setFill(Color.TRANSPARENT);
-            });
-            sp.setLayoutY(rowCoord);
-            sp.setLayoutX(colCoord);
-            ap.getChildren().add(sp);
-        }
         return ap;
     }
 

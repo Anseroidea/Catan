@@ -1,16 +1,15 @@
 import java.util.*;
 
 public class Edge {
-    private ArrayList<Tile> adjacentT;
-    private ArrayList<Vertex> adjacentV;
+    private Map<Integer, Tile> adjacentT;
+    private Map<Integer, Vertex> adjacentV;
     private Road r;
     private Vertex v1, v2;
 
     public Edge(Vertex c, Vertex d) {
-        adjacentT = new ArrayList<Tile>();
-        adjacentV = new ArrayList<Vertex>();
-        adjacentV.add(c);
-        adjacentV.add(d);
+        adjacentT = new HashMap<>();
+        adjacentV = new HashMap<>();
+        /*
         Tile[] a = new Tile[6];
         Tile[] k = new Tile[6];
         Tile[] m = new Tile[2];
@@ -31,15 +30,10 @@ public class Edge {
 
         adjacentT = new ArrayList<Tile>();
         adjacentV = new ArrayList<Vertex>();
+
+         */
     }
 
-    public ArrayList<Tile> getAdjacentTiles() {
-        return adjacentT;
-    }
-
-    public ArrayList<Vertex> getAdjacentVertex() {
-        return adjacentV;
-    }
 
     public Road buildRoad(Player l) {
         r = new Road(this,l);
@@ -50,7 +44,19 @@ public class Edge {
         return r;
     }
 
-    public ArrayList<Vertex> getAdjacentVertices() {
-        return null;
+    public Map<Integer, Tile> getAdjacentT() {
+        return adjacentT;
+    }
+
+    public void setAdjacentT(Map<Integer, Tile> adjacentT) {
+        this.adjacentT = adjacentT;
+    }
+
+    public Map<Integer, Vertex> getAdjacentV() {
+        return adjacentV;
+    }
+
+    public void setAdjacentV(Map<Integer, Vertex> adjacentV) {
+        this.adjacentV = adjacentV;
     }
 }

@@ -5,6 +5,7 @@ public class HexGrid {
 
     private Map<Integer, List<Tile>> map;
     private VertexManager vertexManager;
+    private EdgeManager edgeManager;
 
     public HexGrid(){
          map = new TreeMap<>();
@@ -160,6 +161,31 @@ public class HexGrid {
         }
 
          */
+    }
+
+    public void initializeEdges(){
+        Map<Integer, List<Vertex>> vertices = getVertexManager().getMap();
+        for (Integer r : vertices.keySet()){
+            int edgeR = 2 * r + (r < 0 ? 1 : -1);
+            for (int i = 1; i < vertices.get(r).size(); i++){
+                Vertex v1 = vertices.get(r).get(i - 1);
+                Vertex v2 = vertices.get(r).get(i);
+                edgeManager.addEdge(new Edge(v1, v2), r, i - 1);
+                if (edgeR < 0){
+                    if (i % 2 == 1){
+                        //v1.addAdjacentEdge();
+                    } else {
+
+                    }
+                } else {
+                    if (i % 2 == 1){
+
+                    } else {
+
+                    }
+                }
+            }
+        }
     }
 
     public String toString(){

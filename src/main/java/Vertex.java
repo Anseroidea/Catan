@@ -48,4 +48,8 @@ public class Vertex {
     public Map<Integer, Edge> getAdjacentEdges() {
         return null;
     }
+
+    public void addAdjacentEdge(int pos, Edge e) {
+        adjacentEdges.put(pos, e);
+    }
 }
