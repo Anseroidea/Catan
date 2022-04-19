@@ -14,10 +14,10 @@ public class Road{
     }
 
     public Edge getEdge() {
-        return null;
+        return e;
     }
     public Player getPlayer(){
-        return null;
+        return p;
     }
     public BufferedImage getGraphics(){
         return b;
