@@ -59,5 +59,4 @@ public class Edge {
     public void setAdjacentV(Map<Integer, Vertex> adjacentV) {
         this.adjacentV = adjacentV;
     }
-
 }

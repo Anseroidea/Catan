@@ -36,11 +36,19 @@ public class Player
         name=n;
         id=ID;
         color=c;
+        String[] t={"Pawn", "Settlement", "Road", "City"};
+        Image[][] v=new Image[4][4];
         for(int a=0;a<4;a++){
             for(int b=0;b<4;b++){
 
             }
-            p.put();
+        }
+        for(int a=0;a<4;a++){
+            HashMap<String, Image> w=new HashMap<String, Image>();
+            for(int b=0;b<4;b++){
+                w.put(t[b],);
+            }
+            p.put(c, w);
         }
     }
 
