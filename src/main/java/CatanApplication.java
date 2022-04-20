@@ -41,6 +41,17 @@ public class CatanApplication extends Application {
         primaryStage.show();
         primaryStage.setFullScreen(true);
 
+        for(PopUp p : PopUp.values())
+        {
+            try {
+                FXMLLoader fl = new FXMLLoader(CatanApplication.class.getResource("/fxml/" + p.name().toLowerCase() + ".fxml"));
+                AnchorPane ap = fl.load();
+                p.setPane(ap);
+                p.setController(fl.getController());
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void updateDisplay(){
