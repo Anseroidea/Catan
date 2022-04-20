@@ -22,7 +22,7 @@ public class Player
     private Color color;
     private HashSet<String> curRoads;
     private int longestRoad;
-    static HashMap<Color, Image> p;
+    static HashMap<Color, HashMap<String, Image>> p=new HashMap<Color, HashMap<String, Image>>();
 
     public Player(String n, int ID, Color c){
         resources = new HashMap<Resource, Integer>();
@@ -36,6 +36,12 @@ public class Player
         name=n;
         id=ID;
         color=c;
+        for(int a=0;a<4;a++){
+            for(int b=0;b<4;b++){
+
+            }
+            p.put();
+        }
     }
 
     public List<Vertex> getBuildableVertices()

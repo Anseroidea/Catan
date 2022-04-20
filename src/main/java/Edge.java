@@ -52,11 +52,12 @@ public class Edge {
         this.adjacentT = adjacentT;
     }
 
-    public Map<Integer, Vertex> getAdjacentV() {
+    public Map<Integer, Vertex> getAdjacentVertices() {
         return adjacentV;
     }
 
     public void setAdjacentV(Map<Integer, Vertex> adjacentV) {
         this.adjacentV = adjacentV;
     }
+
 }
