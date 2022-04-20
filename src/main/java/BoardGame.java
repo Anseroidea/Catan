@@ -103,7 +103,7 @@ public class BoardGame {
             hexGridPane.add(new Tile(6), i, 7 - Math.abs(i) - 1);
         }
         hexGridPane.setAdjacencies();
-        hexGridPane.initializeVertices();
+        hexGridPane.initializeConnections();
     }
 
 

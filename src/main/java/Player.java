@@ -41,7 +41,7 @@ public class Player
     {
         List<Vertex> buildable = new ArrayList<>();
         for(int i = 0; i < roads.size(); i++)
-            for(Vertex k : roads.get(i).getEdge().getAdjacentVertices())
+            for(Vertex k : roads.get(i).getEdge().getAdjacentVertices().values())
                 if(k.getSettlement() == null)
                     buildable.add(k);
         return buildable;
@@ -134,7 +134,7 @@ public class Player
         curRoads = getRoads();
         longestRoad = 0;
         for(int i = 0; i < roads.size(); i++)
-            for(Vertex k : roads.get(i).getEdge().getAdjacentVertices())
+            for(Vertex k : roads.get(i).getEdge().getAdjacentVertices().values())
                 findLongestRoad(k, 0);
     }
 

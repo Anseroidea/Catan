@@ -2,6 +2,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerGraphics {
 
@@ -35,6 +39,18 @@ public class PlayerGraphics {
             sp.setLayoutY(rowCoord);
             sp.setLayoutX(colCoord);
             boardPane.getChildren().add(sp);
+        }
+        for (Edge e : hexGridPane.getEdgeManager().getAllEdges()){
+            List<Vertex> vertices = new ArrayList<>(e.getAdjacentVertices().values());
+            Vertex v1 = vertices.get(0);
+            Vertex v2 = vertices.get(1);
+            double rowCoord1 = maxR * (radius + radius/2.) + radius + v1.getR() * radius/2. + v1.getR() / (double) Math.abs(v1.getR()) * (v1.getC() % 2 + (Math.abs(v1.getR()) - 1) * 2) * radius/2. - vertRadius;
+            double colCoord1 = (showWater ? 1 : 0) * radius * Math.sqrt(3) + (Math.abs(v1.getR()) - 1 + v1.getC()) * radius * Math.sqrt(3) / 2. - vertRadius;
+            double rowCoord2 = maxR * (radius + radius/2.) + radius + v2.getR() * radius/2. + v2.getR() / (double) Math.abs(v2.getR()) * (v2.getC() % 2 + (Math.abs(v2.getR()) - 1) * 2) * radius/2. - vertRadius;
+            double colCoord2 = (showWater ? 1 : 0) * radius * Math.sqrt(3) + (Math.abs(v2.getR()) - 1 + v2.getC()) * radius * Math.sqrt(3) / 2. - vertRadius;
+            Line l = new Line(rowCoord1, colCoord1, rowCoord2, colCoord2);
+            l.setFill(Color.BLACK);
+            boardPane.getChildren().add(l);
         }
     }
 }

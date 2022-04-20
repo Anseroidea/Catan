@@ -1,14 +1,24 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Edge {
-    private Map<Integer, Tile> adjacentT;
-    private Map<Integer, Vertex> adjacentV;
+    private Map<Integer, Tile> adjacentTiles;
+    private Map<Integer, Vertex> adjacentVertices;
     private Road r;
     private Vertex v1, v2;
 
+    public static final int NORTH = 0;
+    public static final int NORTHEAST = 1;
+    public static final int EAST = 2;
+    public static final int SOUTHEAST = 3;
+    public static final int SOUTH = 4;
+    public static final int SOUTHWEST = 5;
+    public static final int WEST = 6;
+    public static final int NORTHWEST = 7;
+
     public Edge(Vertex c, Vertex d) {
-        adjacentT = new HashMap<>();
-        adjacentV = new HashMap<>();
+        adjacentTiles = new HashMap<>();
+        adjacentVertices = new HashMap<>();
         /*
         Tile[] a = new Tile[6];
         Tile[] k = new Tile[6];
@@ -44,19 +54,30 @@ public class Edge {
         return r;
     }
 
-    public Map<Integer, Tile> getAdjacentT() {
-        return adjacentT;
+    public Map<Integer, Tile> getAdjacentTiles() {
+        return adjacentTiles;
     }
 
-    public void setAdjacentT(Map<Integer, Tile> adjacentT) {
-        this.adjacentT = adjacentT;
+    public Map<Integer, Vertex> getAdjacentVertices() {
+        return adjacentVertices;
     }
 
-    public Map<Integer, Vertex> getAdjacentV() {
-        return adjacentV;
+    public Map<Integer, Edge> getAdjacentEdges(){
+        List<Edge> adjacentEdges = adjacentVertices.values().stream().flatMap(v -> v.getAdjacentEdges().values().stream()).distinct().collect(Collectors.toList());
+        Map<Integer, Edge> result = new HashMap<>();
+        for (Map.Entry<Integer, Edge> en : adjacentVertices.values().stream().flatMap(v -> v.getAdjacentEdges().entrySet().stream()).collect(Collectors.toList())){
+            if (adjacentEdges.contains(en.getValue())){
+                result.put(en.getKey(), en.getValue());
+            }
+        }
+        return result;
     }
 
-    public void setAdjacentV(Map<Integer, Vertex> adjacentV) {
-        this.adjacentV = adjacentV;
+    public void addAdjacentTile(int dir, Tile t) {
+        adjacentTiles.put(dir, t);
+    }
+
+    public void addAdjacentVertex(Integer i, Vertex v) {
+        adjacentVertices.put(i, v);
     }
 }

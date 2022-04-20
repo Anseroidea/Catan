@@ -13,6 +13,7 @@ public class Tile implements Displayable{
     public final static BufferedImage[] graphics = new BufferedImage[7];
     private final Map<Integer, Tile> adjacentTiles = new HashMap<>();
     private final Map<Integer, Vertex> adjacentVertices = new HashMap<>();
+    private final Map<Integer, Edge> adjacentEdges = new HashMap<>();
 
     public static final int NORTH = 0;
     public static final int NORTHEAST = 1;
@@ -101,6 +102,10 @@ public class Tile implements Displayable{
         }
     }
 
+    public Map<Integer, Vertex> getAdjacentVertices(){
+        return adjacentVertices;
+    }
+
     public void setPos(int r, int c){
         this.r = r;
         this.c = c;
@@ -124,5 +129,9 @@ public class Tile implements Displayable{
 
     public void addAdjacentVertex(Integer i, Vertex v) {
         adjacentVertices.put(i, v);
+    }
+
+    public void addAdjacentEdge(Integer i, Edge e) {
+        adjacentEdges.put(i, e);
     }
 }
