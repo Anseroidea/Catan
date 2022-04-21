@@ -8,11 +8,12 @@ import java.util.List;
 public enum PopUp {
     DICE, TRADEBANK, TRADE, CONVERT, MONOPOLY, ROAD;
 
+    /*
+    Each value above has the following private instance variables, and the enum values can be called like public static variables
+     */
     private Pane pane;
 
     private Object controller;
-
-    private static PopUp cur;
 
     public void setController(Object c)
     {
@@ -35,7 +36,7 @@ public enum PopUp {
         pop.initModality(Modality.APPLICATION_MODAL);
         pop.setScene(new Scene(pane, 1920, 1080));
         pop.setResizable(false);
-
+        pop.show();
     }
 
     public void loadTrade(Player p, List<Resource> l, Player pl, List<Resource> lr)
