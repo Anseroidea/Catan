@@ -52,4 +52,12 @@ public class Vertex {
     public void addAdjacentEdge(int pos, Edge e) {
         adjacentEdges.put(pos, e);
     }
+
+    @Override
+    public String toString() {
+        return "Vertex{" +
+                "r=" + r +
+                ", c=" + c +
+                '}';
+    }
 }

@@ -1,3 +1,4 @@
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -40,17 +41,24 @@ public class PlayerGraphics {
             sp.setLayoutX(colCoord);
             boardPane.getChildren().add(sp);
         }
+        System.out.println(hexGridPane.getEdgeManager().getMap().get(-1));
         for (Edge e : hexGridPane.getEdgeManager().getAllEdges()){
             List<Vertex> vertices = new ArrayList<>(e.getAdjacentVertices().values());
             Vertex v1 = vertices.get(0);
             Vertex v2 = vertices.get(1);
-            double rowCoord1 = maxR * (radius + radius/2.) + radius + v1.getR() * radius/2. + v1.getR() / (double) Math.abs(v1.getR()) * (v1.getC() % 2 + (Math.abs(v1.getR()) - 1) * 2) * radius/2. - vertRadius;
-            double colCoord1 = (showWater ? 1 : 0) * radius * Math.sqrt(3) + (Math.abs(v1.getR()) - 1 + v1.getC()) * radius * Math.sqrt(3) / 2. - vertRadius;
-            double rowCoord2 = maxR * (radius + radius/2.) + radius + v2.getR() * radius/2. + v2.getR() / (double) Math.abs(v2.getR()) * (v2.getC() % 2 + (Math.abs(v2.getR()) - 1) * 2) * radius/2. - vertRadius;
-            double colCoord2 = (showWater ? 1 : 0) * radius * Math.sqrt(3) + (Math.abs(v2.getR()) - 1 + v2.getC()) * radius * Math.sqrt(3) / 2. - vertRadius;
-            Line l = new Line(rowCoord1, colCoord1, rowCoord2, colCoord2);
+            double rowCoord1 = maxR * (radius + radius/2.) + radius + v1.getR() * radius/2. + v1.getR() / (double) Math.abs(v1.getR()) * (v1.getC() % 2 + (Math.abs(v1.getR()) - 1) * 2) * radius/2.;
+            double colCoord1 = (Math.abs(v1.getR()) - 1 + v1.getC()) * radius * Math.sqrt(3) / 2.;
+            double rowCoord2 = maxR * (radius + radius/2.) + radius + v2.getR() * radius/2. + v2.getR() / (double) Math.abs(v2.getR()) * (v2.getC() % 2 + (Math.abs(v2.getR()) - 1) * 2) * radius/2.;
+            double colCoord2 = (Math.abs(v2.getR()) - 1 + v2.getC()) * radius * Math.sqrt(3) / 2.;
+            Line l = new Line(colCoord1, rowCoord1, colCoord2, rowCoord2);
             l.setFill(Color.BLACK);
-            boardPane.getChildren().add(l);
+            l.setStrokeWidth(5);
+            l.setOnMouseClicked((event) -> {
+                System.out.println("v1, v2:" + v1.getR() + ", " + v1.getC());
+            });
+            Label l1 = new Label(v1.getR() + ", " + v1.getC());
+            l1.setLayoutX(rowCoord1);
+            boardPane.getChildren().addAll(l);
         }
     }
 }

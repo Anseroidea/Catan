@@ -36,6 +36,7 @@ public class Player
         name=n;
         id=ID;
         color=c;
+        /*
         String[] t={"Pawn", "Settlement", "Road", "City"};
         ArrayList<Image> v=new ArrayList<Image>();
         Scanner sc=new Scanner("blueP.png settB roadB");
@@ -58,6 +59,8 @@ public class Player
             else if(a==3)
                 p.put(Color.YELLOW, w);
         }
+
+         */
     }
 
     public List<Vertex> getBuildableVertices()

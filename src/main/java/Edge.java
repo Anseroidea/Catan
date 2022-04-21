@@ -6,6 +6,8 @@ public class Edge {
     private Map<Integer, Vertex> adjacentVertices;
     private Road r;
     private Vertex v1, v2;
+    private int row;
+    private int col;
 
     public static final int NORTH = 0;
     public static final int NORTHEAST = 1;
@@ -18,7 +20,7 @@ public class Edge {
 
     public Edge(Vertex c, Vertex d) {
         adjacentTiles = new HashMap<>();
-        adjacentVertices = new HashMap<>();
+        adjacentVertices = new TreeMap<>();
         /*
         Tile[] a = new Tile[6];
         Tile[] k = new Tile[6];
@@ -79,5 +81,28 @@ public class Edge {
 
     public void addAdjacentVertex(Integer i, Vertex v) {
         adjacentVertices.put(i, v);
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    @Override
+    public String toString() {
+        return "Edge{" +
+                "adjacentVertices=" + adjacentVertices +
+                '}';
     }
 }
