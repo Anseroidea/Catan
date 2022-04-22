@@ -36,31 +36,20 @@ public class Player
         name=n;
         id=ID;
         color=c;
-        /*
         String[] t={"Pawn", "Settlement", "Road", "City"};
-        ArrayList<Image> v=new ArrayList<Image>();
-        Scanner sc=new Scanner("blueP.png settB roadB");
+        Image[][] v=new Image[4][4];
         for(int a=0;a<4;a++){
             for(int b=0;b<4;b++){
-                v.add();
+
             }
         }
         for(int a=0;a<4;a++){
             HashMap<String, Image> w=new HashMap<String, Image>();
             for(int b=0;b<4;b++){
-                w.put(t[b], );
+                w.put(t[b],);
             }
-            if(a==0)
-                p.put(Color.BLUE, w);
-            else if(a==1)
-                p.put(Color.RED, w);
-            else if(a==2)
-                p.put(Color.WHITE, w);
-            else if(a==3)
-                p.put(Color.YELLOW, w);
+            p.put(c, w);
         }
-
-         */
     }
 
     public List<Vertex> getBuildableVertices()
