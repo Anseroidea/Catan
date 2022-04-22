@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Player
 {
@@ -73,18 +74,33 @@ public class Player
         return buildable;
     }
 
-    /*public List<Edge> getBuildableEdges()
+    public List<Edge> getBuildableEdges(){
+        List<Edge> buildable = new ArrayList<>();
+        for (Vertex v : settlements.stream().map(Settlement::getVertex).collect(Collectors.toList())){
+            for (Edge e : v.getAdjacentEdges().values()){
+                if (!buildable.contains(e) && !(roads.stream().map(Road::getEdge).collect(Collectors.toList())).contains(e)){
+                    buildable.add(e);
+                }
+            }
+        }
+        return buildable;
+    }
+
+    /*
+    public List<Edge> getBuildableEdges()
     {
         List<Edge> buildable = new ArrayList<>();
         for(int i = 0; i < roads.size(); i++)
-            for(Vertex k : roads.get(i).getEdge().getAdjacentVertices())
+            for(Vertex k : roads.get(i).getEdge().getAdjacentTiles())
                 if(k.getSettlement() == null || k.getSettlement().getPlayer().getId() == id)
                     for(Edge e : k.getAdjacentEdges().values())
                         if(e.getRoad() == null)
                             buildable.add(e);
 
         return buildable;
-    }*/
+    }
+
+     */
 
     public Color getColor()
     {
@@ -192,4 +208,5 @@ public class Player
 
         return h;
     }
+
 }

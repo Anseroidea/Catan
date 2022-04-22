@@ -59,6 +59,7 @@ public class TradeBank
 
     public void confirmBankTrade(MouseEvent mouseEvent)
     {
+        /*
         //Player p = TurnManager.getCurrentPlayer();
         Player p = new Player();
         p.changeCards(new Resource("brick"), 4);
@@ -82,6 +83,8 @@ public class TradeBank
             res.put(gain, res.get(gain) + 1);
             ((Stage)((Button)mouseEvent.getSource()).getScene().getWindow()).close();
         }
+
+         */
     }
 
     public void addBorder(MouseEvent mouseEvent)
@@ -106,6 +109,7 @@ public class TradeBank
             case "c" -> "forest";
             case "d" -> "ore";
             case "e" -> "sheep";
+            default -> "null";
         };
         System.out.println(get);
     }
