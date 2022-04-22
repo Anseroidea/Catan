@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
@@ -26,6 +27,14 @@ public class TradeBank
     private String give, get;
 
     public static Map<String, Image> cardGraphics;
+
+    private Map<String, String> id = Map.of(
+            "a", "brick",
+            "b", "wheat",
+            "c", "forest",
+            "d", "ore",
+            "e", "sheep"
+    );
 
     public TradeBank() throws Exception
     {
@@ -60,9 +69,9 @@ public class TradeBank
     public void confirmBankTrade(MouseEvent mouseEvent)
     {
         //Player p = TurnManager.getCurrentPlayer();
-        Player p = new Player();
+        Player p = new Player("Red", 1, Color.RED);
         p.changeCards(new Resource("brick"), 4);
-        p.changeCards(new Resource("wheat"), 4);
+        p.changeCards(new Resource("wheat"), 3);
         p.changeCards(new Resource("forest"), 4);
         p.changeCards(new Resource("ore"), 4);
         p.changeCards(new Resource("sheep"), 4);
@@ -77,37 +86,48 @@ public class TradeBank
         }
         else
         {
-            res.put(loss, res.get(loss) - 4);
+            p.changeCards(loss, -4);
             Resource gain = new Resource(get);
-            res.put(gain, res.get(gain) + 1);
+            p.changeCards(gain, 1);
+            give = get = "Undecided";
             ((Stage)((Button)mouseEvent.getSource()).getScene().getWindow()).close();
         }
     }
 
     public void addBorder(MouseEvent mouseEvent)
     {
-        ((Pane)mouseEvent.getSource()).setStyle("-fx-border-color: black");
+        Pane temp = (Pane)mouseEvent.getSource();
+        if(!id.get(temp.getId()).equals(give))
+            temp.setStyle("-fx-border-color: black");
     }
 
     public void removeBorder(MouseEvent mouseEvent)
     {
-        ((Pane)mouseEvent.getSource()).setStyle("-fx-border-color: transparent");
+        Pane temp = (Pane)mouseEvent.getSource();
+        if(!id.get(temp.getId()).equals(give))
+            temp.setStyle("-fx-border-color: transparent");
     }
 
     public void select(MouseEvent mouseEvent)
     {
         clearBorders();
         Pane chosen = (Pane)mouseEvent.getSource();
-        chosen.setStyle("-fx-border-color: blue");
-        get = switch(chosen.getId())
+        highlight(chosen);
+        give = switch(chosen.getId())
         {
             case "a" -> "brick";
             case "b" -> "wheat";
             case "c" -> "forest";
             case "d" -> "ore";
             case "e" -> "sheep";
+            default -> "Nothing";
         };
-        System.out.println(get);
+        System.out.println(give);
+    }
+
+    private void highlight(Pane chosen)
+    {
+        chosen.setStyle("-fx-border-color: blue");
     }
 
     private void clearBorders()
