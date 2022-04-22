@@ -209,4 +209,8 @@ public class Player
         return h;
     }
 
+    public void changeCards(Resource r, int v){
+        resources.put(r, resources.get(r) + v);
+    }
+
 }

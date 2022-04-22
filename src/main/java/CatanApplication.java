@@ -22,10 +22,10 @@ public class CatanApplication extends Application {
             System.out.println("s.name().toLowerCase() = " + s.name().toLowerCase());
             try {
                 FXMLLoader fl = new FXMLLoader(CatanApplication.class.getResource("/fxml/" + s.name().toLowerCase() + ".fxml"));
-                AnchorPane ap = fl.load();
+                Pane ap = fl.load();
                 if (s.name().equals("BOARD")) {
                     FXMLLoader fl2 = new FXMLLoader(CatanApplication.class.getResource("/fxml/player.fxml"));
-                    AnchorPane ap2 = fl2.load();
+                    Pane ap2 = fl2.load();
                     GraphicsManager.initialize(fl.getController(), fl2.getController());
                     GraphicsManager.initializeGraphics();
                     s.setPane(new StackPane(ap, ap2));
