@@ -17,7 +17,7 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <StackPane fx:id="a" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
+                  <StackPane fx:id="a" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                      <children>
                         <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
@@ -31,7 +31,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <StackPane fx:id="b" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
+                  <StackPane fx:id="b" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                      <children>
                         <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
@@ -45,7 +45,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <StackPane fx:id="c" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
+                  <StackPane fx:id="c" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                      <children>
                         <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
@@ -59,7 +59,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <StackPane fx:id="d" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
+                  <StackPane fx:id="d" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                      <children>
                         <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
@@ -73,7 +73,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <StackPane fx:id="e" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
+                  <StackPane fx:id="e" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                      <children>
                         <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
