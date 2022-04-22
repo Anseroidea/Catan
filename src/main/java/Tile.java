@@ -81,6 +81,9 @@ public class Tile implements Displayable{
     }
 
     public int getWeight(){
+        if (weightLetter == null){
+            return -1;
+        }
         return weights.get(weightLetter);
     }
 
