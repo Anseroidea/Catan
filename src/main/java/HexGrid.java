@@ -233,18 +233,22 @@ public class HexGrid {
                 e.addAdjacentVertex(Vertex.NORTH, v1);
                 e.addAdjacentVertex(Vertex.SOUTH, v2);
                 tile.addAdjacentEdge(Edge.WEST, e);
-                Edge temp = edgeManager.getEdge(2 * r - 1, 2 * (i - 1));
+                Edge temp = edgeManager.getEdge(2 * r - 1, 2 * (i - 1) + (r > 0 ? 1 : 0));
                 tile.addAdjacentEdge(Edge.NORTHWEST, temp);
                 temp.addAdjacentTile(Tile.SOUTHEAST, tile);
-                temp = edgeManager.getEdge(2 * r - 1, 2 * (i - 1) + 1);
+                temp = edgeManager.getEdge(2 * r - 1, 2 * (i - 1) + 1 + (r > 0 ? 1 : 0));
                 tile.addAdjacentEdge(Edge.NORTHEAST, temp);
                 temp.addAdjacentTile(Tile.SOUTHWEST, tile);
-                temp = edgeManager.getEdge(2 * r + 1, 2 * (i - 1));
+                temp = edgeManager.getEdge(2 * r + 1, 2 * (i - 1) + (r < 0 ? 1 : 0));
                 tile.addAdjacentEdge(Edge.SOUTHWEST, temp);
                 temp.addAdjacentTile(Tile.NORTHEAST, tile);
-                temp = edgeManager.getEdge(2 * r + 1, 2 * (i - 1) + 1);
+                temp = edgeManager.getEdge(2 * r + 1, 2 * (i - 1) + 1 + (r < 0 ? 1 : 0));
                 tile.addAdjacentEdge(Edge.SOUTHEAST, temp);
                 temp.addAdjacentTile(Tile.NORTHWEST, tile);
+                if (i > 1){
+                    e.addAdjacentTile(Tile.WEST, tiles.get(r).get(i - 1));
+                    tiles.get(r).get(i - 1).addAdjacentEdge(Edge.EAST, e);
+                }
             }
             i--;
             Tile tile = tiles.get(r).get(i);

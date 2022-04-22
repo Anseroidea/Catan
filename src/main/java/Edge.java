@@ -5,7 +5,7 @@ public class Edge {
     private Map<Integer, Tile> adjacentTiles;
     private Map<Integer, Vertex> adjacentVertices;
     private Road r;
-    private Vertex v1, v2;
+
     private int row;
     private int col;
 
@@ -104,5 +104,9 @@ public class Edge {
         return "Edge{" +
                 "adjacentVertices=" + adjacentVertices +
                 '}';
+    }
+
+    public boolean hasRoad() {
+        return r != null;
     }
 }
