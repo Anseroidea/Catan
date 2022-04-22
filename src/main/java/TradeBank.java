@@ -68,13 +68,13 @@ public class TradeBank
 
     public void confirmBankTrade(MouseEvent mouseEvent)
     {
-        //Player p = TurnManager.getCurrentPlayer();
-        Player p = new Player("Red", 1, Color.RED);
+        Player p = TurnManager.getCurrentPlayer();
+        /*Player p = new Player("Red", 1, Color.RED);
         p.changeCards(new Resource("brick"), 4);
         p.changeCards(new Resource("wheat"), 3);
         p.changeCards(new Resource("forest"), 4);
         p.changeCards(new Resource("ore"), 4);
-        p.changeCards(new Resource("sheep"), 4);
+        p.changeCards(new Resource("sheep"), 4);*/
         Map<Resource, Integer> res = p.getResources();
 
         Resource loss = new Resource(give);
