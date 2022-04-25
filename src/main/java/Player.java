@@ -1,9 +1,7 @@
 import javafx.scene.paint.Color;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +24,7 @@ public class Player
     private int longestRoad;
     static HashMap<Color, HashMap<String, BufferedImage>> p=new HashMap<Color, HashMap<String, BufferedImage>>();
 
-    public Player(String n, int ID, Color c){
+    public Color Player(String n, int ID, Color c){
         resources = new HashMap<Resource, Integer>();
         developmentCards =new ArrayList<DevelopmentCard>();
         settlements = new ArrayList<Settlement>();
@@ -38,13 +36,13 @@ public class Player
         name=n;
         id=ID;
         color=c;
-<<<<<<<<< Temporary merge branch 1
+
         String[] t={"Pawn", "Settlement", "Road", "City"};
         Image[][] v=new Image[4][4];
         for(int a=0;a<4;a++){
             for(int b=0;b<4;b++){
 
-=========
+
 
         String[] t={"Pawn", "Settlement", "Road", "City"};
         ArrayList<BufferedImage> v=new ArrayList<BufferedImage>();
@@ -56,26 +54,22 @@ public class Player
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
->>>>>>>>> Temporary merge branch 2
+
             }
         }
         Iterator it = v.iterator();
         for(int a=0;a<4;a++){
             HashMap<String, BufferedImage> w=new HashMap<String, BufferedImage>();
             for(int b=0;b<4;b++){
-<<<<<<<<< Temporary merge branch 1
-                w.put(t[b],);
-=========
+
+                //w.put(t[b],);
+
                 w.put(t[b], (BufferedImage) it.next());
->>>>>>>>> Temporary merge branch 2
+
             }
             p.put(c, w);
         }
-<<<<<<<<< Temporary merge branch 1
-=========
 
-
->>>>>>>>> Temporary merge branch 2
     }
 
     public List<Vertex> getBuildableVertices()
