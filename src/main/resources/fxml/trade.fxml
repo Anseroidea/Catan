@@ -128,7 +128,7 @@
                <children>
                   <HBox prefHeight="360.0" prefWidth="1080.0" spacing="15.0">
                      <children>
-                        <VBox prefHeight="360.0" prefWidth="200.0">
+                        <VBox onMouseClicked="#WoodCards" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -142,7 +142,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="20.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="20.0" layoutY="20.0" onMouseClicked="#BrickCards" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -156,7 +156,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="220.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="220.0" layoutY="20.0" onMouseClicked="#OreCards" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -170,7 +170,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="420.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="420.0" layoutY="20.0" onMouseClicked="#WheatCards" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
