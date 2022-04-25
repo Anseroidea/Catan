@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Player
     private Color color;
     private HashSet<String> curRoads;
     private int longestRoad;
-    static HashMap<Color, HashMap<String, Image>> p=new HashMap<Color, HashMap<String, Image>>();
+    static HashMap<Color, HashMap<String, BufferedImage>> p=new HashMap<Color, HashMap<String, BufferedImage>>();
 
     public Player(String n, int ID, Color c){
         resources = new HashMap<Resource, Integer>();
@@ -37,19 +38,24 @@ public class Player
         name=n;
         id=ID;
         color=c;
-        /*
+
         String[] t={"Pawn", "Settlement", "Road", "City"};
-        ArrayList<Image> v=new ArrayList<Image>();
-        Scanner sc=new Scanner("blueP.png settB roadB");
+        ArrayList<BufferedImage> v=new ArrayList<BufferedImage>();
+        Scanner sc=new Scanner("blueP.png settB.png roadB.png cityB.png redP.png settR.png roadR.png cityR.png whiteP.png settW.png roadW.png cityW.png yellowP.png settY.png roadY.png cityY.png");
         for(int a=0;a<4;a++){
             for(int b=0;b<4;b++){
-                v.add();
+                try {
+                    v.add(ImageIO.read(new File(sc.next())));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+        Iterator it = v.iterator();
         for(int a=0;a<4;a++){
-            HashMap<String, Image> w=new HashMap<String, Image>();
+            HashMap<String, BufferedImage> w=new HashMap<String, BufferedImage>();
             for(int b=0;b<4;b++){
-                w.put(t[b], );
+                w.put(t[b], (BufferedImage) it.next());
             }
             if(a==0)
                 p.put(Color.BLUE, w);
@@ -61,7 +67,7 @@ public class Player
                 p.put(Color.YELLOW, w);
         }
 
-         */
+
     }
 
     public List<Vertex> getBuildableVertices()
