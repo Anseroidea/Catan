@@ -25,4 +25,16 @@ public class Trade {
     public void tradeWithBank(MouseEvent mouseEvent) {
 
     }
+
+    public void WoodCards(MouseEvent mouseEvent) {
+    }
+
+    public void BrickCards(MouseEvent mouseEvent) {
+    }
+
+    public void OreCards(MouseEvent mouseEvent) {
+    }
+
+    public void WheatCards(MouseEvent mouseEvent) {
+    }
 }

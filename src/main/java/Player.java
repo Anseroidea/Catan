@@ -60,8 +60,8 @@ public class Player
             else if(a==3)
                 p.put(Color.YELLOW, w);
         }
+*/
 
-         */
     }
 
     public List<Vertex> getBuildableVertices()
@@ -102,6 +102,18 @@ public class Player
 
      */
 
+    public void changeCards(Resource r, int num)
+    {
+        Integer cur = resources.get(r);
+        if(cur != null && cur + num < 0)
+            System.out.println("You don't have enough cards to take away from!");
+        else
+        {
+            if(cur == null)
+                cur = 0;
+            resources.put(r, cur + num);
+        }
+    }
     public Color getColor()
     {
         return color;
@@ -209,8 +221,5 @@ public class Player
         return h;
     }
 
-    public void changeCards(Resource r, int v){
-        resources.put(r, resources.get(r) + v);
-    }
 
 }

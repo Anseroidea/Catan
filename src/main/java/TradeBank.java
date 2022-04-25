@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
@@ -60,7 +61,7 @@ public class TradeBank
     public void confirmBankTrade(MouseEvent mouseEvent)
     {
         //Player p = TurnManager.getCurrentPlayer();
-        Player p = new Player();
+        Player p = new Player("eh", 3, Color.RED);
         p.changeCards(new Resource("brick"), 4);
         p.changeCards(new Resource("wheat"), 4);
         p.changeCards(new Resource("forest"), 4);
@@ -106,6 +107,7 @@ public class TradeBank
             case "c" -> "forest";
             case "d" -> "ore";
             case "e" -> "sheep";
+            default -> "Nothing";
         };
         System.out.println(get);
     }
