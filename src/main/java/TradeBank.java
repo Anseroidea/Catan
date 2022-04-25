@@ -60,7 +60,7 @@ public class TradeBank
     public void confirmBankTrade(MouseEvent mouseEvent)
     {
         //Player p = TurnManager.getCurrentPlayer();
-        Player p = new Player();
+        Player p = new Player("", 15, null);
         p.changeCards(new Resource("brick"), 4);
         p.changeCards(new Resource("wheat"), 4);
         p.changeCards(new Resource("forest"), 4);
