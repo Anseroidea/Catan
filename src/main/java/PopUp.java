@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public enum PopUp {
-    DICE, TRADEBANK, TRADE, CONVERT, MONOPOLY, ROAD;
+    TRADEBANK, TRADE, MONOPOLY, ROAD;
 
     /*
     Each value above has the following private instance variables, and the enum values can be called like public static variables

@@ -46,9 +46,13 @@ public class PlayerGraphics {
                         e.buildRoad(TurnManager.getCurrentPlayer());
                     });
                 }
-                MenuItem mi = new MenuItem();
+                MenuItem mi = new MenuItem("Edge Properties");
                 if (e.hasRoad()){
+                    mi.setText("Road Properties");
                 }
+                mi.setOnAction((event1) -> {
+                    System.out.println("hi");
+                });
 
                 //System.out.println("v1, v2:" + e.getAdjacentTiles().values().stream().map(Tile::getWeight).collect(Collectors.toList()));
             });
