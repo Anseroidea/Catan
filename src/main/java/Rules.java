@@ -1,9 +1,13 @@
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -67,4 +71,5 @@ public class Rules
     {
         //I have no idea pls help
     }
+
 }

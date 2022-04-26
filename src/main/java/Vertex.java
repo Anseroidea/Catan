@@ -1,5 +1,5 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Vertex {
 
@@ -46,11 +46,17 @@ public class Vertex {
     }
 
     public Map<Integer, Edge> getAdjacentEdges() {
-        return null;
+        return adjacentEdges;
     }
 
     public void addAdjacentEdge(int pos, Edge e) {
         adjacentEdges.put(pos, e);
+    }
+
+    public List<Vertex> getAdjacentVertices(){
+        Set<Vertex> result = adjacentEdges.values().stream().flatMap(e -> e.getAdjacentVertices().values().stream()).collect(Collectors.toSet());
+        result.remove(this);
+        return new ArrayList<>(result);
     }
 
     @Override
@@ -60,4 +66,13 @@ public class Vertex {
                 ", c=" + c +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vertex vertex = (Vertex) o;
+        return r == vertex.r && c == vertex.c;
+    }
+
 }

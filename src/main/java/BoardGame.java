@@ -6,8 +6,22 @@ public class BoardGame {
 
     private static HexGridPane hexGridPane;
 
-    public static void initialize(Player[] players){
-        //TurnManager.initialize(players);
+    public static void initializePlayers(Player[] players){
+        TurnManager.initialize(players);
+    }
+
+    public static List<Vertex> getBuildableVertices(){
+        List<Vertex> vertices = hexGridPane.getVertexManager().getAllVertices();
+        for (Player p : TurnManager.getPlayerList()){
+            for (Settlement s : p.getSettlements()){
+                vertices.removeAll(s.getVertex().getAdjacentVertices());
+                vertices.remove(s.getVertex());
+            }
+        }
+        return vertices;
+    }
+
+    public static void initializeGraphics(){
         initializeTiles();
     }
 
@@ -109,6 +123,16 @@ public class BoardGame {
 
     public static HexGridPane getHexGridPane() {
         return hexGridPane;
+    }
+
+    public static List<Vertex> getBuiltVertices() {
+        List<Vertex> result = new ArrayList<>();
+        for (Player p : TurnManager.getPlayerList()){
+            for (Settlement s : p.getSettlements()){
+                result.add(s.getVertex());
+            }
+        }
+        return result;
     }
 }
 

@@ -179,7 +179,7 @@ public class Player
 
     public void getLongestRoad()
     {
-        curRoads = getRoads();
+        curRoads = getRoadSet();
         longestRoad = 0;
         for(int i = 0; i < roads.size(); i++)
             for(Vertex k : roads.get(i).getEdge().getAdjacentVertices().values())
@@ -206,13 +206,17 @@ public class Player
         }
     }
 
-    private HashSet<String> getRoads()
+    public HashSet<String> getRoadSet()
     {
         HashSet<String> h = new HashSet<>();
         for(Road r : roads)
             h.add(r.toString());
 
         return h;
+    }
+
+    public List<Road> getRoads(){
+        return roads;
     }
 
     public void changeCards(Resource r, int num)
