@@ -128,7 +128,7 @@
                   </StackPane>
                   <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                      </children>
                   </TextFlow>
                </children>
@@ -142,7 +142,7 @@
                   </StackPane>
                   <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                      </children>
                   </TextFlow>
                </children>
@@ -156,7 +156,7 @@
                   </StackPane>
                   <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                      </children>
                   </TextFlow>
                </children>
@@ -170,7 +170,7 @@
                   </StackPane>
                   <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                      </children>
                   </TextFlow>
                </children>
