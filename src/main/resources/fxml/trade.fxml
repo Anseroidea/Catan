@@ -14,8 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Trade">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Trade">
    <children>
       <VBox layoutX="640.0" layoutY="90.0" prefHeight="430.0" prefWidth="1200.0" style="-fx-background-color: ffd9a0;">
          <children>
@@ -35,7 +34,7 @@
                <children>
                   <HBox prefHeight="360.0" prefWidth="1080.0" spacing="15.0">
                      <children>
-                        <VBox prefHeight="360.0" prefWidth="200.0">
+                        <VBox fx:id="a1" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -49,7 +48,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="20.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
+                        <VBox fx:id="b1" layoutX="20.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -63,7 +62,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="220.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
+                        <VBox fx:id="c1" layoutX="220.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -77,7 +76,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="420.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
+                        <VBox fx:id="d1" layoutX="420.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -91,7 +90,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="620.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
+                        <VBox fx:id="e1" layoutX="620.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -136,7 +135,7 @@
                <children>
                   <HBox prefHeight="360.0" prefWidth="1080.0" spacing="15.0">
                      <children>
-                        <VBox onMouseClicked="#WoodCards" prefHeight="360.0" prefWidth="200.0">
+                        <VBox fx:id="a" onMouseClicked="#WoodCards" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -150,7 +149,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="20.0" layoutY="20.0" onMouseClicked="#BrickCards" prefHeight="360.0" prefWidth="200.0">
+                        <VBox fx:id="b" layoutX="20.0" layoutY="20.0" onMouseClicked="#BrickCards" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -164,7 +163,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="220.0" layoutY="20.0" onMouseClicked="#OreCards" prefHeight="360.0" prefWidth="200.0">
+                        <VBox fx:id="c" layoutX="220.0" layoutY="20.0" onMouseClicked="#OreCards" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -178,7 +177,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="420.0" layoutY="20.0" onMouseClicked="#WheatCards" prefHeight="360.0" prefWidth="200.0">
+                        <VBox fx:id="d" layoutX="420.0" layoutY="20.0" onMouseClicked="#WheatCards" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -192,7 +191,7 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox layoutX="620.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
+                        <VBox fx:id="e" layoutX="620.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                               <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
@@ -222,7 +221,7 @@
       <VBox layoutX="120.0" layoutY="560.0" prefHeight="430.0" prefWidth="400.0" spacing="50.0">
          <children>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#toTradeOthers" prefHeight="150.0" prefWidth="400.0" text="Trade with others" />
-            <Button mnemonicParsing="false" onAction="#toTradeBank" prefHeight="150.0" prefWidth="400.0" text="Trade with bank" />
+            <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="400.0" text="Trade with bank" />
          </children>
       </VBox>
       <StackPane layoutX="120.0" layoutY="90.0" prefHeight="430.0" prefWidth="400.0">
