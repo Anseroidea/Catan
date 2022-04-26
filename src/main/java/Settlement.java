@@ -23,10 +23,12 @@ public class Settlement {
     }
 
     public Image getGraphic() {
-        Image[] a= (Image[]) graphic.get(player.getColor());
-        if(city==false)
-            return a[0];
-        return a[1];
+        int s;
+        if(player.getColor().equals(javafx.scene.paint.Color.BLUE)) s=0;
+        if(player.getColor().equals(javafx.scene.paint.Color.RED)) s=1;
+        if(player.getColor().equals(javafx.scene.paint.Color.WHITE)) s=2;
+        if(player.getColor().equals(javafx.scene.paint.Color.YELLOW)) s=3;
+        if(city) return null;
     }
 
     public Vertex getVertex() {

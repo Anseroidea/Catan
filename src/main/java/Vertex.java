@@ -21,8 +21,8 @@ public class Vertex {
     public Vertex(int x, int y) {
         r=x;
         c =y;
-        adjacentTiles = new HashMap<>();
-        adjacentEdges = new HashMap<>();
+        adjacentTiles = new HashMap<Integer, Tile>();
+        adjacentEdges = new HashMap<Integer, Edge>();
     }
 
     public int getR() {

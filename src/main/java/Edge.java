@@ -21,7 +21,7 @@ public class Edge {
     public Edge(Vertex c, Vertex d) {
         adjacentTiles = new HashMap<>();
         adjacentVertices = new TreeMap<>();
-
+        c.addAdjacentEdge(this);
         Tile[] a = new Tile[6];
         Tile[] k = new Tile[6];
         Tile[] m = new Tile[2];
