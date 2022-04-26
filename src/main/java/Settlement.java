@@ -10,7 +10,6 @@ import java.util.*;
 public class Settlement {
     private Player player;
     private Vertex vertex;
-    private HashMap<Color, Image[]> graphic= new HashMap<>();
     boolean city = false;
 
     public Settlement (Player p, Vertex v) {
