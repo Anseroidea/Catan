@@ -23,13 +23,9 @@ public class Settlement {
         return player;
     }
 
-    public Image getGraphic() {
-        int s;
-        if(player.getColor().equals(javafx.scene.paint.Color.BLUE)) s=0;
-        if(player.getColor().equals(javafx.scene.paint.Color.RED)) s=1;
-        if(player.getColor().equals(javafx.scene.paint.Color.WHITE)) s=2;
-        if(player.getColor().equals(javafx.scene.paint.Color.YELLOW)) s=3;
-        if(city) return null;
+    public BufferedImage getGraphic() {
+        if(city) return player.p.get(player.getColor()).get(3);
+        return player.p.get(player.getColor()).get(1);
     }
 
     public Vertex getVertex() {
