@@ -21,7 +21,7 @@ public class Edge {
     public Edge(Vertex c, Vertex d) {
         adjacentTiles = new HashMap<>();
         adjacentVertices = new TreeMap<>();
-        /*
+
         Tile[] a = new Tile[6];
         Tile[] k = new Tile[6];
         Tile[] m = new Tile[2];
@@ -34,16 +34,16 @@ public class Edge {
             for (int j = 0; j < 6; j++) {
                 if (a[b].equals(k[j])) {
                     m[r] = a[b];
+                    adjacentTiles.put(r,a[b]);
                     r++;
-                    adjacentT.add(a[b]);
+
                 }
             }
         }
 
-        adjacentT = new ArrayList<Tile>();
-        adjacentV = new ArrayList<Vertex>();
+        /*adjacentT = new ArrayList<Tile>();
+        adjacentV = new ArrayList<Vertex>();*/
 
-         */
     }
 
 
