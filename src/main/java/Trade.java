@@ -2,12 +2,15 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -21,7 +24,13 @@ public class Trade
     @FXML
     private VBox a, b, c, d, e, a1, b1, c1, d1, e1;
 
+    @FXML
+    private Button confirm;
+
     public static Map<String, Image> cardGraphics;
+
+    private String give, get, givePane, getPane;
+
 
     public Trade() throws Exception
     {
@@ -64,27 +73,77 @@ public class Trade
         c.updateDisplay();
     }
 
-    public void toTradeOthers(ActionEvent actionEvent) {
-
+    public void toTradeOthers(ActionEvent actionEvent)
+    {
+        ((Stage)((Button)actionEvent.getSource()).getScene().getWindow()).close();
     }
 
-    public void tradeWithOthers(MouseEvent mouseEvent) {
-
+    public void addBorder(MouseEvent mouseEvent)
+    {
+        System.out.println("border");
+        VBox clicked = ((VBox)mouseEvent.getSource());
+        if(!(clicked.getId().equals(getPane) || clicked.getId().equals(givePane)))
+            clicked.setStyle("-fx-border-color: black");
     }
 
-    public void tradeWithBank(MouseEvent mouseEvent) {
-
+    public void removeBorder(MouseEvent mouseEvent)
+    {
+        VBox clicked = ((VBox)mouseEvent.getSource());
+        if(!(clicked.getId().equals(getPane) || clicked.getId().equals(givePane)))
+            clicked.setStyle("-fx-border-color: transparent");
     }
 
-    public void WheatCards(MouseEvent mouseEvent) {
+    public void select(MouseEvent mouseEvent)
+    {
+        clearGiveBorders();
+        VBox chosen = (VBox)mouseEvent.getSource();
+        chosen.setStyle("-fx-border-color: blue");
+        give = switch(chosen.getId())
+                {
+                    case "a" -> "brick";
+                    case "b" -> "wheat";
+                    case "c" -> "forest";
+                    case "d" -> "ore";
+                    case "e" -> "sheep";
+                    default -> "Nothing";
+                };
+        givePane = chosen.getId();
+        System.out.println(give);
     }
 
-    public void OreCards(MouseEvent mouseEvent) {
+    private void clearGiveBorders()
+    {
+        a.setStyle("-fx-border-color: transparent");
+        b.setStyle("-fx-border-color: transparent");
+        c.setStyle("-fx-border-color: transparent");
+        d.setStyle("-fx-border-color: transparent");
+        e.setStyle("-fx-border-color: transparent");
     }
 
-    public void BrickCards(MouseEvent mouseEvent) {
+    public void choose(MouseEvent mouseEvent)
+    {
+        clearGetBorders();
+        VBox chosen = (VBox)mouseEvent.getSource();
+        chosen.setStyle("-fx-border-color: blue");
+        get = switch(chosen.getId())
+                {
+                    case "a1" -> "brick";
+                    case "b1" -> "wheat";
+                    case "c1" -> "forest";
+                    case "d1" -> "ore";
+                    case "e1" -> "sheep";
+                    default -> "Nothing";
+                };
+        getPane = chosen.getId();
+        System.out.println(get);
     }
 
-    public void WoodCards(MouseEvent mouseEvent) {
+    private void clearGetBorders()
+    {
+        a1.setStyle("-fx-border-color: transparent");
+        b1.setStyle("-fx-border-color: transparent");
+        c1.setStyle("-fx-border-color: transparent");
+        d1.setStyle("-fx-border-color: transparent");
+        e1.setStyle("-fx-border-color: transparent");
     }
 }
