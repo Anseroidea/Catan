@@ -34,9 +34,9 @@
                <children>
                   <HBox prefHeight="360.0" prefWidth="1080.0" spacing="15.0">
                      <children>
-                        <VBox fx:id="a1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="360.0" prefWidth="200.0">
+                        <VBox prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="a1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder" style="-fx-border-color: blue;">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
@@ -52,9 +52,9 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox fx:id="b1" layoutX="20.0" layoutY="20.0" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="20.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="b1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
@@ -70,9 +70,9 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox fx:id="c1" layoutX="220.0" layoutY="20.0" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="220.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="c1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
@@ -88,9 +88,9 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox fx:id="d1" layoutX="420.0" layoutY="20.0" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="420.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="d1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
@@ -106,9 +106,9 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox fx:id="e1" layoutX="620.0" layoutY="20.0" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="620.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="e1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
@@ -155,9 +155,9 @@
                <children>
                   <HBox prefHeight="360.0" prefWidth="1080.0" spacing="15.0">
                      <children>
-                        <VBox fx:id="a" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="360.0" prefWidth="200.0">
+                        <VBox prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="a" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
@@ -173,9 +173,9 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox fx:id="b" layoutX="20.0" layoutY="20.0" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="20.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="b" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
@@ -191,9 +191,9 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox fx:id="c" layoutX="220.0" layoutY="20.0" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="220.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="c" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
@@ -209,9 +209,9 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox fx:id="d" layoutX="420.0" layoutY="20.0" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="420.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="d" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
@@ -227,9 +227,9 @@
                               </TextFlow>
                            </children>
                         </VBox>
-                        <VBox fx:id="e" layoutX="620.0" layoutY="20.0" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="360.0" prefWidth="200.0">
+                        <VBox layoutX="620.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="e" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>

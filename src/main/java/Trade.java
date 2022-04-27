@@ -22,7 +22,7 @@ import java.util.Objects;
 public class Trade
 {
     @FXML
-    private VBox a, b, c, d, e, a1, b1, c1, d1, e1;
+    private StackPane a, b, c, d, e, a1, b1, c1, d1, e1;
 
     @FXML
     private Button confirm;
@@ -81,14 +81,14 @@ public class Trade
     public void addBorder(MouseEvent mouseEvent)
     {
         System.out.println("border");
-        VBox clicked = ((VBox)mouseEvent.getSource());
+        Pane clicked = ((Pane)mouseEvent.getSource());
         if(!(clicked.getId().equals(getPane) || clicked.getId().equals(givePane)))
             clicked.setStyle("-fx-border-color: black");
     }
 
     public void removeBorder(MouseEvent mouseEvent)
     {
-        VBox clicked = ((VBox)mouseEvent.getSource());
+        Pane clicked = ((Pane)mouseEvent.getSource());
         if(!(clicked.getId().equals(getPane) || clicked.getId().equals(givePane)))
             clicked.setStyle("-fx-border-color: transparent");
     }
@@ -96,7 +96,7 @@ public class Trade
     public void select(MouseEvent mouseEvent)
     {
         clearGiveBorders();
-        VBox chosen = (VBox)mouseEvent.getSource();
+        Pane chosen = (Pane)mouseEvent.getSource();
         chosen.setStyle("-fx-border-color: blue");
         give = switch(chosen.getId())
                 {
@@ -123,7 +123,7 @@ public class Trade
     public void choose(MouseEvent mouseEvent)
     {
         clearGetBorders();
-        VBox chosen = (VBox)mouseEvent.getSource();
+        Pane chosen = (Pane)mouseEvent.getSource();
         chosen.setStyle("-fx-border-color: blue");
         get = switch(chosen.getId())
                 {
