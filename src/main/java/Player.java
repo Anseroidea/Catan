@@ -234,4 +234,7 @@ public class Player
         }
     }
 
+    public BufferedImage getGraphics(){
+        return p.get(this.color).get(0);
+    }
 }

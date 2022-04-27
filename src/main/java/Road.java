@@ -21,6 +21,6 @@ public class Road{
         return p;
     }
     public BufferedImage getGraphics(){
-        return b;
+        return p.p.get(p.getColor()).get(2);
     }
 }
