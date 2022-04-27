@@ -21,6 +21,7 @@ public class Edge {
     public Edge(Vertex c, Vertex d) {
         adjacentTiles = new HashMap<>();
         adjacentVertices = new TreeMap<>();
+        /*
         Tile[] a = new Tile[6];
         Tile[] k = new Tile[6];
         Tile[] m = new Tile[2];
@@ -40,6 +41,8 @@ public class Edge {
             }
         }
 
+
+         */
         /*adjacentT = new ArrayList<Tile>();
         adjacentV = new ArrayList<Vertex>();*/
 
@@ -48,6 +51,7 @@ public class Edge {
 
     public Road buildRoad(Player l) {
         r = new Road(this,l);
+        l.getRoads().add(r);
         return r;
     }
 

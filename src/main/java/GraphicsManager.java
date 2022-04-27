@@ -8,10 +8,6 @@ public class GraphicsManager {
         pg = p;
     }
 
-    public static void initializeGraphics(){
-        refreshDisplay();
-    }
-
     public static void refreshDisplay(){
         bg.refreshDisplay();
         pg.refreshDisplay();

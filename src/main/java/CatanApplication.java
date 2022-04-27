@@ -34,7 +34,6 @@ public class CatanApplication extends Application {
                     FXMLLoader fl2 = new FXMLLoader(CatanApplication.class.getResource("/fxml/player.fxml"));
                     Pane ap2 = fl2.load();
                     GraphicsManager.initialize(fl.getController(), fl2.getController());
-                    GraphicsManager.initializeGraphics();
                     s.setPane(new StackPane(ap, ap2));
                 } else if (s.name().equals("SETTLEMENT")) {
                     SettlementSelect.initialize(fl.getController());
@@ -65,6 +64,9 @@ public class CatanApplication extends Application {
     }
 
     public static void updateDisplay(){
+        if (ProgramState.getCurrentState().equals(ProgramState.BOARD)){
+            GraphicsManager.refreshDisplay();
+        }
         primaryStage.setScene(new Scene(ProgramState.getCurrentState().getPane(), 1920, 1080));
     }
 

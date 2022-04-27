@@ -18,7 +18,6 @@ public class PlayerGraphics {
 
     public void refreshDisplay() {
         refreshBoardInteractives();
-
     }
 
     private void refreshBoardInteractives() {
@@ -84,6 +83,50 @@ public class PlayerGraphics {
             sp.setLayoutX(colCoord);
             boardPane.getChildren().add(sp);
         }
+        for (Player p : TurnManager.getPlayerList()){
+            for (Settlement s : p.getSettlements()){
+                double x = getX(s.getVertex(), radius);
+                double y = getY(s.getVertex(), radius);
+                /*
+                ImageView iv = new ImageView(s.getGraphic());
+                iv.setFitWidth(20);
+                iv.setFitHeight(20);
 
+                 */
+                StackPane sp = new StackPane(new Circle(10, p.getColor()));
+                sp.setLayoutX(x - 10);
+                sp.setLayoutY(y - 10);
+                boardPane.getChildren().add(sp);
+            }
+            for (Road r : p.getRoads()){
+                List<Vertex> vertices = new ArrayList<>(r.getEdge().getAdjacentVertices().values());
+                Vertex v1 = vertices.get(0);
+                Vertex v2 = vertices.get(1);
+                double x1 = getX(v1, radius);
+                double x2 = getX(v2, radius);
+                double y1 = getY(v1, radius);
+                double y2 = getY(v2, radius);
+                Line l = new Line(x1, y1, x2, y2);
+                l.setStroke(p.getColor());
+                l.setStrokeWidth(5);
+                boardPane.getChildren().add(l);
+            }
+        }
+
+    }
+    private double getY(Vertex v, double radius){
+        return getY(v, radius, 2);
+    }
+
+    private double getY(Vertex v, double radius, int maxR){
+        return maxR * (radius + radius/2.) + radius + v.getR() * radius/2. + v.getR() / (double) Math.abs(v.getR()) * (v.getC() % 2 + (Math.abs(v.getR()) - 1) * 2) * radius/2.;
+    }
+
+    private double getX(Vertex v, double radius){
+        return getX(v, radius, false);
+    }
+
+    private double getX(Vertex v, double radius, boolean showWater){
+        return (showWater ? 1 : 0) * radius * Math.sqrt(3) + (Math.abs(v.getR()) - 1 + v.getC()) * radius * Math.sqrt(3) / 2.;
     }
 }

@@ -10,6 +10,12 @@ public class TurnManager {
         playerQueue.add(playerQueue.remove());
     }
 
+    public static void previousTurn(){
+        for (int i = 0; i < playerQueue.size() - 1; i++){
+            nextTurn();
+        }
+    }
+
     public static void addAction(String s) {
         allActionLog.append("\n").append(s);
     }
