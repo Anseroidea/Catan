@@ -2,14 +2,14 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
@@ -25,12 +25,18 @@ public class Trade
     private StackPane a, b, c, d, e, a1, b1, c1, d1, e1;
 
     @FXML
-    private Button confirm;
+    private Button confirm, p1, m1;
+
+    @FXML
+    private TextFlow t1;
 
     public static Map<String, Image> cardGraphics;
 
     private String give, get, givePane, getPane;
 
+    private int[] giveThese, getThese;
+
+    private String[] match = new String[] {"brick", "wheat", "forest", "ore", "sheep"};
 
     public Trade() throws Exception
     {
@@ -49,6 +55,8 @@ public class Trade
 
         }
 
+        giveThese = new int[5];
+        getThese = new int[5];
     }
 
     @FXML
@@ -73,30 +81,40 @@ public class Trade
         c.updateDisplay();
     }
 
-    public void toTradeOthers(ActionEvent actionEvent)
+    public void toTradeOthers(ActionEvent actionEvent) throws IOException
     {
+        FXMLLoader fl = new FXMLLoader(CatanApplication.class.getResource("/fxml/" + PopUp.TRADEOTHERS.name().toLowerCase() + ".fxml"));
+        AnchorPane ap = fl.load();
+        PopUp.TRADEOTHERS.setPane(ap);
+        PopUp.TRADEOTHERS.setController(fl.getController());
+        PopUp.TRADEOTHERS.load();
         ((Stage)((Button)actionEvent.getSource()).getScene().getWindow()).close();
     }
 
     public void addBorder(MouseEvent mouseEvent)
     {
         System.out.println("border");
-        Pane clicked = ((Pane)mouseEvent.getSource());
+        StackPane clicked = ((StackPane)mouseEvent.getSource());
+        System.out.println(clicked.getId());
         if(!(clicked.getId().equals(getPane) || clicked.getId().equals(givePane)))
             clicked.setStyle("-fx-border-color: black");
     }
 
     public void removeBorder(MouseEvent mouseEvent)
     {
-        Pane clicked = ((Pane)mouseEvent.getSource());
+        System.out.println("Left");
+        StackPane clicked = ((StackPane)mouseEvent.getSource());
+        System.out.println(clicked.getId());
         if(!(clicked.getId().equals(getPane) || clicked.getId().equals(givePane)))
             clicked.setStyle("-fx-border-color: transparent");
     }
 
     public void select(MouseEvent mouseEvent)
     {
+        System.out.println("Click");
         clearGiveBorders();
-        Pane chosen = (Pane)mouseEvent.getSource();
+        StackPane chosen = (StackPane)mouseEvent.getSource();
+        System.out.println(chosen.getId());
         chosen.setStyle("-fx-border-color: blue");
         give = switch(chosen.getId())
                 {
@@ -122,8 +140,10 @@ public class Trade
 
     public void choose(MouseEvent mouseEvent)
     {
+        System.out.println("Click");
         clearGetBorders();
-        Pane chosen = (Pane)mouseEvent.getSource();
+        StackPane chosen = (StackPane)mouseEvent.getSource();
+        System.out.println(chosen.getId());
         chosen.setStyle("-fx-border-color: blue");
         get = switch(chosen.getId())
                 {
@@ -145,5 +165,25 @@ public class Trade
         c1.setStyle("-fx-border-color: transparent");
         d1.setStyle("-fx-border-color: transparent");
         e1.setStyle("-fx-border-color: transparent");
+    }
+
+    public void add(MouseEvent mouseEvent)
+    {
+        HBox h = (HBox)((Button)mouseEvent.getSource()).getParent();
+        TextFlow t = (TextFlow)h.getChildren().get(1);
+        int id = t.getId().charAt(1) - '1';
+
+        if(id >= 5)
+        {
+
+        }
+        else if(getThese[id] < 19)
+        {
+            getThese[id]++;
+            t.getChildren().get(0).setAccessibleText("" + getThese[id]);
+        }
+    }
+
+    public void minus(MouseEvent mouseEvent) {
     }
 }

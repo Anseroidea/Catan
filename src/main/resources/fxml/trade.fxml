@@ -41,15 +41,21 @@
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </StackPane>
-                              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                              <HBox>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Text>
+                                    <Button fx:id="m1" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="39.0" prefWidth="35.0" text="-" />
+                                    <TextFlow fx:id="t1" prefHeight="38.0" prefWidth="140.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <Button fx:id="p1" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="40.0" text="+" />
                                  </children>
-                              </TextFlow>
+                              </HBox>
                            </children>
                         </VBox>
                         <VBox layoutX="20.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
