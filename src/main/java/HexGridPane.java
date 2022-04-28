@@ -38,9 +38,6 @@ public class HexGridPane extends HexGrid{
         ap.setPrefSize(maxX, maxY);
         maxR--;
         for (Integer r : map.keySet()){
-            if (map.get(r).get(1).getId() == 6 && !showWater){
-                continue;
-            }
             for (int c = (showWater ? 0 : 1); c < map.get(r).size() - (showWater ? 0 : 1); c++){
                 if (map.get(r).get(c) != null && (showWater || map.get(r).get(c).getId() != 6)){
                     double rowCoord = (r + maxR) * (radius + radius/2.);
@@ -69,6 +66,13 @@ public class HexGridPane extends HexGrid{
                     sp.setLayoutY(rowCoord);
                     sp.setLayoutX(colCoord);
                     ap.getChildren().add(sp);
+                } else if (map.get(r).get(c).getId() == 6 && map.get(r).get(c).isHarbor()){
+                    double rowCoord = (r + maxR) * (radius + radius/2.);
+                    double colCoord = Math.abs(r) * radius * Math.sqrt(3)/2. + radius * Math.sqrt(3) * (c - (showWater ? 0 : 1));
+                    Circle cir = new Circle(5);
+                    cir.setLayoutX(colCoord);
+                    cir.setLayoutY(rowCoord);
+                    ap.getChildren().add(cir);
                 }
             }
         }

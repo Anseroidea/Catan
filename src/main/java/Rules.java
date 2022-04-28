@@ -50,7 +50,8 @@ public class Rules
     }
     public void exitRules(MouseEvent mouseEvent)
     {
-        //CatanApplication.updateDisplay();
+        ProgramState.setCurrentState(ProgramState.MAIN);
+        CatanApplication.updateDisplay();
     }
 
     public void prevPage(MouseEvent mouseEvent)

@@ -64,6 +64,9 @@ public class CatanApplication extends Application {
     }
 
     public static void updateDisplay(){
+        if (primaryStage.getScene() != null) {
+            primaryStage.getScene().setRoot(new AnchorPane());
+        }
         if (ProgramState.getCurrentState().equals(ProgramState.BOARD)){
             GraphicsManager.refreshDisplay();
         }
