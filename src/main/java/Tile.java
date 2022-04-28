@@ -30,6 +30,7 @@ public class Tile implements Displayable{
     private Integer id;
     private String type;
     private String weightLetter;
+    private Harbor harbor;
 
     static {
         for (int i = 0; i < tileTypes.length; i++) {
@@ -136,5 +137,13 @@ public class Tile implements Displayable{
 
     public void addAdjacentEdge(Integer i, Edge e) {
         adjacentEdges.put(i, e);
+    }
+
+    public boolean isHarbor(){
+        return harbor != null;
+    }
+
+    public void setHarbor(Harbor h){
+        harbor = h;
     }
 }

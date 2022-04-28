@@ -6,10 +6,11 @@ import java.util.Objects;
 public class Harbor {
 
     public Resource resource;
-    public Vertex vertex;
+    public Tile tile;
 
-    public Harbor() {
-
+    public Harbor(Resource r, Tile t) {
+        resource = r;
+        tile = t;
     }
 
     public Resource getResource() {

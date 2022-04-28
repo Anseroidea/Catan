@@ -1,11 +1,13 @@
 import javafx.scene.layout.AnchorPane;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BoardGame {
 
     private static HexGridPane hexGridPane;
 
+    public static List<Harbor> harbors = new ArrayList<Harbor>();
     public static void initializePlayers(Player[] players){
         TurnManager.initialize(players);
     }
@@ -116,8 +118,21 @@ public class BoardGame {
             hexGridPane.add(new Tile(6), i, 0);
             hexGridPane.add(new Tile(6), i, 7 - Math.abs(i) - 1);
         }
+
+        List<Integer> resourceIntList = new ArrayList<>(Arrays.stream("0 1 2 3 4 5 5 5 5 5".split(" ")).map(Integer::valueOf).toList());
+        Collections.shuffle(resourceIntList);
+        List<Resource> resourceList = resourceIntList.stream().map(i -> i >= 5 ? null : Resource.getResourceList().get(i)).collect(Collectors.toList());
         hexGridPane.setAdjacencies();
         hexGridPane.initializeConnections();
+        for (Integer in : hexGridPane.getVertexManager().getMap().keySet()){
+            for (int col = 0; col < hexGridPane.getVertexManager().getMap().get(in).size(); col++){
+                if (in + col % 2 == 0){
+                    Resource resou = resourceList.remove(0);
+                    Harbor h = new Harbor(resou, hexGridPane.get(in, col));
+                    harbors.add(h);
+                }
+            }
+        }
     }
 
 
