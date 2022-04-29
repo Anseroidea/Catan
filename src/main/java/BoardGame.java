@@ -11,6 +11,17 @@ public class BoardGame {
     public static void initializePlayers(Player[] players){
         TurnManager.initialize(players);
     }
+    public static final String harborLocations = """
+            -3 0 60
+            -3 2 60
+            -2 4 120
+            0 6 180
+            2 4 180
+            3 2 240
+            3 0 300
+            1 0 0
+            -1 0 0
+            """;
 
     public static List<Vertex> getBuildableVertices(){
         List<Vertex> vertices = hexGridPane.getVertexManager().getAllVertices();
@@ -122,16 +133,14 @@ public class BoardGame {
         List<Integer> resourceIntList = new ArrayList<>(Arrays.stream("0 1 2 3 4 5 5 5 5 5".split(" ")).map(Integer::valueOf).toList());
         Collections.shuffle(resourceIntList);
         List<Resource> resourceList = resourceIntList.stream().map(i -> i >= 5 ? null : Resource.getResourceList().get(i)).collect(Collectors.toList());
+        System.out.println("resourceList = " + resourceList);
         hexGridPane.setAdjacencies();
         hexGridPane.initializeConnections();
-        for (Integer in : hexGridPane.getVertexManager().getMap().keySet()){
-            for (int col = 0; col < hexGridPane.getVertexManager().getMap().get(in).size(); col++){
-                if (in + col % 2 == 0){
-                    Resource resou = resourceList.remove(0);
-                    Harbor h = new Harbor(resou, hexGridPane.get(in, col));
-                    harbors.add(h);
-                }
-            }
+        for (String s : harborLocations.split("\n")){
+            int hr = Integer.parseInt(s.split(" ")[0]);
+            int hc = Integer.parseInt(s.split(" ")[1]);
+            Resource resou = resourceList.remove(0);
+            harbors.add(new Harbor(resou, hexGridPane.get(hr, hc), Integer.parseInt(s.split(" ")[2])));
         }
     }
 

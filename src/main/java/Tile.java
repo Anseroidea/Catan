@@ -57,6 +57,7 @@ public class Tile implements Displayable{
         type = tileTypes[id];
     }
 
+
     public Image getImage() {
         return SwingFXUtils.toFXImage(graphics[id], null);
     }
@@ -145,5 +146,9 @@ public class Tile implements Displayable{
 
     public void setHarbor(Harbor h){
         harbor = h;
+    }
+
+    public Harbor getHarbor() {
+        return harbor;
     }
 }
