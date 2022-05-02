@@ -1,20 +1,27 @@
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 public class Resource {
 
     public static List<Resource> resourceList = new ArrayList<>();
+    private BufferedImage smallGraphic;
 
-    public String name;
+    private String name;
 
     static {
         for (String s : "Brick Lumber Ore Wheat Wool".split(" ")){
-            new Resource(s);
+            Resource r = new Resource(s);
+            try {
+                r.smallGraphic = ImageIO.read(Objects.requireNonNull(Resource.class.getResourceAsStream("images/resources/" + s.toLowerCase() + ".png")));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -46,5 +53,9 @@ public class Resource {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    public BufferedImage getGraphic() {
+        return smallGraphic;
     }
 }
