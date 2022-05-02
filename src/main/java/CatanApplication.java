@@ -50,7 +50,7 @@ public class CatanApplication extends Application {
         primaryStage.show();
         primaryStage.setFullScreen(true);
 
-        for(PopUp p : PopUp.values())
+        /*for(PopUp p : PopUp.values())
         {
             try {
                 FXMLLoader fl = new FXMLLoader(CatanApplication.class.getResource("/fxml/" + p.name().toLowerCase() + ".fxml"));
@@ -61,6 +61,7 @@ public class CatanApplication extends Application {
                 e.printStackTrace();
             }
         }
+        PopUp.TRADEBANK.load();*/
     }
 
     public static void updateDisplay(){

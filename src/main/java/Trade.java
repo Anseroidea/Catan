@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -25,7 +27,7 @@ public class Trade
     private StackPane a, b, c, d, e, a1, b1, c1, d1, e1;
 
     @FXML
-    private Button confirm, p1, m1;
+    private Button confirm, p0, m0, p1, m1, p2, m2, p3, m3, p4, m4, p5, m5, p6, m6, p7, m7, p8, m8, p9, m9;
 
     @FXML
     private TextFlow t1;
@@ -171,19 +173,54 @@ public class Trade
     {
         HBox h = (HBox)((Button)mouseEvent.getSource()).getParent();
         TextFlow t = (TextFlow)h.getChildren().get(1);
-        int id = t.getId().charAt(1) - '1';
-
+        int id = t.getId().charAt(1) - '0';
+        System.out.println("CLICKED!!! " + id);
         if(id >= 5)
         {
-
+            Player p = new Player("eh", 3, Color.RED);
+            p.changeCards(new Resource("brick"), 4);
+            p.changeCards(new Resource("wheat"), 4);
+            p.changeCards(new Resource("forest"), 4);
+            p.changeCards(new Resource("ore"), 4);
+            p.changeCards(new Resource("sheep"), 4);
+            if(p.getResources().get(new Resource(match[id - 5])) <= giveThese[id - 5])
+                System.out.println("You don't have enough cards!");
+            else {
+                giveThese[id - 5]++;
+                ((Text)t.getChildren().get(0)).setText("" + giveThese[id]);
+            }
         }
         else if(getThese[id] < 19)
         {
             getThese[id]++;
-            t.getChildren().get(0).setAccessibleText("" + getThese[id]);
+            ((Text)t.getChildren().get(0)).setText("" + getThese[id]);
         }
+
+        System.out.println(Arrays.toString(getThese));
+        System.out.println(Arrays.toString(giveThese));
     }
 
-    public void minus(MouseEvent mouseEvent) {
+    public void minus(MouseEvent mouseEvent)
+    {
+        HBox h = (HBox)((Button)mouseEvent.getSource()).getParent();
+        TextFlow t = (TextFlow)h.getChildren().get(1);
+        int id = t.getId().charAt(1) - '0';
+        System.out.println("CLICKED!!! " + id);
+        if(id >= 5)
+        {
+            if(giveThese[id - 5] > 0)
+            {
+                giveThese[id - 5]--;
+                ((Text) t.getChildren().get(0)).setText("" + getThese[id]);
+            }
+        }
+        else if(getThese[id] > 0)
+        {
+            getThese[id]--;
+            ((Text)t.getChildren().get(0)).setText("" + getThese[id]);
+        }
+
+        System.out.println(Arrays.toString(getThese));
+        System.out.println(Arrays.toString(giveThese));
     }
 }
