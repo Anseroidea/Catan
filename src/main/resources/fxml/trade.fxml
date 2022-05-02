@@ -36,7 +36,31 @@
                      <children>
                         <VBox prefHeight="360.0" prefWidth="200.0">
                            <children>
-                              <StackPane fx:id="a1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder" style="-fx-border-color: blue;">
+                              <StackPane fx:id="a1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="300.0" prefWidth="200.0" style="-fx-border-color: blue;">
+                                 <children>
+                                    <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </StackPane>
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="m0" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="39.0" prefWidth="35.0" text="-" />
+                                    <TextFlow fx:id="t0" prefHeight="38.0" prefWidth="140.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <Button fx:id="p0" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="40.0" text="+" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="20.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
+                           <children>
+                              <StackPane fx:id="b1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder" prefHeight="300.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
@@ -58,24 +82,6 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <VBox layoutX="20.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
-                           <children>
-                              <StackPane fx:id="b1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
-                                 <children>
-                                    <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </StackPane>
-                              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </TextFlow>
-                           </children>
-                        </VBox>
                         <VBox layoutX="220.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
                            <children>
                               <StackPane fx:id="c1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
@@ -83,15 +89,21 @@
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </StackPane>
-                              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                              <HBox>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Text>
+                                    <Button fx:id="m2" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="39.0" prefWidth="35.0" text="-" />
+                                    <TextFlow fx:id="t2" prefHeight="38.0" prefWidth="140.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <Button fx:id="p2" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="40.0" text="+" />
                                  </children>
-                              </TextFlow>
+                              </HBox>
                            </children>
                         </VBox>
                         <VBox layoutX="420.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
@@ -101,15 +113,21 @@
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </StackPane>
-                              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                              <HBox>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Text>
+                                    <Button fx:id="m3" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="39.0" prefWidth="35.0" text="-" />
+                                    <TextFlow fx:id="t3" prefHeight="38.0" prefWidth="140.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <Button fx:id="p3" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="40.0" text="+" />
                                  </children>
-                              </TextFlow>
+                              </HBox>
                            </children>
                         </VBox>
                         <VBox layoutX="620.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
@@ -119,15 +137,21 @@
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </StackPane>
-                              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                              <HBox>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Text>
+                                    <Button fx:id="m4" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="39.0" prefWidth="35.0" text="-" />
+                                    <TextFlow fx:id="t4" prefHeight="38.0" prefWidth="140.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <Button fx:id="p4" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="40.0" text="+" />
                                  </children>
-                              </TextFlow>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
@@ -168,15 +192,21 @@
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </StackPane>
-                              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                              <HBox>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Text>
+                                    <Button fx:id="m5" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="39.0" prefWidth="35.0" text="-" />
+                                    <TextFlow fx:id="t5" prefHeight="38.0" prefWidth="140.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <Button fx:id="p5" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="40.0" text="+" />
                                  </children>
-                              </TextFlow>
+                              </HBox>
                            </children>
                         </VBox>
                         <VBox layoutX="20.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
@@ -186,15 +216,21 @@
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </StackPane>
-                              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                              <HBox>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Text>
+                                    <Button fx:id="m6" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="39.0" prefWidth="35.0" text="-" />
+                                    <TextFlow fx:id="t6" prefHeight="38.0" prefWidth="140.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <Button fx:id="p6" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="40.0" text="+" />
                                  </children>
-                              </TextFlow>
+                              </HBox>
                            </children>
                         </VBox>
                         <VBox layoutX="220.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
@@ -204,15 +240,21 @@
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </StackPane>
-                              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                              <HBox>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Text>
+                                    <Button fx:id="m7" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="39.0" prefWidth="35.0" text="-" />
+                                    <TextFlow fx:id="t7" prefHeight="38.0" prefWidth="140.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <Button fx:id="p7" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="40.0" text="+" />
                                  </children>
-                              </TextFlow>
+                              </HBox>
                            </children>
                         </VBox>
                         <VBox layoutX="420.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
@@ -222,15 +264,21 @@
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </StackPane>
-                              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                              <HBox>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Text>
+                                    <Button fx:id="m8" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="39.0" prefWidth="35.0" text="-" />
+                                    <TextFlow fx:id="t8" prefHeight="38.0" prefWidth="140.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <Button fx:id="p8" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="40.0" text="+" />
                                  </children>
-                              </TextFlow>
+                              </HBox>
                            </children>
                         </VBox>
                         <VBox layoutX="620.0" layoutY="20.0" prefHeight="360.0" prefWidth="200.0">
@@ -240,15 +288,21 @@
                                     <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </StackPane>
-                              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                              <HBox>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Text>
+                                    <Button fx:id="m9" mnemonicParsing="false" onMouseClicked="#minus" prefHeight="39.0" prefWidth="35.0" text="-" />
+                                    <TextFlow fx:id="t9" prefHeight="38.0" prefWidth="140.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <Button fx:id="p9" mnemonicParsing="false" onMouseClicked="#add" prefHeight="39.0" prefWidth="40.0" text="+" />
                                  </children>
-                              </TextFlow>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
