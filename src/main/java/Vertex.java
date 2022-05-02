@@ -75,4 +75,8 @@ public class Vertex {
         return r == vertex.r && c == vertex.c;
     }
 
+    public void addSettlement(Player p){
+        settlement= new Settlement(p,this);
+    }
+
 }
