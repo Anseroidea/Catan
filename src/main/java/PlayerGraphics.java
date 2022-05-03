@@ -1,10 +1,11 @@
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -16,9 +17,27 @@ import java.util.stream.Collectors;
 public class PlayerGraphics {
 
     public AnchorPane boardPane;
+    public ScrollPane scrollPane;
+    public Button resourceButton;
+    public VBox resourcesBox;
+
+    @FXML
+    public void initialize(){
+        scrollPane.setFitToWidth(true);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setBackground(Background.fill(Color.TRANSPARENT));
+    }
 
     public void refreshDisplay() {
+        refreshText();
         refreshBoardInteractives();
+    }
+
+    private void refreshText() {
+        Label value = new Label(TurnManager.getAllActions());
+        value.setBackground(Background.fill(Color.TRANSPARENT));
+        scrollPane.setContent(value);
     }
 
     private void refreshBoardInteractives() {
@@ -132,5 +151,15 @@ public class PlayerGraphics {
     }
 
     public void pause(MouseEvent mouseEvent) {
+    }
+
+    public void toggleResourceShowing(ActionEvent actionEvent) {
+        if (resourcesBox.isDisabled()){
+            resourceButton.setText("Hide Resources");
+            resourcesBox.setDisable(false);
+        } else {
+            resourceButton.setText("Show Resources");
+            resourcesBox.setDisable(true);
+        }
     }
 }

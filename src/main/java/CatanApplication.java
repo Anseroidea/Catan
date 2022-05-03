@@ -72,6 +72,7 @@ public class CatanApplication extends Application {
             GraphicsManager.refreshDisplay();
         }
         primaryStage.setScene(new Scene(ProgramState.getCurrentState().getPane(), 1920, 1080));
+        primaryStage.setFullScreen(true);
     }
 
     public static void main(String[] args){

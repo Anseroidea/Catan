@@ -29,6 +29,10 @@ public class TurnManager {
         return p;
     }
 
+    public static String getAllActions(){
+        return allActionLog.toString();
+    }
+
     public static boolean hasBuilt() {
         return hasBuilt;
     }
