@@ -3,6 +3,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -83,40 +84,84 @@ public class Trade
         c.updateDisplay();
     }
 
+    /*
+    Other players accept or decline
+     */
     public void toTradeOthers(ActionEvent actionEvent) throws IOException
     {
-        FXMLLoader fl = new FXMLLoader(CatanApplication.class.getResource("/fxml/" + PopUp.TRADEOTHERS.name().toLowerCase() + ".fxml"));
-        AnchorPane ap = fl.load();
-        PopUp.TRADEOTHERS.setPane(ap);
-        PopUp.TRADEOTHERS.setController(fl.getController());
-        PopUp.TRADEOTHERS.load();
-        ((Stage)((Button)actionEvent.getSource()).getScene().getWindow()).close();
+        boolean allTheSame = true;
+        boolean emptyGive = true;
+        for(int i = 0; i < 5; i++)
+        {
+            if ((giveThese[i] == 0 && getThese[i] > 0) || (getThese[i] == 0 && giveThese[i] > 0))
+                allTheSame = false;
+            if (giveThese[i] > 0)
+                emptyGive = false;
+        }
+
+        if(emptyGive)
+        {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText("You MUST give something in trade!");
+            a.show();
+        }
+        else if(allTheSame)
+        {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText("Cannot give and get the same resource(s)!");
+            a.show();
+        }
+        else
+        {
+            FXMLLoader fl = new FXMLLoader(CatanApplication.class.getResource("/fxml/" + PopUp.TRADEOTHERS.name().toLowerCase() + ".fxml"));
+            AnchorPane ap = fl.load();
+            PopUp.TRADEOTHERS.setPane(ap);
+            PopUp.TRADEOTHERS.setController(fl.getController());
+            PopUp.TRADEOTHERS.load();
+
+            HashMap<String, Integer> temp = new HashMap<>();
+            for(int i = 0; i < 5; i++)
+                if(getThese[i] > 0)
+                    temp.put(match[i], getThese[i]);
+
+            ((TradeOthers)PopUp.TRADEOTHERS.getController()).setGet(temp);
+
+            HashMap<String, Integer> temp2 = new HashMap<>();
+            for(int i = 0; i < 5; i++)
+                if(giveThese[i] > 0)
+                    temp2.put(match[i], giveThese[i]);
+
+            ((TradeOthers)PopUp.TRADEOTHERS.getController()).setGive(temp2);
+
+            ((TradeOthers)PopUp.TRADEOTHERS.getController()).setBasics();
+            //((Stage) ((Button) actionEvent.getSource()).getScene().getWindow()).close();
+        }
     }
 
     public void addBorder(MouseEvent mouseEvent)
     {
-        System.out.println("border");
+        //System.out.println("border");
         StackPane clicked = ((StackPane)mouseEvent.getSource());
-        System.out.println(clicked.getId());
+        //System.out.println(clicked.getId());
         if(!(clicked.getId().equals(getPane) || clicked.getId().equals(givePane)))
             clicked.setStyle("-fx-border-color: black");
     }
 
     public void removeBorder(MouseEvent mouseEvent)
     {
-        System.out.println("Left");
+        //System.out.println("Left");
         StackPane clicked = ((StackPane)mouseEvent.getSource());
-        System.out.println(clicked.getId());
+        //System.out.println(clicked.getId());
         if(!(clicked.getId().equals(getPane) || clicked.getId().equals(givePane)))
             clicked.setStyle("-fx-border-color: transparent");
     }
 
     public void select(MouseEvent mouseEvent)
     {
-        System.out.println("Click");
+        //System.out.println("Click");
         clearGiveBorders();
         StackPane chosen = (StackPane)mouseEvent.getSource();
-        System.out.println(chosen.getId());
+        //System.out.println(chosen.getId());
         chosen.setStyle("-fx-border-color: blue");
         give = switch(chosen.getId())
                 {
@@ -142,10 +187,10 @@ public class Trade
 
     public void choose(MouseEvent mouseEvent)
     {
-        System.out.println("Click");
+        //System.out.println("Click");
         clearGetBorders();
         StackPane chosen = (StackPane)mouseEvent.getSource();
-        System.out.println(chosen.getId());
+        //System.out.println(chosen.getId());
         chosen.setStyle("-fx-border-color: blue");
         get = switch(chosen.getId())
                 {
@@ -157,7 +202,7 @@ public class Trade
                     default -> "Nothing";
                 };
         getPane = chosen.getId();
-        System.out.println(get);
+        //System.out.println(get);
     }
 
     private void clearGetBorders()
@@ -174,6 +219,8 @@ public class Trade
         HBox h = (HBox)((Button)mouseEvent.getSource()).getParent();
         TextFlow t = (TextFlow)h.getChildren().get(1);
         int id = t.getId().charAt(1) - '0';
+        System.out.println(Arrays.toString(getThese));
+        System.out.println(Arrays.toString(giveThese));
         System.out.println("CLICKED!!! " + id);
         if(id >= 5)
         {
@@ -187,7 +234,7 @@ public class Trade
                 System.out.println("You don't have enough cards!");
             else {
                 giveThese[id - 5]++;
-                ((Text)t.getChildren().get(0)).setText("" + giveThese[id]);
+                ((Text)t.getChildren().get(0)).setText("" + giveThese[id - 5]);
             }
         }
         else if(getThese[id] < 19)
