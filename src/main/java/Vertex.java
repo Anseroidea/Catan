@@ -6,7 +6,8 @@ public class Vertex {
     public Map<Integer, Tile> adjacentTiles;
     public Map<Integer, Edge> adjacentEdges;
     public Settlement settlement;
-    int r, c;
+    private int r, c;
+    private Harbor h;
 
     public static final int NORTH = 0;
     public static final int NORTHEAST = 1;
@@ -79,4 +80,15 @@ public class Vertex {
         settlement= new Settlement(p,this);
     }
 
+    public Harbor getHarbor() {
+        return h;
+    }
+
+    public void setHarbor(Harbor h) {
+        this.h = h;
+    }
+
+    public boolean hasHarbor(){
+        return h != null;
+    }
 }

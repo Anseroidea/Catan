@@ -1,5 +1,6 @@
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -76,10 +77,22 @@ public class HexGridPane extends HexGrid{
                     double factor = radius * 2 / i.getHeight();
                     iv.setFitHeight(radius * 2);
                     iv.setFitWidth(i.getWidth() * factor);
-                    iv.setLayoutX(colCoord);
-                    iv.setLayoutY(rowCoord);
+                    StackPane sp = new StackPane(iv);
+                    sp.setLayoutX(colCoord);
+                    sp.setLayoutY(rowCoord);
                     iv.setRotate(map.get(r).get(c).getHarbor().getRotation());
-                    ap.getChildren().add(iv);
+                    if (map.get(r).get(c).getHarbor().getResource() != null){
+                        WritableImage image = SwingFXUtils.toFXImage(map.get(r).get(c).getHarbor().getResource().getGraphic(), null);
+                        ImageView res = new ImageView(image);
+                        factor = radius/ 1.5 / image.getHeight();
+                        res.setFitHeight(radius/1.5);
+                        res.setFitWidth(image.getWidth() * factor);
+                        sp.getChildren().add(res);
+                    } else {
+                        Label l = new Label("?");
+                        sp.getChildren().add(l);
+                    }
+                    ap.getChildren().add(sp);
                 }
             }
         }

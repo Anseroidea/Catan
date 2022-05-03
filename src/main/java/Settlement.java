@@ -36,4 +36,14 @@ public class Settlement {
     }
 
     public void upGrade(){city=true;}
+
+    public void getResources(){
+        Map m =vertex.getAdjacentTiles();
+        Set<Tile> k=m.entrySet();
+        int REMOVETHIS;
+        for(Tile r:k){
+            if(r.getWeight()==REMOVETHIS){
+            r.get(this);}
+        }
+    }
 }
