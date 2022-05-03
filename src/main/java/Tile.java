@@ -24,6 +24,7 @@ public class Tile implements Displayable{
     public static final int WEST = 6;
     public static final int NORTHWEST = 7;
     public static final String[] directions = {"NORTH", "NORTHEAST", "EAST", "SOUTHEAST", "SOUTH", "SOUTHWEST", "WEST", "NORTHWEST"};
+    boolean robber = false;
 
     private int r;
     private int c;
@@ -150,5 +151,12 @@ public class Tile implements Displayable{
 
     public Harbor getHarbor() {
         return harbor;
+    }
+
+    public void get(Settlement s){
+        if(!robber){
+            if(s.city){s.getPlayer().changeCards(new Resource(type),2);}
+            else{s.getPlayer().changeCards(new Resource(type),1);}
+        }
     }
 }
