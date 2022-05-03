@@ -118,7 +118,23 @@ public class Trade
             PopUp.TRADEOTHERS.setPane(ap);
             PopUp.TRADEOTHERS.setController(fl.getController());
             PopUp.TRADEOTHERS.load();
-            ((Stage) ((Button) actionEvent.getSource()).getScene().getWindow()).close();
+
+            HashMap<String, Integer> temp = new HashMap<>();
+            for(int i = 0; i < 5; i++)
+                if(getThese[i] > 0)
+                    temp.put(match[i], getThese[i]);
+
+            ((TradeOthers)PopUp.TRADEOTHERS.getController()).setGet(temp);
+
+            HashMap<String, Integer> temp2 = new HashMap<>();
+            for(int i = 0; i < 5; i++)
+                if(giveThese[i] > 0)
+                    temp2.put(match[i], giveThese[i]);
+
+            ((TradeOthers)PopUp.TRADEOTHERS.getController()).setGive(temp2);
+
+            ((TradeOthers)PopUp.TRADEOTHERS.getController()).setBasics();
+            //((Stage) ((Button) actionEvent.getSource()).getScene().getWindow()).close();
         }
     }
 
