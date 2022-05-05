@@ -42,8 +42,8 @@ public class Settlement {
         Set<Tile> k=m.entrySet();
         int REMOVETHIS;
         for(Tile r:k){
-            if(r.getWeight()==REMOVETHIS){
-            r.get(this);}
+            //if(r.getWeight()==REMOVETHIS){
+            r.get(this);//}
         }
     }
 }

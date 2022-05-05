@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlayerGraphics">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlayerGraphics">
    <children>
       <AnchorPane fx:id="boardPane" layoutX="450.0" layoutY="108.0" prefHeight="863.0" prefWidth="936.0" />
       <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="520.0" layoutX="20.0" layoutY="540.0" stroke="BLACK" strokeType="INSIDE" width="350.0" />
@@ -81,12 +81,12 @@
       <Line endX="86.0" endY="-23.0" layoutX="283.0" layoutY="800.0" startX="-263.0" startY="-23.0" />
       <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="539.0" prefHeight="262.0" prefWidth="349.0" spacing="10.0">
          <children>
-            <Button fx:id="resourceButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="170.0" text="Hide Resources">
+            <Button fx:id="resourceButton" mnemonicParsing="false" onAction="#toggleResourceShowing" prefHeight="38.0" prefWidth="170.0" text="Hide Resources">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-            <VBox prefHeight="153.0" prefWidth="349.0" spacing="10.0">
+            <VBox fx:id="resourcesBox" prefHeight="153.0" prefWidth="349.0" spacing="10.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="64.0" prefWidth="349.0" spacing="10.0">
                      <children>
@@ -282,7 +282,7 @@
                                     <Font size="32.0" />
                                  </font>
                               </Label>
-                              <ImageView fitHeight="70.0" fitWidth="96.0" layoutX="199.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="70.0" fitWidth="61.0" layoutX="199.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/resources/development.png" />
                                  </image>

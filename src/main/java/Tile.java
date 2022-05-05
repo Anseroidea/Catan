@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Tile implements Displayable{
 
-    public final static String[] tileTypes = {"Brick", "Desert", "Forest", "Ore", "Sheep", "Wheat", "Water"};
+    public final static String[] tileTypes = {"Brick", "Forest", "Ore", "Wheat", "Wool", "Desert", "Water"};
     public final static Map<String, Integer> weights = new TreeMap<>();
     public final static BufferedImage[] graphics = new BufferedImage[7];
     private final Map<Integer, Tile> adjacentTiles = new HashMap<>();
@@ -30,6 +30,7 @@ public class Tile implements Displayable{
     private int c;
     private Integer id;
     private String type;
+    private Resource resource;
     private String weightLetter;
     private Harbor harbor;
 
@@ -56,6 +57,11 @@ public class Tile implements Displayable{
     public Tile(Integer id){
         this.id = id;
         type = tileTypes[id];
+        if (id > 4){
+            resource = null;
+        } else {
+            resource = Resource.getResourceList().get(id);
+        }
     }
 
 
@@ -158,5 +164,9 @@ public class Tile implements Displayable{
             if(s.city){s.getPlayer().changeCards(new Resource(type),2);}
             else{s.getPlayer().changeCards(new Resource(type),1);}
         }
+    }
+
+    public Resource getResource() {
+        return resource;
     }
 }

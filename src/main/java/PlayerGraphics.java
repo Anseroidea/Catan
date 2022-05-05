@@ -2,10 +2,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -30,8 +27,22 @@ public class PlayerGraphics {
     }
 
     public void refreshDisplay() {
+        refreshPlayerInfo();
         refreshText();
         refreshBoardInteractives();
+    }
+
+    private void refreshPlayerInfo() {
+        int resouInd = 0;
+        for (int r = 0; r < 2; r++){
+            HBox h = (HBox) resourcesBox.getChildren().get(r);
+            for (int i = 0; i < resourcesBox.getChildren().size(); i++){
+                if (i % 3 == 1){
+                    Label l = (Label) h.getChildren().get(i);
+                    l.setText(TurnManager.getCurrentPlayer().getResources().get(Resource.getResourceList().get(resouInd++)) + "");
+                }
+            }
+        }
     }
 
     private void refreshText() {
@@ -156,10 +167,10 @@ public class PlayerGraphics {
     public void toggleResourceShowing(ActionEvent actionEvent) {
         if (resourcesBox.isDisabled()){
             resourceButton.setText("Hide Resources");
-            resourcesBox.setDisable(false);
+            resourcesBox.setVisible(false);
         } else {
             resourceButton.setText("Show Resources");
-            resourcesBox.setDisable(true);
+            resourcesBox.setDisable(false);
         }
     }
 }

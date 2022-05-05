@@ -90,6 +90,12 @@ public class SettlementSelect {
                 StackPane sp = new StackPane(circle);
                 circle.setOnMouseClicked((event) -> {
                     Settlement s = new Settlement(TurnManager.getCurrentPlayer(), v);
+                    if (isSecondSelection){
+                        for (Tile t : s.getVertex().getAdjacentTiles().values())
+                            if (t.getResource() != null){
+                                TurnManager.getCurrentPlayer().changeCards(t.getResource(), 1);
+                            }
+                    }
                     TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " placed a settlement.");
                     lastPlacedVertex = v;
                     updateDisplay();
