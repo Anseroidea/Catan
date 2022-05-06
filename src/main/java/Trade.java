@@ -39,32 +39,50 @@ public class Trade
 
     private int[] giveThese, getThese;
 
-    private String[] match = new String[] {"brick", "wheat", "forest", "ore", "sheep"};
+    public static String[] match = new String[] {"brick", "wheat", "forest", "ore", "sheep"};
 
-    public Trade() throws Exception
+    private TradeBank bank;
+
+    static
     {
         cardGraphics = new HashMap<>();
 
-        String[] temp = Tile.tileTypes;
-
-        for(int i = 0; i < temp.length; i++)
+        for(int i = 0; i < 5; i++)
         {
-            if (i == 1 || i == 6)
-                continue;
+            BufferedImage im = null;
+            try {
+                im = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/cards/resources--" + match[i] + ".png")));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
 
-            BufferedImage im = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/cards/resources--" + temp[i].toLowerCase() + ".png")));
+            cardGraphics.put(match[i], SwingFXUtils.toFXImage(im, null));
 
-            cardGraphics.put(temp[i].toLowerCase(), SwingFXUtils.toFXImage(im, null));
+        }
+    }
+
+    public Trade() throws Exception
+    {
+        /*cardGraphics = new HashMap<>();
+
+        for(int i = 0; i < 5; i++)
+        {
+            BufferedImage im = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/cards/resources--" + match[i] + ".png")));
+
+            cardGraphics.put(match[i], SwingFXUtils.toFXImage(im, null));
 
         }
 
         giveThese = new int[5];
         getThese = new int[5];
+        bank = new TradeBank();*/
     }
 
     @FXML
     public void initialize()
     {
+        giveThese = new int[5];
+        getThese = new int[5];
         ((ImageView)a.getChildren().get(0)).setImage(cardGraphics.get("brick"));
         ((ImageView)b.getChildren().get(0)).setImage(cardGraphics.get("wheat"));
         ((ImageView)c.getChildren().get(0)).setImage(cardGraphics.get("forest"));

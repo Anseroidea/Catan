@@ -27,25 +27,21 @@ public class TradeBank
 
     private String give, get, givePane, getPane;
 
-    public static Map<String, Image> cardGraphics;
+    public static Map<String, Image> cardGraphics = Trade.cardGraphics;
 
     public TradeBank() throws Exception
     {
-        cardGraphics = new HashMap<>();
+        /*cardGraphics = new HashMap<>();
         //System.out.println(1);
-        String[] temp = Tile.tileTypes;
+        String[] temp = Trade.match;
         //System.out.println(2);
-        for(int i = 0; i < temp.length; i++)
+        for(int i = 0; i < 5; i++)
         {
-            if (i == 1 || i == 6)
-                continue;
-            //System.out.println(i + " ho");
             BufferedImage im = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/cards/resources--" + temp[i].toLowerCase() + ".png")));
-            //System.out.println("li");
+
             cardGraphics.put(temp[i].toLowerCase(), SwingFXUtils.toFXImage(im, null));
-            //System.out.println("day");
-        }
-        //System.out.println(3);
+
+        }*/
     }
     @FXML
     public void initialize()
