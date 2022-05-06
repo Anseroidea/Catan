@@ -1,11 +1,13 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,11 @@ public class PlayerGraphics {
     public ScrollPane scrollPane;
     public Button resourceButton;
     public VBox resourcesBox;
+    public Button rollDiceButton;
+    public Button tradeButton;
+    public Button buyDevelopmentButton;
+    public Button developmentCardsButton;
+    public Button nextRoundButton;
 
     @FXML
     public void initialize(){
@@ -28,16 +35,33 @@ public class PlayerGraphics {
 
     public void refreshDisplay() {
         refreshPlayerInfo();
+        refreshButtons();
         refreshText();
         refreshBoardInteractives();
+    }
+
+    private void refreshButtons(){
+        if(TurnManager.hasRolledDice()){
+            tradeButton.setDisable(false);
+            buyDevelopmentButton.setDisable(false);
+            developmentCardsButton.setDisable(false);
+            rollDiceButton.setDisable(true);
+            nextRoundButton.setDisable(false);
+        } else {
+            tradeButton.setDisable(true);
+            buyDevelopmentButton.setDisable(true);
+            developmentCardsButton.setDisable(true);
+            rollDiceButton.setDisable(false);
+            nextRoundButton.setDisable(true);
+        }
     }
 
     private void refreshPlayerInfo() {
         int resouInd = 0;
         for (int r = 0; r < 2; r++){
             HBox h = (HBox) resourcesBox.getChildren().get(r);
-            for (int i = 0; i < resourcesBox.getChildren().size(); i++){
-                if (i % 3 == 1){
+            for (int i = 0; i < h.getChildren().size(); i++){
+                if (i % 2 == 1){
                     Label l = (Label) h.getChildren().get(i);
                     l.setText(TurnManager.getCurrentPlayer().getResources().get(Resource.getResourceList().get(resouInd++)) + "");
                 }
@@ -83,7 +107,7 @@ public class PlayerGraphics {
                 mi.setOnAction((event1) -> {
                     System.out.println("hi");
                 });
-
+                menu.show(l, Side.BOTTOM, 0, 0);
                 //System.out.println("v1, v2:" + e.getAdjacentTiles().values().stream().map(Tile::getWeight).collect(Collectors.toList()));
             });
             l.setOnMouseEntered((event) -> {
@@ -165,12 +189,22 @@ public class PlayerGraphics {
     }
 
     public void toggleResourceShowing(ActionEvent actionEvent) {
-        if (resourcesBox.isDisabled()){
-            resourceButton.setText("Hide Resources");
+        if (resourcesBox.isVisible()){
+            resourceButton.setText("Show Resources");
             resourcesBox.setVisible(false);
         } else {
-            resourceButton.setText("Show Resources");
-            resourcesBox.setDisable(false);
+            resourceButton.setText("Hide Resources");
+            resourcesBox.setVisible(true);
         }
+    }
+
+    public void rollDice(ActionEvent actionEvent) {
+        BoardGame.rollDice();
+        refreshDisplay();
+    }
+
+    public void nextRound(ActionEvent actionEvent) {
+        TurnManager.nextTurn();
+        refreshDisplay();
     }
 }

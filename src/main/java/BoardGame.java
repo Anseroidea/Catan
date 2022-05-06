@@ -41,7 +41,7 @@ public class BoardGame {
     private static void initializeTiles(){
         List<Tile> tiles = new ArrayList<>();
         for (int i = 0; i <= 5; i++) {
-            for (int j = 0; j < (i <= 3 ? (i == 1) ? 1 : (i == 2) ? 4 : 3 : 4); j++){
+            for (int j = 0; j < (i <= 4 ? (i == 0 || i == 2) ? 3 : 4: 1); j++){
                 tiles.add(new Tile(i));
             }
         }
@@ -60,7 +60,7 @@ public class BoardGame {
         }
         Collections.shuffle(selectableTiles);
         Tile start = null;
-        while (start == null || start.getId() == 1)
+        while (start == null || start.getId() == 5)
             start = selectableTiles.get(0);
         Set<String> weights = Tile.weights.keySet();
         Iterator<String> it = weights.iterator();
@@ -117,7 +117,7 @@ public class BoardGame {
                     break;
                 }
             }
-            if (hexGridPane.get(r, c).getId() != 1)
+            if (hexGridPane.get(r, c).getId() != 5)
                 hexGridPane.get(r, c).setWeightLetter(it.next());
         }
         for (int i = -3; i < 4; i++) {
@@ -162,6 +162,24 @@ public class BoardGame {
             }
         }
         return result;
+    }
+
+    public static void rollDice(){
+        int sum = (int) (Math.random() * 6) + (int) (Math.random() * 6) + 2;
+        TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " has rolled a " + sum);
+        TurnManager.setHasRolledDice(true);
+        for (Tile t : hexGridPane.getTiles()){
+            if (t.getWeight() == sum){
+                for (Vertex v : t.getAdjacentVertices().values()){
+                    if (v.getSettlement() != null){
+                        v.getSettlement().getPlayer().changeCards(t.getResource(), 1);
+                        if (!v.getSettlement().isSettlement()) {
+                            v.getSettlement().getPlayer().changeCards(t.getResource(), 1);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

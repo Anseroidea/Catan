@@ -289,4 +289,15 @@ public class HexGrid {
         return map.get(r).get(c);
     }
 
+    public List<Tile> getTiles() {
+        List<Tile> result = new ArrayList<>();
+        for (Integer r : map.keySet()){
+            for (Tile t : map.get(r)){
+                if (t.getResource() != null){
+                    result.add(t);
+                }
+            }
+        }
+        return result;
+    }
 }

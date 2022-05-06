@@ -89,12 +89,16 @@ public class SettlementSelect {
                 Circle circle = new Circle(vertRadius, new Color(0.1,0.7, 0, .7));
                 StackPane sp = new StackPane(circle);
                 circle.setOnMouseClicked((event) -> {
-                    Settlement s = new Settlement(TurnManager.getCurrentPlayer(), v);
+                    v.addSettlement(TurnManager.getCurrentPlayer());
                     if (isSecondSelection){
-                        for (Tile t : s.getVertex().getAdjacentTiles().values())
-                            if (t.getResource() != null){
+                        for (Tile t : v.getAdjacentTiles().values()) {
+                            if (t.getResource()!= null){
+                                System.out.println(t.getResource().getResource());
+                            }
+                            if (t.getResource() != null) {
                                 TurnManager.getCurrentPlayer().changeCards(t.getResource(), 1);
                             }
+                        }
                     }
                     TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " placed a settlement.");
                     lastPlacedVertex = v;

@@ -67,6 +67,9 @@ public class Player
                 p.put(Color.YELLOW, w);
         }
 
+        for (Resource r : Resource.getResourceList()){
+            resources.put(r, 0);
+        }
 
     }
 
