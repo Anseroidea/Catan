@@ -1,49 +1,270 @@
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.util.*;
 
 public class TradeOthers
 {
+    @FXML
+    private AnchorPane scene;
+
     @FXML
     private Button oneA, oneD, twoA, twoD, threeA, threeD, one, two, three;
 
     @FXML
     private HBox request, offer;
 
-    private HashMap<String, Integer> get, give;
+    @FXML
+    private VBox consider;
 
-    public void setGet(HashMap<String, Integer> g)
+    private Player[] partners;
+    private Button[] acceptedPartners;
+    private HashMap<Resource, Integer> get, give;
+    private Trade t;
+
+    public static BufferedImage check, cross;
+
+    public void temp(Trade t)
     {
-        get = g;
+        this.t = t;
     }
 
-    public void setGive(HashMap<String, Integer> g)
+    public TradeOthers()
     {
-        give = g;
+        try {
+            check = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/trade/si-removebg-preview.png")));
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            System.out.println("Reading the check symbol didn't work");
+        }
+
+        try {
+            cross = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/trade/Nay-removebg-preview.png")));
+        } catch (Exception e) {
+            System.out.println("Reading the nay symbol didn't work");
+        }
     }
+
+    public void setGet(Map<Resource, Integer> g)
+    {
+        get = (HashMap)g;
+    }
+
+    public void setGive(Map<Resource, Integer> g)
+    {
+        give = (HashMap)g;
+    }
+
+
 
     //Graphics, enable / disable buttons
     public void setBasics()
     {
         System.out.println("HELOOOOOOOOOOOOOOOO");
-        for(Iterator<Map.Entry<String, Integer>> i = get.entrySet().iterator(); i.hasNext();)
+
+        Player p = new Player("eh", 3, Color.RED);
+        p.changeCards(Resource.BRICK, 4);
+        p.changeCards(Resource.WHEAT, 4);
+        p.changeCards(Resource.ORE, 4);
+        p.changeCards(Resource.LUMBER, 4);
+        p.changeCards(Resource.WOOL, 4);
+
+        Player p2 = new Player("eh", 3, Color.RED);
+        p2.changeCards(Resource.BRICK, 5);
+        p2.changeCards(Resource.WHEAT, 3);
+        p2.changeCards(Resource.ORE, 4);
+        p2.changeCards(Resource.LUMBER, 4);
+        p2.changeCards(Resource.WOOL, 4);
+
+        Player p3 = new Player("eh", 3, Color.RED);
+        p3.changeCards(Resource.BRICK, 5);
+        p3.changeCards(Resource.WHEAT, 4);
+        p3.changeCards(Resource.ORE, 4);
+        p3.changeCards(Resource.LUMBER, 4);
+        p3.changeCards(Resource.WOOL, 4);
+
+        //List<Player> tradePartners = TurnManager.getPlayerList();
+        List<Player> tradePartners = new ArrayList<>();
+        tradePartners.add(p);
+        tradePartners.add(p2);
+        tradePartners.add(p3);
+
+        if(tradePartners == null)
         {
-            Map.Entry<String, Integer> e = i.next();
+            System.out.println("For some reason the list of players is null");
+            return;
+        }
+
+        partners = new Player[tradePartners.size()];
+        acceptedPartners = new Button[partners.length];
+        int count = 0;
+
+        EventHandler<MouseEvent> trade = new EventHandler<>(){
+            @Override
+            public void handle(MouseEvent event)
+            {
+                Button pressed = ((Button)event.getSource());
+                Player partner = partners[pressed.getId().charAt(1) - '0'];
+                for(Iterator<Map.Entry<Resource, Integer>> i = give.entrySet().iterator(); i.hasNext();)
+                {
+                    Map.Entry<Resource, Integer> e = i.next();
+                    partner.changeCards(e.getKey(), e.getValue());
+                }
+
+                Player p0 = new Player("eh", 3, Color.RED);
+                p0.changeCards(Resource.BRICK, 4);
+                p0.changeCards(Resource.WHEAT, 4);
+                p0.changeCards(Resource.ORE, 4);
+                p0.changeCards(Resource.LUMBER, 4);
+                p0.changeCards(Resource.WOOL, 4);
+                for(Iterator<Map.Entry<Resource, Integer>> i = get.entrySet().iterator(); i.hasNext();)
+                {
+                    Map.Entry<Resource, Integer> e = i.next();
+                    partner.changeCards(e.getKey(), e.getValue());
+                }
+
+                Stage thisStage = (Stage) pressed.getScene().getWindow();
+                thisStage.getScene().setRoot(new AnchorPane());
+                thisStage.close();
+
+                t.back(event);
+
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("Trade successful!");
+                a.show();
+            }
+        };
+
+        EventHandler<ActionEvent> yes = new EventHandler<>(){
+            public void handle(ActionEvent event)
+            {
+                System.out.println("Accept");
+                Button source = (Button)event.getSource();
+
+                System.out.println("HUGE BUTTON");
+                int id = source.getId().charAt(1) - '1';
+                if(acceptedPartners[id] == null)
+                {
+                    Button accepted = new Button();
+                    accepted.setOnMouseClicked(trade);
+                    accepted.setId("y" + id);
+                    accepted.setPrefWidth(100);
+                    accepted.setPrefHeight(100);
+                    accepted.setVisible(true);
+
+
+                    double x = consider.getLayoutX() - 30;
+                    double y = consider.getLayoutY() + consider.getHeight() / (partners.length * 2) - accepted.getPrefHeight() / 2
+                            + (id * consider.getHeight() / partners.length);
+
+
+                    AnchorPane.setRightAnchor(accepted, scene.getWidth() - x); // distance 0 from right side of
+                    AnchorPane.setTopAnchor(accepted, y);
+                    System.out.println(scene.getWidth() - x + " " + y);
+                    scene.getChildren().add(accepted);
+
+                    acceptedPartners[id] = accepted;
+                }
+
+                ImageView iv = new ImageView(SwingFXUtils.toFXImage(check, null));
+                iv.setFitHeight(acceptedPartners[id].getPrefHeight());
+                iv.setFitWidth(acceptedPartners[id].getPrefWidth());
+                acceptedPartners[id].setGraphic(iv);
+
+
+                System.out.println(id);
+                System.out.println("DONE");
+            }
+        };
+
+        EventHandler<ActionEvent> no = new EventHandler<>(){
+            public void handle(ActionEvent event)
+            {
+                System.out.println("Decline");
+                Button source = (Button)event.getSource();
+
+
+                int id = source.getId().charAt(1) - '1';
+                System.out.println(id);
+                if(acceptedPartners[id] != null)
+                {
+                    acceptedPartners[id].setDisable(true);
+
+                    ImageView iv = new ImageView(SwingFXUtils.toFXImage(cross, null));
+                    iv.setFitHeight(acceptedPartners[id].getPrefHeight());
+                    iv.setFitWidth(acceptedPartners[id].getPrefWidth());
+                    acceptedPartners[id].setGraphic(iv);
+                    acceptedPartners[id].setStyle("-fx-background-color: transparent");
+                }
+            }
+        };
+
+        for(int i = 0; i < tradePartners.size(); i++)
+        {
+            //if(tradePartners.get(i).equals(TurnManager.getCurrentPlayer()))
+                //continue;
+
+            Player temp = tradePartners.get(i);
+            partners[count++] = temp;
+
+            HBox h = new HBox();
+            h.setPrefHeight(consider.getHeight() / (tradePartners.size()));
+            h.setPrefWidth(consider.getWidth());
+            h.setAlignment(Pos.CENTER);
+
+            Button accept = new Button();
+            accept.setId("a" + count);
+            accept.setPrefHeight(h.getPrefHeight());
+            accept.setPrefWidth(h.getPrefWidth() / 2);
+            accept.setOnAction(yes);
+            ImageView iv = new ImageView(SwingFXUtils.toFXImage(check, null));
+            iv.setFitHeight(accept.getPrefHeight());
+            iv.setFitWidth(accept.getPrefWidth());
+            accept.setGraphic(iv);
+
+            Button decline = new Button();
+            decline.setId("d" + count);
+            decline.setPrefHeight(h.getPrefHeight());
+            decline.setPrefWidth(h.getPrefWidth() / 2);
+            decline.setOnAction(no);
+            ImageView iv2 = new ImageView(SwingFXUtils.toFXImage(cross, null));
+            iv2.setFitHeight(decline.getPrefHeight());
+            iv2.setFitWidth(decline.getPrefWidth());
+
+            decline.setGraphic(iv2);
+
+            h.getChildren().addAll(accept, decline);
+            h.setVisible(true);
+            consider.getChildren().add(h);
+        }
+
+        for(Iterator<Map.Entry<Resource, Integer>> i = get.entrySet().iterator(); i.hasNext();)
+        {
+            Map.Entry<Resource, Integer> e = i.next();
             VBox v = new VBox();
             v.setPrefHeight(request.getHeight());
             v.setPrefWidth(request.getWidth() / 5);
             v.setAlignment(Pos.CENTER); //Alignment of its children
 
-            ImageView im = new ImageView(Trade.cardGraphics.get(e.getKey()));
+            ImageView im = new ImageView(SwingFXUtils.toFXImage(e.getKey().getGraphic(), null));
             im.setFitHeight(v.getPrefHeight() - 20); //Different from getHeight()
             im.setFitWidth(v.getPrefWidth());
             v.getChildren().add(im);
@@ -58,17 +279,26 @@ public class TradeOthers
             System.out.println(v.getPrefHeight());
             System.out.println(v.getPrefWidth());
             System.out.println("WEll, " + request.getHeight() + " " + request.getWidth());
+
+            for(int k = 0; k < partners.length; k++)
+            {
+                System.out.println(e.getKey());
+                System.out.println(partners[k].getResources().get(e.getKey()));
+                System.out.println(e.getValue());
+                if(partners[k].getResources().get(e.getKey()) < e.getValue())
+                    ((Button)((HBox)consider.getChildren().get(k)).getChildren().get(0)).setDisable(true);
+            }
         }
 
-        for(Iterator<Map.Entry<String, Integer>> i = give.entrySet().iterator(); i.hasNext();)
+        for(Iterator<Map.Entry<Resource, Integer>> i = give.entrySet().iterator(); i.hasNext();)
         {
-            Map.Entry<String, Integer> e = i.next();
+            Map.Entry<Resource, Integer> e = i.next();
             VBox v = new VBox();
             v.setPrefHeight(offer.getHeight());
             v.setPrefWidth(offer.getWidth() / 5);
             v.setAlignment(Pos.CENTER);
 
-            ImageView im = new ImageView(Trade.cardGraphics.get(e.getKey()));
+            ImageView im = new ImageView(SwingFXUtils.toFXImage(e.getKey().getGraphic(), null));
             im.setFitHeight(v.getPrefHeight() - 20);
             im.setFitWidth(v.getPrefWidth());
             v.getChildren().add(im);
@@ -81,6 +311,9 @@ public class TradeOthers
             v.setVisible(true);
             offer.getChildren().add(v);
         }
+
+
+
         System.out.println("BYEEEEEEEEEEEEEEEE");
     }
 }

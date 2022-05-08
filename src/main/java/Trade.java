@@ -77,7 +77,7 @@ public class Trade
     @FXML
     private TextFlow t1;
 
-    public static Map<String, Image> cardGraphics;
+    //public static Map<String, Image> cardGraphics;
 
     private String give, get, givePane, getPane;
 
@@ -105,7 +105,7 @@ public class Trade
 
         }
 
-         */
+        */
     }
 
     public Trade() throws Exception
@@ -552,6 +552,20 @@ public class Trade
         refreshAll();
     }
 
-    public void toTradeOthers(ActionEvent actionEvent) {
+    public void toTradeOthers(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fl = new FXMLLoader(CatanApplication.class.getResource("/fxml/" + PopUp.TRADEOTHERS.name().toLowerCase() + ".fxml"));
+        AnchorPane ap = fl.load();
+        PopUp.TRADEOTHERS.setPane(ap);
+        PopUp.TRADEOTHERS.setController(fl.getController());
+        PopUp.TRADEOTHERS.load();
+
+        ((TradeOthers)PopUp.TRADEOTHERS.getController()).temp(this);
+
+        ((TradeOthers)PopUp.TRADEOTHERS.getController()).setGet(request);
+
+        ((TradeOthers)PopUp.TRADEOTHERS.getController()).setGive(offer);
+
+        ((TradeOthers)PopUp.TRADEOTHERS.getController()).setBasics();
+        //((Stage) ((Button) actionEvent.getSource()).getScene().getWindow()).close();
     }
 }
