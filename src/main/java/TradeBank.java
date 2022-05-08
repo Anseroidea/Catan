@@ -242,6 +242,13 @@ public class TradeBank
             reqAddOreButton.setDisable(true);
             reqAddWheatButton.setDisable(true);
             reqAddWoolButton.setDisable(true);
+        } else {
+            ResourceDeck rd = BoardGame.getResourceDeck();
+            reqAddBrickButton.setDisable(!rd.getResource(Resource.BRICK, get.get(Resource.BRICK) + 1));
+            reqAddLumberButton.setDisable(!rd.getResource(Resource.LUMBER, get.get(Resource.LUMBER) + 1));
+            reqAddOreButton.setDisable(!rd.getResource(Resource.ORE, get.get(Resource.ORE) + 1));
+            reqAddWheatButton.setDisable(!rd.getResource(Resource.WHEAT, get.get(Resource.WHEAT) + 1));
+            reqAddWoolButton.setDisable(!rd.getResource(Resource.WOOL, get.get(Resource.WOOL) + 1));
         }
     }
 

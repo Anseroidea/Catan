@@ -9,6 +9,9 @@ public class BoardGame {
     private static DevelopmentCardDeck developmentCardDeck = new DevelopmentCardDeck();
     private static ResourceDeck resourceDeck = new ResourceDeck();
 
+    private static Player longestRoad = null;
+    private static Player largestArmy = null;
+
     public static List<Harbor> harbors = new ArrayList<Harbor>();
     public static void initializePlayers(Player[] players){
         TurnManager.initialize(players);
@@ -190,6 +193,35 @@ public class BoardGame {
 
     public static ResourceDeck getResourceDeck() {
         return resourceDeck;
+    }
+
+    public static Player getLargestArmy() {
+        return largestArmy;
+    }
+
+    public static void updateLargestArmy() {
+        Player largest = (largestArmy != null) ? largestArmy : TurnManager.getCurrentPlayer();
+        for (Player p : TurnManager.getPlayerList()){
+            if (p.getKnights() > largest.getKnights()){
+                largest = p;
+            }
+        }
+
+    }
+
+    public static Player getLongestRoad() {
+        return longestRoad;
+    }
+
+    public static void updateLongestRoad() {
+        Player longest = (longestRoad != null) ? longestRoad : TurnManager.getCurrentPlayer();
+        for (Player p : TurnManager.getPlayerList()){
+            p.updateLongestRoad();
+            if (p.getLongestRoad() > longest.getLongestRoad()){
+                longest = p;
+            }
+        }
+        longestRoad = longest;
     }
 }
 

@@ -3,6 +3,7 @@ import java.util.*;
 public class TurnManager {
     private static Map<String, String> moveMap;
     private static Queue<Player> playerQueue;
+    private static List<Player> originalList;
     private static StringBuilder allActionLog;
     private static boolean hasRolledDice;
     private static boolean hasBuilt;
@@ -28,8 +29,7 @@ public class TurnManager {
     }
 
     public static List<Player> getPlayerList() {
-        List p = (List) playerQueue;
-        return p;
+        return originalList;
     }
 
     public static String getAllActions(){
@@ -42,7 +42,8 @@ public class TurnManager {
 
     public static void initialize(Player[] players) {
         playerQueue = new LinkedList<>();
-        playerQueue.addAll(Arrays.stream(players).toList());
+        originalList = Arrays.stream(players).toList();
+        playerQueue.addAll(originalList);
         allActionLog = new StringBuilder();
     }
 

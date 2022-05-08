@@ -38,12 +38,15 @@ public enum PopUp {
         return pane;
     }
 
-    public void load()
-    {
+    public void load() {
+        load(1920, 1080);
+    }
+
+    public void load(double w, double h){
         lastPopUpCancelled = false;
         Stage pop = new Stage();
         pop.initModality(Modality.APPLICATION_MODAL);
-        pop.setScene(new Scene(pane, 1920, 1080));
+        pop.setScene(new Scene(pane, w, h));
         pop.setOnCloseRequest((event) -> {
             lastPopUpCancelled = true;
             pop.getScene().setRoot(new AnchorPane());
@@ -72,5 +75,14 @@ public enum PopUp {
         ((TradeBank) controller).initPopUp();
         ((TradeBank) controller).refreshAll();
         load();
+    }
+
+    public void loadMonopoly() {
+        if (this != MONOPOLY){
+            System.out.println("This is monopoly");
+            return;
+        }
+        ((Monopoly) controller).initPlayerInfo();
+        load(600, 400);
     }
 }

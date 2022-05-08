@@ -20,10 +20,11 @@ public class Player
     private List<Road> roads;
     private ArrayList<City> cities;
     private int id;
-    private HashMap<String, Integer> victoryPoints;
     private Color color;
     private HashSet<String> curRoads;
     private int longestRoad;
+    private BufferedImage pawn;
+    private int knights;
     static HashMap<Color, HashMap<String, BufferedImage>> p=new HashMap<Color, HashMap<String, BufferedImage>>();
 
     public Player(String n, int ID, Color c){
@@ -32,7 +33,6 @@ public class Player
         settlements = new ArrayList<Settlement>();
         roads = new ArrayList<Road>();
         cities = new ArrayList<City>();
-        victoryPoints=new HashMap<String, Integer>();
         curRoads=new HashSet<String>();
         longestRoad=0;
         name=n;
@@ -41,6 +41,7 @@ public class Player
 
         String[] t={"Pawn", "Settlement", "Road", "City"};
         ArrayList<BufferedImage> v=new ArrayList<BufferedImage>();
+        /*
         Scanner sc=new Scanner("blueP.png settB.png roadB.png cityB.png redP.png settR.png roadR.png cityR.png whiteP.png settW.png roadW.png cityW.png yellowP.png settY.png roadY.png cityY.png");
         for(int a=0;a<4;a++){
             for(int b=0;b<4;b++){
@@ -51,21 +52,31 @@ public class Player
                 }
             }
         }
-        Iterator it = v.iterator();
-        for(int a=0;a<4;a++){
-            HashMap<String, BufferedImage> w=new HashMap<String, BufferedImage>();
-            for(int b=0;b<4;b++){
-                w.put(t[b], (BufferedImage) it.next());
-            }
-            if(a==0)
-                p.put(Color.BLUE, w);
-            else if(a==1)
-                p.put(Color.RED, w);
-            else if(a==2)
-                p.put(Color.WHITE, w);
-            else if(a==3)
-                p.put(Color.YELLOW, w);
+
+
+         */
+
+        BufferedImage bi = null;
+        try {
+            bi = ImageIO.read(Player.class.getResourceAsStream("images/player/pawnFill.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        BufferedImage result = new BufferedImage(bi.getWidth(), bi.getHeight(), 2);
+        BufferedImage lines = null;
+        try {
+            lines = ImageIO.read(Player.class.getResourceAsStream("images/player/pawnOutline.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Graphics2D graphics2D = result.createGraphics();
+        graphics2D.drawImage(bi, 0, 0, null);
+        graphics2D.setComposite(AlphaComposite.SrcAtop);
+        graphics2D.setColor(new java.awt.Color((float) c.getRed(), (float) c.getGreen(), (float) c.getBlue()));
+        graphics2D.fillRect(0,0, bi.getWidth(), bi.getHeight());
+        graphics2D.drawImage(lines, 0, 0, null);
+        graphics2D.dispose();
+        this.pawn = result;
 
         for (Resource r : Resource.getResourceList()){
             resources.put(r, 0);
@@ -138,49 +149,25 @@ public class Player
 
     public int getPrivateVictoryPoints()
     {
-        int sum = 0;
-        for(Iterator<Integer> i = victoryPoints.values().iterator(); i.hasNext();)
-        {
-            sum += i.next();
-        }
-        return sum;
+        return getPublicVictoryPoints() + (int) developmentCards.stream().filter(dc -> dc.getId() <= 4).count();
     }
 
     public int getPublicVictoryPoints()
     {
-        Integer i = victoryPoints.get("VPCard");
-        return getPrivateVictoryPoints() - (i == null ? 0 : i);
+        return settlements.stream().map(s -> {
+            if (s.isSettlement()){
+                return 1;
+            } else {
+                return 2;
+            }
+        }).reduce(0, Integer::sum) + (BoardGame.getLongestRoad() != null && BoardGame.getLongestRoad().equals(this) ? 2 : 0) + ((BoardGame.getLargestArmy() != null && BoardGame.getLargestArmy().equals(this)) ? 2 : 0);
     }
 
-    public void use(DevelopmentCard dc)
-    {
-        switch(dc.getId())
-        {
-            case 0:
-                victoryPoints.put("VPCard", victoryPoints.getOrDefault("VPCard", 0) + 1);
-                break;
-            case 1:
-            {
-                //PopUp.load(ROB);
-            }
-            case 2:
-            {
-                //2 roads
-                //PopUp.load(ROAD);
-                //PopUp.load(ROAD);
-            }
-            case 3:
-            {
-                //PopUp.load(
-            }
-            case 4:
-            {
-
-            }
-        }
+    public int getLongestRoad() {
+        return longestRoad;
     }
 
-    public void getLongestRoad()
+    public void updateLongestRoad()
     {
         curRoads = getRoadSet();
         longestRoad = 0;
@@ -235,6 +222,7 @@ public class Player
         {
             if(cur == null)
                 cur = 0;
+            BoardGame.getResourceDeck().changeCount(r, num);
             resources.put(r, cur + num);
         }
     }
@@ -298,5 +286,21 @@ public class Player
 
     public boolean canBuyDevelopment(){
         return resources.get(Resource.WOOL) >= 1 && resources.get(Resource.ORE) >= 1 && resources.get(Resource.WHEAT) >= 1;
+    }
+
+    public BufferedImage getPawn() {
+        return pawn;
+    }
+
+    public int getKnights() {
+        return knights;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(name, player.name);
     }
 }
