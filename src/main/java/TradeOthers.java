@@ -123,22 +123,26 @@ public class TradeOthers
             {
                 Button pressed = ((Button)event.getSource());
                 Player partner = partners[pressed.getId().charAt(1) - '0'];
-                for(Iterator<Map.Entry<Resource, Integer>> i = give.entrySet().iterator(); i.hasNext();)
-                {
-                    Map.Entry<Resource, Integer> e = i.next();
-                    partner.changeCards(e.getKey(), e.getValue());
-                }
-
+                //Player p0 = TurnManager.getCurrentPlayer();
                 Player p0 = new Player("eh", 3, Color.RED);
                 p0.changeCards(Resource.BRICK, 4);
                 p0.changeCards(Resource.WHEAT, 4);
                 p0.changeCards(Resource.ORE, 4);
                 p0.changeCards(Resource.LUMBER, 4);
                 p0.changeCards(Resource.WOOL, 4);
-                for(Iterator<Map.Entry<Resource, Integer>> i = get.entrySet().iterator(); i.hasNext();)
+
+                for(Iterator<Map.Entry<Resource, Integer>> i = give.entrySet().iterator(); i.hasNext();)
                 {
                     Map.Entry<Resource, Integer> e = i.next();
                     partner.changeCards(e.getKey(), e.getValue());
+                    p0.changeCards(e.getKey(), -e.getValue());
+                }
+
+                for(Iterator<Map.Entry<Resource, Integer>> i = get.entrySet().iterator(); i.hasNext();)
+                {
+                    Map.Entry<Resource, Integer> e = i.next();
+                    p0.changeCards(e.getKey(), e.getValue());
+                    partner.changeCards(e.getKey(), -e.getValue());
                 }
 
                 Stage thisStage = (Stage) pressed.getScene().getWindow();
