@@ -1,8 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.lang.Math;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class DevelopmentCard
@@ -15,46 +18,52 @@ public class DevelopmentCard
     4 = monopoly
      */
     private int id;
-    public static Map<Integer, Image> graphics;
+    public static Map<Integer, BufferedImage> graphics = new HashMap<>();
     private String type;
     private Player player;
 
-    public DevelopmentCard() {
-        BufferedImage VictoryPoint1 = (BufferedImage) new ImageIcon("resources/images/development/market--development").getImage();
-        BufferedImage VictoryPoint2 = (BufferedImage) new ImageIcon("resources/images/development/chapel--development").getImage();
-        BufferedImage VictoryPoint3 = (BufferedImage) new ImageIcon("resources/images/development/university--development").getImage();
-        BufferedImage VictoryPoint4 = (BufferedImage) new ImageIcon("resources/images/development/library--development").getImage();
-        BufferedImage VictoryPoint5 = (BufferedImage) new ImageIcon("resources/images/development/govenershosue--development").getImage();
-        BufferedImage Knight = (BufferedImage) new ImageIcon("resources/images/development/soldier--development").getImage();
-        BufferedImage RoadBuilding = (BufferedImage) new ImageIcon("resources/images/development/roadbuilding--development").getImage();
-        BufferedImage Monopoly = (BufferedImage) new ImageIcon("resources/image/development/monopoly--development.png").getImage();
-        BufferedImage YearofPlenty = (BufferedImage) new ImageIcon("resources/image/development/yearofplenty--development.png").getImage();
+    static {
+        try {
+            BufferedImage VictoryPoint1 = ImageIO.read(DevelopmentCard.class.getResourceAsStream("images/development/market--development.png"));
+            BufferedImage VictoryPoint2 = ImageIO.read(DevelopmentCard.class.getResourceAsStream("images/development/chapel--development.png"));
+            BufferedImage VictoryPoint3 = ImageIO.read(DevelopmentCard.class.getResourceAsStream("images/development/university--development.png"));
+            BufferedImage VictoryPoint4 = ImageIO.read(DevelopmentCard.class.getResourceAsStream("images/development/library--development.png"));
+            BufferedImage VictoryPoint5 = ImageIO.read(DevelopmentCard.class.getResourceAsStream("images/development/governershouse--development.png"));
+            BufferedImage Knight = ImageIO.read(DevelopmentCard.class.getResourceAsStream("images/development/soldier--development.png"));
+            BufferedImage RoadBuilding = ImageIO.read(DevelopmentCard.class.getResourceAsStream("images/development/roadbuilding--development.png"));
+            BufferedImage Monopoly = ImageIO.read(DevelopmentCard.class.getResourceAsStream("images/development/monopoly--development.png"));
+            BufferedImage YearofPlenty = ImageIO.read(DevelopmentCard.class.getResourceAsStream("images/development/yearofplenty--development.png"));
+            graphics.put(0, VictoryPoint1);
+            graphics.put(1, VictoryPoint2);
+            graphics.put(2, VictoryPoint3);
+            graphics.put(3, VictoryPoint4);
+            graphics.put(4, VictoryPoint5);
+            graphics.put(5, Knight);
+            graphics.put(6, RoadBuilding);
+            graphics.put(7, YearofPlenty);
+            graphics.put(8, Monopoly);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        id = (int) Math.random()*4;
-        if (id == 0) {
+    public DevelopmentCard(int id) {
+        if (id <= 4) {
             type = "Victory Point";
         }
-        if (id == 1) {
+        if (id == 5) {
             type = "Knight";
         }
-        if (id == 2) {
+        if (id == 6) {
             type = "Road Building";
         }
-        if (id == 3) {
+        if (id == 7) {
             type = "Year of Plenty";
         }
-        if (id == 4) {
+        if (id == 8) {
             type = "Monopoly";
         }
-        graphics.put(0, VictoryPoint1);
-        graphics.put(0, VictoryPoint2);
-        graphics.put(0, VictoryPoint3);
-        graphics.put(0, VictoryPoint4);
-        graphics.put(0, VictoryPoint5);
-        graphics.put(1, Knight);
-        graphics.put(2, RoadBuilding);
-        graphics.put(3, YearofPlenty);
-        graphics.put(4, Monopoly);
+        this.id = id;
     }
 
     public int getId()
@@ -65,5 +74,9 @@ public class DevelopmentCard
     public String getType()
     {
         return type;
+    }
+
+    public BufferedImage getGraphic() {
+        return graphics.get(id);
     }
 }

@@ -80,18 +80,18 @@ public class Player
             for(Vertex k : roads.get(i).getEdge().getAdjacentVertices().values())
                 if(k.getSettlement() == null)
                     buildable.add(k);
+        for (Settlement s : settlements){
+            buildable.removeAll(s.getVertex().getAdjacentVertices());
+        }
         return buildable;
     }
 
     public List<Edge> getBuildableEdges(){
         List<Edge> buildable = new ArrayList<>();
-        for (Vertex v : settlements.stream().map(Settlement::getVertex).collect(Collectors.toList())){
-            for (Edge e : v.getAdjacentEdges().values()){
-                if (!buildable.contains(e) && !(roads.stream().map(Road::getEdge).collect(Collectors.toList())).contains(e)){
-                    buildable.add(e);
-                }
-            }
+        for (Road r : roads){
+            buildable.addAll(r.getEdge().getAdjacentEdges().values());
         }
+        buildable.removeAll(roads.stream().map(Road::getEdge).toList());
         return buildable;
     }
 
@@ -209,7 +209,9 @@ public class Player
         }
     }
 
-
+    public List<DevelopmentCard> getDevelopmentCards(){
+        return developmentCards;
+    }
 
     public HashSet<String> getRoadSet()
     {
@@ -239,5 +241,62 @@ public class Player
 
     public BufferedImage getGraphics(){
         return p.get(this.color).get(0);
+    }
+
+    public boolean canBuildRoad(){
+        return resources.get(Resource.BRICK) >= 1 && resources.get(Resource.LUMBER) >= 1;
+    }
+
+    public void buildRoad(Edge e){
+        e.buildRoad(this);
+        changeCards(Resource.LUMBER, -1);
+        changeCards(Resource.BRICK, -1);
+    }
+
+    public void buildSettlement(Vertex v) {
+        v.addSettlement(this);
+        changeCards(Resource.BRICK, -1);
+        changeCards(Resource.LUMBER, -1);
+        changeCards(Resource.WHEAT, -1);
+        changeCards(Resource.WOOL, -1);
+    }
+
+    public void buildCity(Settlement s){
+        s.buildCity();
+        changeCards(Resource.WHEAT, -2);
+        changeCards(Resource.ORE, -3);
+    }
+
+    public void buyDevelopment() {
+        developmentCards.add(BoardGame.getDevelopmentCardDeck().drawCard());
+        changeCards(Resource.WOOL, -1);
+        changeCards(Resource.WHEAT, -1);
+        changeCards(Resource.ORE, -1);
+    }
+
+    public void useDevelopment(DevelopmentCard dc){
+        if (dc.getId() == 6){
+
+        } else if (dc.getId() == 7){
+
+        } else if (dc.getId() == 8){
+
+        } else {
+
+        }
+        developmentCards.remove(dc);
+        TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " placed on a " + dc.getType() + " card.");
+    }
+
+    public boolean canBuildSettlement() {
+        return resources.get(Resource.LUMBER) >= 1 && resources.get(Resource.BRICK) >= 1 && resources.get(Resource.WHEAT) >=1 && resources.get(Resource.WOOL) >=1;
+    }
+
+    public boolean canBuildCity(){
+        return resources.get(Resource.WHEAT) >= 2 && resources.get(Resource.ORE) >= 3;
+    }
+
+    public boolean canBuyDevelopment(){
+        return resources.get(Resource.WOOL) >= 1 && resources.get(Resource.ORE) >= 1 && resources.get(Resource.WHEAT) >= 1;
     }
 }

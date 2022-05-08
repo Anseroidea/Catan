@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlayerGraphics">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlayerGraphics">
    <children>
       <AnchorPane fx:id="boardPane" layoutX="450.0" layoutY="108.0" prefHeight="863.0" prefWidth="936.0" />
       <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="520.0" layoutX="20.0" layoutY="540.0" stroke="BLACK" strokeType="INSIDE" width="350.0" />
@@ -161,17 +161,26 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="tradeButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="349.0" text="Trade">
+            <HBox>
+               <children>
+                  <Button fx:id="tradeButton" mnemonicParsing="false" onAction="#trade" prefHeight="51.0" prefWidth="174.0" text="Player Trade">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="bankTradeButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#bankTrade" prefHeight="51.0" prefWidth="174.0" text="Bank Trade">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Button fx:id="buyDevelopmentButton" layoutX="10.0" layoutY="96.0" mnemonicParsing="false" onAction="#buyDevelopment" prefHeight="51.0" prefWidth="357.0" text="Buy Development">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="buyDevelopmentButton" layoutX="10.0" layoutY="96.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="357.0" text="Buy Development">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
-            <Button fx:id="developmentCardsButton" layoutX="10.0" layoutY="182.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="352.0" text="Development Cards">
+            <Button fx:id="developmentCardsButton" layoutX="10.0" layoutY="182.0" mnemonicParsing="false" onAction="#goToDevelopment" prefHeight="51.0" prefWidth="352.0" text="Development Cards">
                <font>
                   <Font size="24.0" />
                </font>
@@ -266,5 +275,23 @@
             </StackPane>
          </children>
       </VBox>
+      <StackPane fx:id="developmentPanel" layoutX="20.0" layoutY="20.0" visible="false">
+         <children>
+            <Rectangle arcHeight="50.0" arcWidth="50.0" fill="DODGERBLUE" height="1040.0" stroke="BLACK" strokeType="INSIDE" width="350.0" />
+            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+               <content>
+                  <VBox fx:id="developmentCardBox" prefWidth="350.0" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#back" text="Back" />
+                        <HBox prefHeight="225.0" prefWidth="330.0" spacing="30.0" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

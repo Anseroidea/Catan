@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 public class BoardGame {
 
     private static HexGridPane hexGridPane;
+    private static DevelopmentCardDeck developmentCardDeck = new DevelopmentCardDeck();
+    private static ResourceDeck resourceDeck = new ResourceDeck();
 
     public static List<Harbor> harbors = new ArrayList<Harbor>();
     public static void initializePlayers(Player[] players){
@@ -180,6 +182,14 @@ public class BoardGame {
                 }
             }
         }
+    }
+
+    public static DevelopmentCardDeck getDevelopmentCardDeck() {
+        return developmentCardDeck;
+    }
+
+    public static ResourceDeck getResourceDeck() {
+        return resourceDeck;
     }
 }
 

@@ -35,7 +35,7 @@ public class Settlement {
         return !city;
     }
 
-    public void upGrade(){city=true;}
+    public void buildCity(){city=true;}
 
     public void getResources(){
         Map m =vertex.getAdjacentTiles();

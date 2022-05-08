@@ -29,19 +29,18 @@ public class Monopoly
             "b", "wheat",
             "c", "forest",
             "d", "ore",
-            "e", "sheep"
+            "e", "wool"
     );
 
     public Monopoly() throws Exception
     {
+        /*
         TradeBank.cardGraphics = new HashMap<>();
         //System.out.println(1);
         String[] temp = Tile.tileTypes;
         //System.out.println(2);
-        for(int i = 0; i < temp.length; i++)
+        for(int i = 0; i < 5; i++)
         {
-            if (i == 1 || i == 6)
-                continue;
             //System.out.println(i + " ho");
             BufferedImage im = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/cards/resources--" + temp[i].toLowerCase() + ".png")));
             //System.out.println("li");
@@ -49,17 +48,22 @@ public class Monopoly
             //System.out.println("day");
         }
         //System.out.println(3);
+
+         */
     }
     @FXML
     public void initialize()
     {
+        /*
         //System.out.println(4);
         ((ImageView)a.getChildren().get(0)).setImage(TradeBank.cardGraphics.get("brick"));
         ((ImageView)b.getChildren().get(0)).setImage(TradeBank.cardGraphics.get("wheat"));
         ((ImageView)c.getChildren().get(0)).setImage(TradeBank.cardGraphics.get("forest"));
         ((ImageView)d.getChildren().get(0)).setImage(TradeBank.cardGraphics.get("ore"));
-        ((ImageView)e.getChildren().get(0)).setImage(TradeBank.cardGraphics.get("sheep"));
+        ((ImageView)e.getChildren().get(0)).setImage(TradeBank.cardGraphics.get("wool"));
         //System.out.println(5);
+
+         */
     }
 
     public void confirmRob(MouseEvent mouseEvent)

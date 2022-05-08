@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,13 +18,56 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Trade
 {
+    public VBox reqBrick;
+    public Button reqRemBrickButton;
+    public Label brickLabel;
+    public Button reqAddBrickButton;
+    public Button reqRemLumberButton;
+    public Label lumberLabel;
+    public Button reqAddLumber;
+    public Button reqRemOreButton;
+    public Label oreLabel;
+    public Button reqAddOreButton;
+    public Button reqRemWheatButton;
+    public Button reqAddWheatButton;
+    public Button reqRemWoolButton;
+    public Label woolLabel;
+    public Button reqAddWoolButton;
+    public Button offRemBrickButton;
+    public Label brickLabelOff;
+    public Button reqAddBrickButton1;
+    public VBox offLumber;
+    public Button offRemLumberButton;
+    public Label lumberLabelOff;
+    public Button offAddLumberButton;
+    public VBox offOre;
+    public Button offRemOreButton;
+    public Label oreLabelOff;
+    public Button offAddOreButton;
+    public VBox offWheat;
+    public Button offRemWheatButton;
+    public Button offAddWheatButton;
+    public VBox offWool;
+    public Button offRemWoolButton;
+    public Label woolLabelOff;
+    public Button offAddWoolButton;
+    public VBox reqLumber;
+    public VBox reqOre;
+    public VBox reqWheat;
+    public VBox reqWool;
+    public VBox offBrick;
+    private Map<Resource, Integer> request = new HashMap<>();
+    private Map<Resource, Integer> offer = new HashMap<>();
+    public Label wheatLabel;
+    public Label wheatLabelOff;
+    public Button offAddBrickButton;
+    public Button reqAddLumberButton;
+
+
     @FXML
     private StackPane a, b, c, d, e, a1, b1, c1, d1, e1;
 
@@ -39,12 +83,13 @@ public class Trade
 
     private int[] giveThese, getThese;
 
-    public static String[] match = new String[] {"brick", "wheat", "forest", "ore", "sheep"};
+    public static String[] match = new String[] {"brick", "wheat", "forest", "ore", "wool"};
 
     private TradeBank bank;
 
     static
     {
+        /*
         cardGraphics = new HashMap<>();
 
         for(int i = 0; i < 5; i++)
@@ -59,6 +104,8 @@ public class Trade
             cardGraphics.put(match[i], SwingFXUtils.toFXImage(im, null));
 
         }
+
+         */
     }
 
     public Trade() throws Exception
@@ -77,10 +124,13 @@ public class Trade
         getThese = new int[5];
         bank = new TradeBank();*/
     }
-
-    @FXML
     public void initialize()
     {
+        for (Resource r : Resource.getResourceList()){
+            request.put(r, 0);
+            offer.put(r, 0);
+        }
+        /*
         giveThese = new int[5];
         getThese = new int[5];
         ((ImageView)a.getChildren().get(0)).setImage(cardGraphics.get("brick"));
@@ -94,17 +144,20 @@ public class Trade
         ((ImageView)d1.getChildren().get(0)).setImage(cardGraphics.get("ore"));
         ((ImageView)e1.getChildren().get(0)).setImage(cardGraphics.get("sheep"));
         //System.out.println(5);
+
+         */
     }
 
     public void back(MouseEvent mouseEvent) {
-        ProgramState.setCurrentState(ProgramState.MAIN);
-        CatanApplication c = new CatanApplication();
-        c.updateDisplay();
+        Stage thisStage = (Stage) reqRemBrickButton.getScene().getWindow();
+        thisStage.getScene().setRoot(new AnchorPane());
+        thisStage.close();
     }
 
     /*
     Other players accept or decline
      */
+    /*
     public void toTradeOthers(ActionEvent actionEvent) throws IOException
     {
         boolean allTheSame = true;
@@ -287,5 +340,218 @@ public class Trade
 
         System.out.println(Arrays.toString(getThese));
         System.out.println(Arrays.toString(giveThese));
+    }
+
+     */
+
+    public void refreshLabels(){
+        brickLabel.setText(request.get(Resource.BRICK) + "");
+        lumberLabel.setText(request.get(Resource.LUMBER) + "");
+        oreLabel.setText(request.get(Resource.ORE) + "");
+        wheatLabel.setText(request.get(Resource.WHEAT) + "");
+        woolLabel.setText(request.get(Resource.WOOL) + "");
+        brickLabelOff.setText(offer.get(Resource.BRICK) + "");
+        lumberLabelOff.setText(offer.get(Resource.LUMBER) + "");
+        oreLabelOff.setText(offer.get(Resource.ORE) + "");
+        wheatLabelOff.setText(offer.get(Resource.WHEAT) + "");
+        woolLabelOff.setText(offer.get(Resource.WOOL) + "");
+    }
+    
+    public void refreshButtons(){
+        Map<Resource, Integer> owned = TurnManager.getCurrentPlayer().getResources();
+        offRemBrickButton.setDisable(false);
+        offAddBrickButton.setDisable(false);
+        if (offer.get(Resource.BRICK) == 0){
+            offRemBrickButton.setDisable(true);
+        }
+        if (owned.get(Resource.BRICK).intValue() == offer.get(Resource.BRICK)){
+            offAddBrickButton.setDisable(true);
+        }
+        offRemLumberButton.setDisable(false);
+        offAddLumberButton.setDisable(false);
+        if (offer.get(Resource.LUMBER) == 0){
+            offRemLumberButton.setDisable(true);
+        }
+        if (owned.get(Resource.LUMBER).intValue() == offer.get(Resource.LUMBER)){
+            offAddLumberButton.setDisable(true);
+        }
+        offRemOreButton.setDisable(false);
+        offAddOreButton.setDisable(false);
+        if (offer.get(Resource.ORE) == 0){
+            offRemOreButton.setDisable(true);
+        }
+        if (owned.get(Resource.ORE).intValue() == offer.get(Resource.ORE)){
+            offAddOreButton.setDisable(true);
+        }
+        offRemWheatButton.setDisable(false);
+        offAddWheatButton.setDisable(false);
+        if (offer.get(Resource.WHEAT) == 0){
+            offRemWheatButton.setDisable(true);
+        }
+        if (owned.get(Resource.WHEAT).intValue() == offer.get(Resource.WHEAT)){
+            offAddWheatButton.setDisable(true);
+        }
+        offRemWoolButton.setDisable(false);
+        offAddWoolButton.setDisable(false);
+        if (offer.get(Resource.WOOL) == 0){
+            offRemWoolButton.setDisable(true);
+        }
+        if (owned.get(Resource.WOOL).intValue() == offer.get(Resource.WOOL)){
+            offAddWoolButton.setDisable(true);
+        }
+        if (request.get(Resource.BRICK) == 0){
+            reqRemBrickButton.setDisable(true);
+        }
+        if (request.get(Resource.LUMBER) == 0){
+            reqRemLumberButton.setDisable(true);
+        }
+        if (request.get(Resource.ORE) == 0){
+            reqRemOreButton.setDisable(true);
+        }
+        if (request.get(Resource.WHEAT) == 0){
+            reqRemWheatButton.setDisable(true);
+        }
+        if (request.get(Resource.WOOL) == 0){
+            reqRemWoolButton.setDisable(true);
+        }
+    }
+    
+    public void refreshIcons(){
+        if (offer.get(Resource.BRICK) > 0){
+            reqBrick.setDisable(true);
+            reqAddBrickButton.setDisable(true);
+            reqRemBrickButton.setDisable(true);
+            request.put(Resource.BRICK, 0);
+        }
+        if (offer.get(Resource.LUMBER) > 0){
+            reqLumber.setDisable(true);
+            reqAddLumberButton.setDisable(true);
+            reqRemLumberButton.setDisable(true);
+            request.put(Resource.LUMBER, 0);
+        }
+        if (offer.get(Resource.ORE) > 0){
+            reqOre.setDisable(true);
+            reqAddOreButton.setDisable(true);
+            reqRemOreButton.setDisable(true);
+            request.put(Resource.ORE, 0);
+        }
+        if (offer.get(Resource.WHEAT) > 0){
+            reqWheat.setDisable(true);
+            reqAddWheatButton.setDisable(true);
+            reqRemWheatButton.setDisable(true);
+            request.put(Resource.WHEAT, 0);
+        }
+        if (offer.get(Resource.WOOL) > 0){
+            reqWool.setDisable(true);
+            reqAddWoolButton.setDisable(true);
+            reqRemWoolButton.setDisable(true);
+            request.put(Resource.WOOL, 0);
+        }
+        
+    }
+    
+    public void refreshAll(){
+        reqAddBrickButton.setDisable(false);
+        reqRemBrickButton.setDisable(false);
+        reqAddLumberButton.setDisable(false);
+        reqRemLumberButton.setDisable(false);
+        reqAddOreButton.setDisable(false);
+        reqRemOreButton.setDisable(false);
+        reqAddWheatButton.setDisable(false);
+        reqRemWheatButton.setDisable(false);
+        reqAddWoolButton.setDisable(false);
+        reqRemWoolButton.setDisable(false);
+        reqBrick.setDisable(false);
+        reqLumber.setDisable(false);
+        reqOre.setDisable(false);
+        reqWheat.setDisable(false);
+        reqWool.setDisable(false);
+        refreshIcons();
+        refreshLabels();
+        refreshButtons();
+    }
+    
+    public void minBrick(ActionEvent actionEvent) {
+        request.put(Resource.BRICK, request.get(Resource.BRICK) - 1);
+        refreshAll();
+    }
+    public void maxBrick(ActionEvent actionEvent) {
+        request.put(Resource.BRICK, request.get(Resource.BRICK) + 1);
+        refreshAll();
+    }
+    public void minLumber(ActionEvent actionEvent) {
+        request.put(Resource.LUMBER, request.get(Resource.LUMBER) - 1);
+        refreshAll();
+    }
+    public void maxLumber(ActionEvent actionEvent) {
+        request.put(Resource.LUMBER, request.get(Resource.LUMBER) + 1);
+        refreshAll();
+    }
+    public void minOre(ActionEvent actionEvent) {
+        request.put(Resource.ORE, request.get(Resource.ORE) - 1);
+        refreshAll();
+    }
+    public void maxOre(ActionEvent actionEvent) {
+        request.put(Resource.ORE, request.get(Resource.ORE) + 1);
+        refreshAll();
+    }
+    public void minWheat(ActionEvent actionEvent) {
+        request.put(Resource.WHEAT, request.get(Resource.WHEAT) - 1);
+        refreshAll();
+    }
+    public void maxWheat(ActionEvent actionEvent) {
+        request.put(Resource.WHEAT, request.get(Resource.WHEAT) + 1);
+        refreshAll();
+    }
+    public void minWool(ActionEvent actionEvent) {
+        request.put(Resource.WOOL, request.get(Resource.WOOL) - 1);
+        refreshAll();
+    }
+    public void maxWool(ActionEvent actionEvent) {
+        request.put(Resource.WOOL, request.get(Resource.WOOL) + 1);
+        refreshAll();
+    }
+    public void minBrickOff(ActionEvent actionEvent) {
+        offer.put(Resource.BRICK, offer.get(Resource.BRICK) - 1);
+        refreshAll();
+    }
+    public void maxBrickOff(ActionEvent actionEvent) {
+        offer.put(Resource.BRICK, offer.get(Resource.BRICK) + 1);
+        refreshAll();
+    }
+    public void minLumberOff(ActionEvent actionEvent) {
+        offer.put(Resource.LUMBER, offer.get(Resource.LUMBER) - 1);
+        refreshAll();
+    }
+    public void maxLumberOff(ActionEvent actionEvent) {
+        offer.put(Resource.LUMBER, offer.get(Resource.LUMBER) + 1);
+        refreshAll();
+    }
+    public void minOreOff(ActionEvent actionEvent) {
+        offer.put(Resource.ORE, offer.get(Resource.ORE) - 1);
+        refreshAll();
+    }
+    public void maxOreOff(ActionEvent actionEvent) {
+        offer.put(Resource.ORE, offer.get(Resource.ORE) + 1);
+        refreshAll();
+    }
+    public void minWheatOff(ActionEvent actionEvent) {
+        offer.put(Resource.WHEAT, offer.get(Resource.WHEAT) - 1);
+        refreshAll();
+    }
+    public void maxWheatOff(ActionEvent actionEvent) {
+        offer.put(Resource.WHEAT, offer.get(Resource.WHEAT) + 1);
+        refreshAll();
+    }
+    public void minWoolOff(ActionEvent actionEvent) {
+        offer.put(Resource.WOOL, offer.get(Resource.WOOL) - 1);
+        refreshAll();
+    }
+    public void maxWoolOff(ActionEvent actionEvent) {
+        offer.put(Resource.WOOL, offer.get(Resource.WOOL) + 1);
+        refreshAll();
+    }
+
+    public void toTradeOthers(ActionEvent actionEvent) {
     }
 }

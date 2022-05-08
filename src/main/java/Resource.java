@@ -12,13 +12,18 @@ public class Resource {
     public static List<Resource> resourceList = new ArrayList<>();
     private BufferedImage smallGraphic;
 
+    public static final Resource BRICK = new Resource("Brick");
+    public static final Resource LUMBER = new Resource("Lumber");
+    public static final Resource ORE = new Resource("Ore");
+    public static final Resource WHEAT = new Resource("Wheat");
+    public static final Resource WOOL = new Resource("Wool");
+
     private String name;
 
     static {
-        for (String s : "Brick Lumber Ore Wheat Wool".split(" ")){
-            Resource r = new Resource(s);
+        for (Resource r : resourceList){
             try {
-                r.smallGraphic = ImageIO.read(Objects.requireNonNull(Resource.class.getResourceAsStream("images/resources/" + s.toLowerCase() + ".png")));
+                r.smallGraphic = ImageIO.read(Objects.requireNonNull(Resource.class.getResourceAsStream("images/resources/" + r.getResource().toLowerCase() + ".png")));
             } catch (IOException e) {
                 e.printStackTrace();
             }

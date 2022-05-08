@@ -1,183 +1,390 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TradeBank">
    <children>
-      <HBox layoutX="695.0" layoutY="350.0" prefHeight="190.0" prefWidth="508.0" style="-fx-background-color: ffd9a0;">
+      <VBox layoutX="640.0" layoutY="90.0" prefHeight="430.0" prefWidth="1200.0" style="-fx-background-color: ffd9a0;">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <StackPane prefHeight="70.0" prefWidth="1200.0">
                <children>
-                  <StackPane fx:id="a" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
+                  <HBox alignment="CENTER">
                      <children>
-                        <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label text="Get (">
+                           <font>
+                              <Font size="34.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="numCardsRemain" layoutX="514.0" layoutY="20.0" text="0">
+                           <font>
+                              <Font size="34.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="577.0" layoutY="20.0" text=" Cards Remaining)">
+                           <font>
+                              <Font size="34.0" />
+                           </font>
+                        </Label>
                      </children>
-                  </StackPane>
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                     </children>
-                  </TextFlow>
+                  </HBox>
                </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            </StackPane>
+            <AnchorPane>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
                <children>
-                  <StackPane fx:id="b" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
+                  <HBox prefHeight="350.0" prefWidth="1080.0" spacing="20.0">
                      <children>
-                        <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
+                        <VBox fx:id="reqBrick" prefHeight="350.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cards/resources--brick.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="reqRemBrickButton" alignment="CENTER" mnemonicParsing="false" onAction="#minBrick" prefHeight="50.0" prefWidth="50.0" text="-">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="brickLabel" alignment="CENTER" prefWidth="100.0" text="0">
+                                       <font>
+                                          <Font size="34.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="reqAddBrickButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxBrick" prefHeight="50.0" prefWidth="50.0" text="+">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="reqLumber" layoutX="10.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cards/resources--forest.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="reqRemLumberButton" alignment="CENTER" mnemonicParsing="false" onAction="#minLumber" prefHeight="50.0" prefWidth="50.0" text="-">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="lumberLabel" alignment="CENTER" prefWidth="100.0" text="0">
+                                       <font>
+                                          <Font size="34.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="reqAddLumberButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxLumber" prefHeight="50.0" prefWidth="50.0" text="+">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="reqOre" layoutX="230.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cards/resources--ore.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="reqRemOreButton" alignment="CENTER" mnemonicParsing="false" onAction="#minOre" prefHeight="50.0" prefWidth="50.0" text="-">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="oreLabel" alignment="CENTER" prefWidth="100.0" text="0">
+                                       <font>
+                                          <Font size="34.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="reqAddOreButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxOre" prefHeight="50.0" prefWidth="50.0" text="+">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="reqWheat" layoutX="450.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cards/resources--wheat.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="reqRemWheatButton" alignment="CENTER" mnemonicParsing="false" onAction="#minWheat" prefHeight="50.0" prefWidth="50.0" text="-">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="wheatLabel" alignment="CENTER" prefWidth="100.0" text="0">
+                                       <font>
+                                          <Font size="34.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="reqAddWheatButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxWheat" prefHeight="50.0" prefWidth="50.0" text="+">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="reqWool" layoutX="670.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cards/resources--wool.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="reqRemWoolButton" alignment="CENTER" mnemonicParsing="false" onAction="#minWool" prefHeight="50.0" prefWidth="50.0" text="-">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="woolLabel" alignment="CENTER" prefWidth="100.0" text="0">
+                                       <font>
+                                          <Font size="34.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="reqAddWoolButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxWool" prefHeight="50.0" prefWidth="50.0" text="+">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                  </StackPane>
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
-                     </children>
-                  </TextFlow>
+                  </HBox>
                </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <StackPane fx:id="c" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
-                     <children>
-                        <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </StackPane>
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="5" />
-                     </children>
-                  </TextFlow>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <StackPane fx:id="d" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
-                     <children>
-                        <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </StackPane>
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-                     </children>
-                  </TextFlow>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <StackPane fx:id="e" onMouseClicked="#select" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
-                     <children>
-                        <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </StackPane>
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-                     </children>
-                  </TextFlow>
-               </children>
-            </VBox>
+            </AnchorPane>
          </children>
-      </HBox>
-      <HBox layoutX="708.0" layoutY="116.0" prefHeight="100.0" prefWidth="504.0">
+         <padding>
+            <Insets left="60.0" right="60.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="640.0" layoutY="560.0" prefHeight="430.0" prefWidth="1200.0" style="-fx-background-color: ffd9a0;">
          <children>
-            <Button fx:id="confirmTrade" mnemonicParsing="false" onMouseClicked="#confirmBankTrade" prefHeight="103.0" prefWidth="152.0" text="Confirm Trade" />
-            <TextFlow prefHeight="95.0" prefWidth="200.0" textAlignment="CENTER">
+            <StackPane prefHeight="70.0" prefWidth="1200.0">
                <children>
-                  <Label text="Trade with Bank" translateY="15.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Give">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="34.0" />
                      </font>
-                  </Label>
+                  </Text>
                </children>
-            </TextFlow>
-            <Button fx:id="changeRequest" mnemonicParsing="false" prefHeight="103.0" prefWidth="152.0" text="Change Request" />
+            </StackPane>
+            <AnchorPane>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <HBox prefHeight="350.0" prefWidth="1080.0" spacing="20.0">
+                     <children>
+                        <VBox fx:id="offBrick" prefHeight="350.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cards/resources--brick.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="offRemBrickButton" alignment="CENTER" mnemonicParsing="false" onAction="#minBrickOff" prefHeight="50.0" prefWidth="50.0" text="-4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="brickLabelOff" alignment="CENTER" prefWidth="100.0" text="0">
+                                       <font>
+                                          <Font size="34.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="offAddBrickButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxBrickOff" prefHeight="50.0" prefWidth="50.0" text="+4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="offLumber" layoutX="10.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cards/resources--forest.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="offRemLumberButton" alignment="CENTER" mnemonicParsing="false" onAction="#minLumberOff" prefHeight="50.0" prefWidth="50.0" text="-4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="lumberLabelOff" alignment="CENTER" prefWidth="100.0" text="0">
+                                       <font>
+                                          <Font size="34.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="offAddLumberButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxLumberOff" prefHeight="50.0" prefWidth="50.0" text="+4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="offOre" layoutX="230.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cards/resources--ore.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="offRemOreButton" alignment="CENTER" mnemonicParsing="false" onAction="#minOreOff" prefHeight="50.0" prefWidth="50.0" text="-4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="oreLabelOff" alignment="CENTER" prefWidth="100.0" text="0">
+                                       <font>
+                                          <Font size="34.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="offAddOreButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxOreOff" prefHeight="50.0" prefWidth="50.0" text="+4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="offWheat" layoutX="450.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cards/resources--wheat.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="offRemWheatButton" alignment="CENTER" mnemonicParsing="false" onAction="#minWheatOff" prefHeight="50.0" prefWidth="50.0" text="-4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="wheatLabelOff" alignment="CENTER" prefWidth="100.0" text="0">
+                                       <font>
+                                          <Font size="34.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="offAddWheatButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxWheatOff" prefHeight="50.0" prefWidth="50.0" text="+4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="offWool" layoutX="670.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cards/resources--wool.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="offRemWoolButton" alignment="CENTER" mnemonicParsing="false" onAction="#minWoolOff" prefHeight="50.0" prefWidth="50.0" text="-4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="woolLabelOff" alignment="CENTER" prefWidth="100.0" text="0">
+                                       <font>
+                                          <Font size="34.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="offAddWoolButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxWoolOff" prefHeight="50.0" prefWidth="50.0" text="+4">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
          </children>
-      </HBox>
-      <HBox layoutX="695.0" layoutY="644.0" prefHeight="190.0" prefWidth="508.0" style="-fx-background-color: ffd9a0;">
+         <padding>
+            <Insets left="60.0" right="60.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="120.0" layoutY="839.0" prefHeight="151.0" prefWidth="400.0" spacing="50.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <StackPane fx:id="a1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
-                     <children>
-                        <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </StackPane>
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                     </children>
-                  </TextFlow>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <StackPane fx:id="b1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
-                     <children>
-                        <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </StackPane>
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                     </children>
-                  </TextFlow>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <StackPane fx:id="c1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
-                     <children>
-                        <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </StackPane>
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                     </children>
-                  </TextFlow>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <StackPane fx:id="d1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
-                     <children>
-                        <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </StackPane>
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                     </children>
-                  </TextFlow>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <StackPane fx:id="e1" onMouseClicked="#choose" onMouseEntered="#addBorder" onMouseExited="#removeBorder">
-                     <children>
-                        <ImageView fitHeight="168.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </StackPane>
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                     </children>
-                  </TextFlow>
-               </children>
-            </VBox>
+            <Button fx:id="confirm" alignment="CENTER" mnemonicParsing="false" onAction="#confirmTrade" prefHeight="150.0" prefWidth="400.0" text="Confirm Bank Trade">
+               <font>
+                  <Font size="38.0" />
+               </font></Button>
          </children>
-      </HBox>
-      <TextField alignment="CENTER" layoutX="886.0" layoutY="293.0" text="Give" />
-      <TextField alignment="CENTER" layoutX="886.0" layoutY="591.0" text="Get" />
+      </VBox>
+      <StackPane layoutX="120.0" layoutY="305.0" prefHeight="430.0" prefWidth="400.0">
+         <children>
+            <Polygon fill="DODGERBLUE" layoutX="518.0" layoutY="91.0" onMouseClicked="#back" points="-329.0, 84.0, -144.0, 84.0, -144.0, 190.0, -329.0, 190.0, -329.0, 236.0, -472.0, 134.0, -329.0, 33.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label onMouseClicked="#back" text="Go Back">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+      <Label alignment="CENTER" layoutX="205.0" layoutY="154.0" text="Bank Trade">
+         <font>
+            <Font size="47.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -45,6 +45,17 @@ public class CatanApplication extends Application {
                 e.printStackTrace();
             }
         }
+
+        for (PopUp p : PopUp.values()){
+            try {
+                FXMLLoader fl = new FXMLLoader(CatanApplication.class.getResource("/fxml/"+ p.name().toLowerCase() + ".fxml"));
+                Pane ap = fl.load();
+                p.setPane(ap);
+                p.setController(fl.getController());
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
         ProgramState.setCurrentState(ProgramState.MAIN);
         updateDisplay();
         primaryStage.show();
@@ -68,10 +79,10 @@ public class CatanApplication extends Application {
         if (primaryStage.getScene() != null) {
             primaryStage.getScene().setRoot(new AnchorPane());
         }
+        primaryStage.setScene(new Scene(ProgramState.getCurrentState().getPane(), 1920, 1080));
         if (ProgramState.getCurrentState().equals(ProgramState.BOARD)){
             GraphicsManager.refreshDisplay();
         }
-        primaryStage.setScene(new Scene(ProgramState.getCurrentState().getPane(), 1920, 1080));
         primaryStage.setFullScreen(true);
     }
 
