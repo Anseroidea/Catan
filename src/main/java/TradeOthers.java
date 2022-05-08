@@ -333,4 +333,10 @@ public class TradeOthers
 
         System.out.println("BYEEEEEEEEEEEEEEEE");
     }
+
+    public void back(MouseEvent mouseEvent) {
+        Stage thisStage = (Stage) scene.getScene().getWindow();
+        thisStage.getScene().setRoot(new AnchorPane());
+        thisStage.close();
+    }
 }

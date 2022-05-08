@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
@@ -25,5 +29,15 @@
             </TextFlow>
          </children>
       </VBox>
+      <StackPane layoutX="238.0" layoutY="856.0" prefHeight="194.0" prefWidth="278.0">
+         <children>
+            <Polygon fill="DODGERBLUE" layoutX="518.0" layoutY="91.0" onMouseClicked="#back" points="-329.0, 84.0, -144.0, 84.0, -144.0, 190.0, -329.0, 190.0, -329.0, 236.0, -472.0, 134.0, -329.0, 33.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label onMouseClicked="#back" text="Change Offer">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
