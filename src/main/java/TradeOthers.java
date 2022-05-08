@@ -80,7 +80,7 @@ public class TradeOthers
     {
         System.out.println("HELOOOOOOOOOOOOOOOO");
 
-        Player p = new Player("eh", 3, Color.RED);
+        /*Player p = new Player("eh", 3, Color.RED);
         p.changeCards(Resource.BRICK, 4);
         p.changeCards(Resource.WHEAT, 4);
         p.changeCards(Resource.ORE, 4);
@@ -99,13 +99,13 @@ public class TradeOthers
         p3.changeCards(Resource.WHEAT, 4);
         p3.changeCards(Resource.ORE, 4);
         p3.changeCards(Resource.LUMBER, 4);
-        p3.changeCards(Resource.WOOL, 4);
+        p3.changeCards(Resource.WOOL, 4);*/
 
-        //List<Player> tradePartners = TurnManager.getPlayerList();
-        List<Player> tradePartners = new ArrayList<>();
+        List<Player> tradePartners = TurnManager.getPlayerList();
+        /*List<Player> tradePartners = new ArrayList<>();
         tradePartners.add(p);
         tradePartners.add(p2);
-        tradePartners.add(p3);
+        tradePartners.add(p3);*/
 
         if(tradePartners == null)
         {
@@ -113,7 +113,7 @@ public class TradeOthers
             return;
         }
 
-        partners = new Player[tradePartners.size()];
+        partners = new Player[tradePartners.size() - 1];
         acceptedPartners = new Button[partners.length];
         int count = 0;
 
@@ -123,13 +123,13 @@ public class TradeOthers
             {
                 Button pressed = ((Button)event.getSource());
                 Player partner = partners[pressed.getId().charAt(1) - '0'];
-                //Player p0 = TurnManager.getCurrentPlayer();
-                Player p0 = new Player("eh", 3, Color.RED);
+                Player p0 = TurnManager.getCurrentPlayer();
+                /*Player p0 = new Player("eh", 3, Color.RED);
                 p0.changeCards(Resource.BRICK, 4);
                 p0.changeCards(Resource.WHEAT, 4);
                 p0.changeCards(Resource.ORE, 4);
                 p0.changeCards(Resource.LUMBER, 4);
-                p0.changeCards(Resource.WOOL, 4);
+                p0.changeCards(Resource.WOOL, 4);*/
 
                 for(Iterator<Map.Entry<Resource, Integer>> i = give.entrySet().iterator(); i.hasNext();)
                 {
@@ -164,7 +164,7 @@ public class TradeOthers
                 Button source = (Button)event.getSource();
 
                 System.out.println("HUGE BUTTON");
-                int id = source.getId().charAt(1) - '1';
+                int id = source.getId().charAt(1) - '0';
                 if(acceptedPartners[id] == null)
                 {
                     Button accepted = new Button();
@@ -176,8 +176,10 @@ public class TradeOthers
 
 
                     double x = consider.getLayoutX() - 30;
-                    double y = consider.getLayoutY() + consider.getHeight() / (partners.length * 2) - accepted.getPrefHeight() / 2
+                    double y = consider.getLayoutY() + consider.getHeight() / (partners.length * 8) * 5 - accepted.getPrefHeight() / 2
                             + (id * consider.getHeight() / partners.length);
+
+                    System.out.println("ALIGN " + partners.length + " ID: " + id + " Y coor: " + y + " " + consider.getLayoutY());
 
 
                     AnchorPane.setRightAnchor(accepted, scene.getWidth() - x); // distance 0 from right side of
@@ -192,7 +194,7 @@ public class TradeOthers
                 iv.setFitHeight(acceptedPartners[id].getPrefHeight());
                 iv.setFitWidth(acceptedPartners[id].getPrefWidth());
                 acceptedPartners[id].setGraphic(iv);
-
+                acceptedPartners[id].setDisable(false);
 
                 System.out.println(id);
                 System.out.println("DONE");
@@ -206,7 +208,7 @@ public class TradeOthers
                 Button source = (Button)event.getSource();
 
 
-                int id = source.getId().charAt(1) - '1';
+                int id = source.getId().charAt(1) - '0';
                 System.out.println(id);
                 if(acceptedPartners[id] != null)
                 {
@@ -216,21 +218,24 @@ public class TradeOthers
                     iv.setFitHeight(acceptedPartners[id].getPrefHeight());
                     iv.setFitWidth(acceptedPartners[id].getPrefWidth());
                     acceptedPartners[id].setGraphic(iv);
-                    acceptedPartners[id].setStyle("-fx-background-color: transparent");
                 }
             }
         };
 
         for(int i = 0; i < tradePartners.size(); i++)
         {
-            //if(tradePartners.get(i).equals(TurnManager.getCurrentPlayer()))
-                //continue;
+            if(tradePartners.get(i).equals(TurnManager.getCurrentPlayer()))
+                continue;
 
             Player temp = tradePartners.get(i);
-            partners[count++] = temp;
+            partners[count] = temp;
 
+            VBox v = new VBox();
+            v.setPrefHeight(consider.getHeight() / partners.length);
+            v.setPrefWidth(consider.getWidth());
+            v.setAlignment(Pos.TOP_CENTER);
             HBox h = new HBox();
-            h.setPrefHeight(consider.getHeight() / (tradePartners.size()));
+            h.setPrefHeight(v.getPrefHeight() / 4 * 3);
             h.setPrefWidth(consider.getWidth());
             h.setAlignment(Pos.CENTER);
 
@@ -252,12 +257,20 @@ public class TradeOthers
             ImageView iv2 = new ImageView(SwingFXUtils.toFXImage(cross, null));
             iv2.setFitHeight(decline.getPrefHeight());
             iv2.setFitWidth(decline.getPrefWidth());
-
             decline.setGraphic(iv2);
 
+            Label l = new Label();
+            l.setAlignment(Pos.CENTER);
+            l.setText(temp.getName());
+            l.setPrefHeight(v.getPrefHeight() / 4);
+            l.setPrefHeight(v.getPrefWidth());
+
             h.getChildren().addAll(accept, decline);
-            h.setVisible(true);
-            consider.getChildren().add(h);
+            v.getChildren().addAll(l, h);
+            consider.getChildren().add(v);
+
+            System.out.println("Y spot " + v.getLayoutY() + " Height: " + v.getPrefHeight());
+            count++;
         }
 
         for(Iterator<Map.Entry<Resource, Integer>> i = get.entrySet().iterator(); i.hasNext();)
@@ -290,7 +303,7 @@ public class TradeOthers
                 System.out.println(partners[k].getResources().get(e.getKey()));
                 System.out.println(e.getValue());
                 if(partners[k].getResources().get(e.getKey()) < e.getValue())
-                    ((Button)((HBox)consider.getChildren().get(k)).getChildren().get(0)).setDisable(true);
+                    ((Button)((HBox)((VBox)consider.getChildren().get(k)).getChildren().get(1)).getChildren().get(0)).setDisable(true);
             }
         }
 
