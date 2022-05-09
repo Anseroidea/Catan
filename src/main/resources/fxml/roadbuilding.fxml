@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RoadBuilding">
    <children>
-      <StackPane fx:id="boardPane" layoutX="108.0" layoutY="108.0" prefHeight="863.0" prefWidth="936.0" />
+      <AnchorPane fx:id="boardPane" layoutX="108.0" layoutY="108.0" prefHeight="863.0" prefWidth="936.0" />
       <VBox alignment="CENTER" layoutX="1100.0" layoutY="108.0" prefHeight="863.0" prefWidth="450.0" spacing="20.0">
          <children>
             <Label text="Select your roads">

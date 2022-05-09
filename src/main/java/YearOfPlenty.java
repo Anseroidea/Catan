@@ -37,6 +37,7 @@ public class YearOfPlenty {
         for (Resource r : Resource.getResourceList()){
             request.put(r, 0);
         }
+        refreshAll();
     }
 
     public void back(ActionEvent actionEvent) {
@@ -122,6 +123,7 @@ public class YearOfPlenty {
 
     public void refreshButtons(){
         int total = request.values().stream().reduce(0, Integer::sum);
+        confirm.setDisable(total < 2);
         reqRemBrickButton.setDisable(request.get(Resource.BRICK) == 0);
         reqRemLumberButton.setDisable(request.get(Resource.LUMBER) == 0);
         reqRemOreButton.setDisable(request.get(Resource.ORE) == 0);

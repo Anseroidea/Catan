@@ -130,6 +130,7 @@ public class TradeBank
         //System.out.println(5);
 
          */
+        refreshAll();
     }
 
     public void refreshAll(){

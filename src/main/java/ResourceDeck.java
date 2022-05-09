@@ -25,12 +25,6 @@ public class ResourceDeck {
     }
 
     public int getCount(Resource r) {
-        int count = 0;
-        for (Resource res : resource.keySet()) {
-            if (res.equals(r)) {
-                count++;
-            }
-        }
-        return count;
+        return resource.get(r);
     }
 }

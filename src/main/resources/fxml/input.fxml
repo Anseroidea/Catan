@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Input">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Input">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="100.0">
          <StackPane.margin>
@@ -77,7 +77,7 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
                      <children>
                         <Button fx:id="addButton" mnemonicParsing="false" onAction="#addPlayerFour" prefHeight="75.0" prefWidth="200.0" text="Add Player">
                            <font>
@@ -89,12 +89,17 @@
                               <Font size="30.0" />
                            </font>
                         </Button>
+                        <Label fx:id="errorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="524.0" text="Players may not have the same name!" textFill="RED" visible="false">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
                         <Button layoutX="310.0" layoutY="10.0" mnemonicParsing="false" onAction="#start" prefHeight="75.0" prefWidth="250.0" text="Continue &gt;">
                            <font>
                               <Font size="30.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="800.0" />
+                              <Insets />
                            </HBox.margin>
                         </Button>
                      </children>

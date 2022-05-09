@@ -14,16 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoadBuilding {
-    public StackPane boardPane;
+    public AnchorPane boardPane;
     public Label roadsLeftLabel;
     public Button confirm;
     private List<Edge> selectedEdges = new ArrayList<>();
 
     public void initPopUp(){
+        boardPane.getChildren().clear();
+        boardPane.getChildren().add(BoardGame.getHexGridPane().toPane(false));
         selectedEdges = new ArrayList<>();
+        refreshAll();
     }
 
     public void refreshAll(){
+        roadsLeftLabel.setText("Roads Left: " + (2 - selectedEdges.size()));
         refreshInteractives();
         refreshButtons();
     }
@@ -36,7 +40,7 @@ public class RoadBuilding {
         HexGridPane hexGridPane = BoardGame.getHexGridPane();
         int maxR = 2;
         double radius = hexGridPane.getRadius();
-        for (Edge e : hexGridPane.getEdgeManager().getAllEdges()){
+        for (Edge e : TurnManager.getCurrentPlayer().getBuildableEdges()){
             List<Vertex> vertices = new ArrayList<>(e.getAdjacentVertices().values());
             Vertex v1 = vertices.get(0);
             Vertex v2 = vertices.get(1);
@@ -44,6 +48,8 @@ public class RoadBuilding {
             double colCoord1 = (Math.abs(v1.getR()) - 1 + v1.getC()) * radius * Math.sqrt(3) / 2.;
             double rowCoord2 = maxR * (radius + radius/2.) + radius + v2.getR() * radius/2. + v2.getR() / (double) Math.abs(v2.getR()) * (v2.getC() % 2 + (Math.abs(v2.getR()) - 1) * 2) * radius/2.;
             double colCoord2 = (Math.abs(v2.getR()) - 1 + v2.getC()) * radius * Math.sqrt(3) / 2.;
+            System.out.println(rowCoord1);
+            System.out.println(colCoord1);
             Line l = new Line(colCoord1, rowCoord1, colCoord2, rowCoord2);
             l.setStroke(Color.TRANSPARENT);
             l.setStrokeWidth(5);
@@ -54,12 +60,7 @@ public class RoadBuilding {
                 selectedEdges.add(e);
                 refreshAll();
             });
-            l.setOnMouseEntered((event) -> {
-                l.setStroke(Color.BLACK);
-            });
-            l.setOnMouseExited((event) -> {
-                l.setStroke(Color.TRANSPARENT);
-            });
+            l.setStroke(new Color(0.1,0.7, 0, .7));
             boardPane.getChildren().addAll(l);
         }
         for (Player p : TurnManager.getPlayerList()){

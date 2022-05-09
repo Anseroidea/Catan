@@ -100,7 +100,7 @@ public enum PopUp {
             System.out.println("This is roadbuilding");
             return;
         }
-        ((YearOfPlenty) controller).initPopUp();
+        ((RoadBuilding) controller).initPopUp();
         load(1600, 1080);
     }
 }

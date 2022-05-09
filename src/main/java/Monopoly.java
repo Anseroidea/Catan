@@ -73,6 +73,11 @@ public class Monopoly
             }
         }
         p.changeCards(gain, total);
+        if (total != 0){
+            TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " stole all the " + gain.getResource() + ".");
+        } else {
+            TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " tried to steal all the " + gain.getResource() + ". There wasn't any!");
+        }
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         ((Button) actionEvent.getSource()).getScene().setRoot(new AnchorPane());
         stage.close();
