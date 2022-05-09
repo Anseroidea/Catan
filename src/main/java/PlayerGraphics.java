@@ -12,8 +12,13 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class PlayerGraphics {
@@ -28,6 +33,7 @@ public class PlayerGraphics {
     public Button developmentCardsButton;
     public Button nextRoundButton;
     public Button bankTradeButton;
+    public Button rob;
     public StackPane developmentPanel;
     public VBox developmentCardBox;
     public ImageView player1Icon;
@@ -72,9 +78,27 @@ public class PlayerGraphics {
     public Label knightsLabel;
     public Label cardsLabel;
     public Label vpLabel;
+    public Label heading;
 
+    private Tile robberTile;
+    private boolean isRobbing;
+    private static ImageView robberGraphic;
     @FXML
-    public void initialize(){
+    public void initialize()
+    {
+        BufferedImage im = null;
+        try {
+            im = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/player/robber.png")));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        ImageView iv = new ImageView(SwingFXUtils.toFXImage(im, null));
+        double radius = BoardGame.getHexGridPane().getRadius();
+        iv.setFitHeight(radius / 3 * 2);
+        iv.setFitWidth(radius / 3);
+        robberGraphic = iv;
+        boardPane.getChildren().add(robberGraphic);
+        robberGraphic.setVisible(false);
     }
 
     public void refreshDisplay() {
@@ -475,5 +499,104 @@ public class PlayerGraphics {
     public void buyDevelopment(ActionEvent actionEvent) {
         TurnManager.getCurrentPlayer().buyDevelopment();
         refreshDisplay();
+    }
+
+    public void robber(ActionEvent actionEvent)
+    {
+        isRobbing = true;
+        heading.setText("Choose a tile to move the robber to");
+        heading.setVisible(true);
+        HexGridPane hexGridPane = BoardGame.getHexGridPane();
+        double radius = hexGridPane.getRadius();
+        Map<Integer, List<Tile>> map = hexGridPane.getMap();
+        for (Integer r : map.keySet())
+        {
+            if(r == 3 || r == -3)
+                continue;
+            for (int c = 1; c < map.get(r).size() - 1; c++) {
+                System.out.println(r + " " + c);
+                Circle circle = new Circle(radius / 2, Color.BLACK);
+                circle.setOpacity(0);
+
+                int finalC = c;
+                circle.setOnMouseClicked(event -> {
+                    if(isRobbing) {
+                        robberTile = hexGridPane.get(r, finalC);
+                        boolean valid = false;
+                        for(Vertex v : robberTile.getAdjacentVertices().values())
+                            if(v.getSettlement() != null && !v.getSettlement().getPlayer().equals(TurnManager.getCurrentPlayer()))
+                            {
+                                valid = true;
+                                break;
+                            }
+
+                        if(!valid)
+                        {
+                            Alert a = new Alert(Alert.AlertType.INFORMATION);
+                            a.setContentText("Cannot move robber to tile with no players or with only the current player!");
+                            a.show();
+                            return;
+                        }
+                        //refreshDisplay();
+
+                        robberGraphic.setLayoutY(radius / 2 + (r + 2) * (3.0 / 2 * radius));
+                        robberGraphic.setLayoutX(radius / 2 + finalC * (Math.sqrt(3) * radius) + Math.abs(r) * (Math.sqrt(3) / 2 * radius) - radius / 2 - Math.sqrt(3) / 2 * radius);
+                        robberGraphic.setVisible(true);
+
+                        heading.setText("Choose someone to rob");
+                        double vertRadius = radius/10.;
+                        int maxR = 2;
+                        boolean showWater = false;
+                        for(Vertex v : robberTile.getAdjacentVertices().values())
+                            if(v.getSettlement() != null && !v.getSettlement().getPlayer().equals(TurnManager.getCurrentPlayer()))
+                            {
+                                //Circle cc = new Circle(200, Color.RED);
+                                //boardPane.getChildren().add(cc);
+                                double rowCoord = maxR * (radius + radius/2.) + radius + v.getR() * radius/2. + v.getR() / (double) Math.abs(v.getR()) * (v.getC() % 2 + (Math.abs(v.getR()) - 1) * 2) * radius/2. - vertRadius;
+                                double colCoord = (showWater ? 1 : 0) * radius * Math.sqrt(3) + (Math.abs(v.getR()) - 1 + v.getC()) * radius * Math.sqrt(3) / 2. - vertRadius;
+
+                                Circle victim = new Circle(vertRadius + 5, Color.TRANSPARENT);
+                                //boardPane.getChildren().add(victim);
+                                System.out.println(rowCoord + " " + colCoord);
+                                StackPane sp = new StackPane(victim);
+                                victim.setOnMouseClicked((badEvent) -> {
+
+                                    PopUp.ROBBER.load();
+                                    ((Robber)PopUp.ROBBER.getController()).setRobber(TurnManager.getCurrentPlayer());
+                                    ((Robber)PopUp.ROBBER.getController()).setPlayer(v.getSettlement().getPlayer());
+
+                                    heading.setVisible(false);
+                                    refreshDisplay();
+                                });
+                                victim.setOnMouseEntered(badEvent -> {
+                                    System.out.println("HERE");
+                                    sp.setStyle("-fx-border-color: black");
+                                });
+                                victim.setOnMouseExited(badEvent -> {
+                                    sp.setStyle("-fx-border-color: transparent");
+                                });
+
+                                sp.setLayoutY(rowCoord);
+                                sp.setLayoutX(colCoord);
+                                sp.setVisible(true);
+                                boardPane.getChildren().add(sp);
+                            }
+                        isRobbing = false;
+                    }
+                });
+                circle.setOnMouseEntered(event -> {
+                    if(isRobbing)
+                        circle.setOpacity(1.0);
+                });
+                circle.setOnMouseExited(event -> {
+                    circle.setOpacity(0);
+                });
+
+                StackPane sp = new StackPane(circle);
+                sp.setLayoutY(radius / 2 + (r + 2) * (3.0 / 2 * radius));
+                sp.setLayoutX(c * (Math.sqrt(3) * radius) + Math.abs(r) * (Math.sqrt(3) / 2 * radius) - radius / 2 - Math.sqrt(3) / 2 * radius);
+                boardPane.getChildren().add(sp);
+            }
+        }
     }
 }

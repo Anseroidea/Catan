@@ -574,4 +574,10 @@
          </ScrollPane>
       </children>
    </StackPane>
+   <Button layoutX="370.0" layoutY="184.0" mnemonicParsing="false" onAction="#robber" text="Rob" />
+   <Label fx:id="heading" layoutX="874.0" layoutY="30.0" text="Label" textAlignment="CENTER" visible="false">
+      <font>
+         <Font size="38.0" />
+      </font>
+   </Label>
 </AnchorPane>
