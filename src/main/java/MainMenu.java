@@ -1,6 +1,10 @@
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class MainMenu {
+    public Button button;
+
     public void play(ActionEvent actionEvent) {
         ProgramState.setCurrentState(ProgramState.INPUT);
         CatanApplication.updateDisplay();
@@ -15,6 +19,7 @@ public class MainMenu {
     }
 
     public void quit(ActionEvent actionEvent) {
-
+        Stage stage = (Stage) button.getScene().getWindow();
+        stage.close();
     }
 }

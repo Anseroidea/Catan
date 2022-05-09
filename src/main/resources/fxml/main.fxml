@@ -13,7 +13,7 @@
             <Insets top="600.0" />
          </StackPane.margin>
          <children>
-            <Button mnemonicParsing="false" onAction="#play" prefWidth="376.0" text="Play">
+            <Button mnemonicParsing="false" onAction="#play" prefWidth="376.0" text="Play" fx:id="button">
                <font>
                   <Font size="46.0" />
                </font>

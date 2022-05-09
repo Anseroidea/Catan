@@ -76,7 +76,7 @@ public class Discard {
 
     public void confirm(ActionEvent actionEvent) {
         for (Resource r : Resource.getResourceList()){
-            p.changeCards(r, request.get(r));
+            p.changeCards(r, -1 * request.get(r));
         }
         close();
     }
