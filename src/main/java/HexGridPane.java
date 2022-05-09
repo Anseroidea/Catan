@@ -13,6 +13,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeoutException;
 
@@ -34,6 +37,10 @@ public class HexGridPane extends HexGrid{
     }
 
     public AnchorPane toPane(boolean showWater){
+        return toPane(showWater, true);
+    }
+
+    public AnchorPane toPane(boolean showWater, boolean showRobber){
         AnchorPane ap = new AnchorPane();
         Map<Integer, List<Tile>> map = getMap();
         double maxX = map.keySet().stream().map(r -> (radius/2. * Math.sqrt(3)) * Math.abs(r) + radius * Math.sqrt(3) * map.get(r).size()).max(Comparator.naturalOrder()).get();
@@ -67,6 +74,12 @@ public class HexGridPane extends HexGrid{
                         VBox v = new VBox(l, h);
                         v.setAlignment(Pos.CENTER);
                         sp.getChildren().addAll(new Circle(radius/2., Color.rgb(255, 201, 130)), v);
+                    }
+                    if (showRobber && map.get(r).get(c).equals(BoardGame.getRobber().getTile())){
+                        ImageView e = new ImageView(SwingFXUtils.toFXImage(Robber.getGraphic(), null));
+                        e.setFitHeight(72);
+                        e.setFitWidth(36);
+                        sp.getChildren().add(e);
                     }
                     sp.setLayoutY(rowCoord);
                     sp.setLayoutX(colCoord);

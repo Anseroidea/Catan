@@ -9,6 +9,7 @@ public class TurnManager {
     private static boolean hasBuilt;
 
     public static void nextTurn(){
+        getCurrentPlayer().nextTurn();
         hasRolledDice = false;
         hasBuilt = false;
         playerQueue.add(playerQueue.remove());

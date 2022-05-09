@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Discard">
+   <children>
+      <VBox spacing="50.0">
+         <children>
+            <HBox alignment="CENTER" spacing="50.0">
+               <children>
+                  <Label fx:id="discardLabel" text="Left to Discard: 0">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="confirm" mnemonicParsing="false" onAction="#confirm" prefHeight="71.0" prefWidth="158.0" text="Confirm">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+             <HBox prefHeight="350.0" prefWidth="1000.0" spacing="20.0">
+             <children>
+                 <VBox fx:id="reqBrick" prefHeight="350.0" prefWidth="200.0">
+                     <children>
+                         <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                             <image>
+                                 <Image url="@../images/cards/resources--brick.png" />
+                             </image>
+                         </ImageView>
+                         <HBox prefHeight="50.0" prefWidth="200.0">
+                             <children>
+                                 <Button fx:id="reqRemBrickButton" alignment="CENTER" mnemonicParsing="false" onAction="#minBrick" prefHeight="50.0" prefWidth="50.0" text="-">
+                                     <font>
+                                         <Font name="System Bold" size="18.0" />
+                                     </font>
+                                 </Button>
+                                 <Label fx:id="brickLabel" alignment="CENTER" prefWidth="100.0" text="0">
+                                     <font>
+                                         <Font size="34.0" />
+                                     </font>
+                                 </Label>
+                                 <Button fx:id="reqAddBrickButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxBrick" prefHeight="50.0" prefWidth="50.0" text="+">
+                                     <font>
+                                         <Font name="System Bold" size="18.0" />
+                                     </font>
+                                 </Button>
+                             </children>
+                         </HBox>
+                     </children>
+                 </VBox>
+                 <VBox fx:id="reqLumber" layoutX="10.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                     <children>
+                         <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                             <image>
+                                 <Image url="@../images/cards/resources--forest.png" />
+                             </image>
+                         </ImageView>
+                         <HBox prefHeight="50.0" prefWidth="200.0">
+                             <children>
+                                 <Button fx:id="reqRemLumberButton" alignment="CENTER" mnemonicParsing="false" onAction="#minLumber" prefHeight="50.0" prefWidth="50.0" text="-">
+                                     <font>
+                                         <Font name="System Bold" size="18.0" />
+                                     </font>
+                                 </Button>
+                                 <Label fx:id="lumberLabel" alignment="CENTER" prefWidth="100.0" text="0">
+                                     <font>
+                                         <Font size="34.0" />
+                                     </font>
+                                 </Label>
+                                 <Button fx:id="reqAddLumberButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxLumber" prefHeight="50.0" prefWidth="50.0" text="+">
+                                     <font>
+                                         <Font name="System Bold" size="18.0" />
+                                     </font>
+                                 </Button>
+                             </children>
+                         </HBox>
+                     </children>
+                 </VBox>
+                 <VBox fx:id="reqOre" layoutX="230.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                     <children>
+                         <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                             <image>
+                                 <Image url="@../images/cards/resources--ore.png" />
+                             </image>
+                         </ImageView>
+                         <HBox prefHeight="50.0" prefWidth="200.0">
+                             <children>
+                                 <Button fx:id="reqRemOreButton" alignment="CENTER" mnemonicParsing="false" onAction="#minOre" prefHeight="50.0" prefWidth="50.0" text="-">
+                                     <font>
+                                         <Font name="System Bold" size="18.0" />
+                                     </font>
+                                 </Button>
+                                 <Label fx:id="oreLabel" alignment="CENTER" prefWidth="100.0" text="0">
+                                     <font>
+                                         <Font size="34.0" />
+                                     </font>
+                                 </Label>
+                                 <Button fx:id="reqAddOreButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxOre" prefHeight="50.0" prefWidth="50.0" text="+">
+                                     <font>
+                                         <Font name="System Bold" size="18.0" />
+                                     </font>
+                                 </Button>
+                             </children>
+                         </HBox>
+                     </children>
+                 </VBox>
+                 <VBox fx:id="reqWheat" layoutX="450.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                     <children>
+                         <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                             <image>
+                                 <Image url="@../images/cards/resources--wheat.png" />
+                             </image>
+                         </ImageView>
+                         <HBox prefHeight="50.0" prefWidth="200.0">
+                             <children>
+                                 <Button fx:id="reqRemWheatButton" alignment="CENTER" mnemonicParsing="false" onAction="#minWheat" prefHeight="50.0" prefWidth="50.0" text="-">
+                                     <font>
+                                         <Font name="System Bold" size="18.0" />
+                                     </font>
+                                 </Button>
+                                 <Label fx:id="wheatLabel" alignment="CENTER" prefWidth="100.0" text="0">
+                                     <font>
+                                         <Font size="34.0" />
+                                     </font>
+                                 </Label>
+                                 <Button fx:id="reqAddWheatButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxWheat" prefHeight="50.0" prefWidth="50.0" text="+">
+                                     <font>
+                                         <Font name="System Bold" size="18.0" />
+                                     </font>
+                                 </Button>
+                             </children>
+                         </HBox>
+                     </children>
+                 </VBox>
+                 <VBox fx:id="reqWool" layoutX="670.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
+                     <children>
+                         <ImageView fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                             <image>
+                                 <Image url="@../images/cards/resources--wool.png" />
+                             </image>
+                         </ImageView>
+                         <HBox prefHeight="50.0" prefWidth="200.0">
+                             <children>
+                                 <Button fx:id="reqRemWoolButton" alignment="CENTER" mnemonicParsing="false" onAction="#minWool" prefHeight="50.0" prefWidth="50.0" text="-">
+                                     <font>
+                                         <Font name="System Bold" size="18.0" />
+                                     </font>
+                                 </Button>
+                                 <Label fx:id="woolLabel" alignment="CENTER" prefWidth="100.0" text="0">
+                                     <font>
+                                         <Font size="34.0" />
+                                     </font>
+                                 </Label>
+                                 <Button fx:id="reqAddWoolButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maxWool" prefHeight="50.0" prefWidth="50.0" text="+">
+                                     <font>
+                                         <Font name="System Bold" size="18.0" />
+                                     </font>
+                                 </Button>
+                             </children>
+                         </HBox>
+                     </children>
+                 </VBox>
+             </children>
+             </HBox>
+         </children>
+         <StackPane.margin>
+            <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
+         </StackPane.margin>
+      </VBox>
+   </children>
+</StackPane>

@@ -80,25 +80,9 @@ public class PlayerGraphics {
     public Label vpLabel;
     public Label heading;
 
-    private Tile robberTile;
-    private boolean isRobbing;
-    private static ImageView robberGraphic;
     @FXML
     public void initialize()
     {
-        BufferedImage im = null;
-        try {
-            im = ImageIO.read(Objects.requireNonNull(Rules.class.getResourceAsStream("/images/player/robber.png")));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        ImageView iv = new ImageView(SwingFXUtils.toFXImage(im, null));
-        double radius = BoardGame.getHexGridPane().getRadius();
-        iv.setFitHeight(radius / 3 * 2);
-        iv.setFitWidth(radius / 3);
-        robberGraphic = iv;
-        boardPane.getChildren().add(robberGraphic);
-        robberGraphic.setVisible(false);
     }
 
     public void refreshDisplay() {
@@ -116,7 +100,8 @@ public class PlayerGraphics {
         for (int i = v.getChildren().size() - 1; i >= 1; i--){
             v.getChildren().remove(i);
         }
-        for (int i = 0; i < TurnManager.getCurrentPlayer().getDevelopmentCards().size(); i++){
+        int availableDevelopmentCards = TurnManager.getCurrentPlayer().getDevelopmentCards().size();
+        for (int i = 0; i < availableDevelopmentCards + TurnManager.getCurrentPlayer().getDevelopmentCardsBoughtThisTurn().size(); i++){
             DevelopmentCard dc = TurnManager.getCurrentPlayer().getDevelopmentCards().get(i);
             HBox h = new HBox();
             h.setSpacing(30);
@@ -124,7 +109,10 @@ public class PlayerGraphics {
             im.setFitWidth(150);
             im.setFitHeight(200);
             final int id1 = dc.getId();
-            if (dc.getId() > 4){
+            if (i >= availableDevelopmentCards){
+                im.setDisable(true);
+            }
+            if (dc.getId() > 4 && 1 < availableDevelopmentCards){
                 im.setOnMouseClicked((event) -> {
                     if (id1 == 5){
                         TurnManager.getCurrentPlayer().addKnight();
@@ -148,7 +136,7 @@ public class PlayerGraphics {
                 if (id > 4){
                     im.setOnMouseClicked((event) -> {
                         if (id == 5){
-                            TurnManager.getCurrentPlayer().addKnight();
+                            PopUp.ROBBERSELECT.loadRobber(true);
                         } else if (id == 6){
                             PopUp.ROADBUILDING.loadRoadBuilding();
                         } else if (id == 7){
@@ -357,7 +345,7 @@ public class PlayerGraphics {
             l.setStroke(Color.TRANSPARENT);
             l.setStrokeWidth(5);
             l.setOnMouseClicked((event) -> {
-                if (!TurnManager.hasRolledDice() || isRobbing){
+                if (!TurnManager.hasRolledDice()){
                     return;
                 }
                 if (TurnManager.getCurrentPlayer().getBuildableEdges().contains(e)){
@@ -384,8 +372,7 @@ public class PlayerGraphics {
                 //System.out.println("v1, v2:" + e.getAdjacentTiles().values().stream().map(Tile::getWeight).collect(Collectors.toList()));
             });
             l.setOnMouseEntered((event) -> {
-                if(!isRobbing)
-                    l.setStroke(Color.BLACK);
+                l.setStroke(Color.BLACK);
             });
             l.setOnMouseExited((event) -> {
                 l.setStroke(Color.TRANSPARENT);
@@ -400,7 +387,7 @@ public class PlayerGraphics {
             Circle circle = new Circle(vertRadius, Color.TRANSPARENT);
             StackPane sp = new StackPane(circle);
             circle.setOnMouseClicked((event) -> {
-                if (!TurnManager.hasRolledDice() || isRobbing){
+                if (!TurnManager.hasRolledDice()){
                     return;
                 }
                 ContextMenu menu = new ContextMenu();
@@ -425,8 +412,7 @@ public class PlayerGraphics {
                 menu.show(sp, Side.BOTTOM, 0, 0);
             });
             circle.setOnMouseEntered(event -> {
-                if(!isRobbing)
-                    circle.setFill(Color.BLACK);
+                circle.setFill(Color.BLACK);
             });
             circle.setOnMouseExited(event -> {
                 circle.setFill(Color.TRANSPARENT);
@@ -584,6 +570,7 @@ public class PlayerGraphics {
         nextRoundButton.setDisable(true);
     }
 
+    /*
     public void robber(ActionEvent actionEvent)
     {
         isRobbing = true;
@@ -683,4 +670,6 @@ public class PlayerGraphics {
             }
         }
     }
+
+     */
 }

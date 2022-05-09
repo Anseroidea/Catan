@@ -16,9 +16,9 @@ public class Player
     private String name;
     private Map<Resource, Integer> resources;
     private List<DevelopmentCard> developmentCards;
+    private List<DevelopmentCard> developmentCardsBoughtThisTurn;
     private List<Settlement> settlements;
     private List<Road> roads;
-    private ArrayList<City> cities;
     private int id;
     private Color color;
     private HashSet<String> curRoads;
@@ -30,9 +30,9 @@ public class Player
     public Player(String n, int ID, Color c){
         resources = new HashMap<Resource, Integer>();
         developmentCards =new ArrayList<DevelopmentCard>();
+        developmentCardsBoughtThisTurn = new ArrayList<>();
         settlements = new ArrayList<Settlement>();
         roads = new ArrayList<Road>();
-        cities = new ArrayList<City>();
         curRoads=new HashSet<String>();
         longestRoad=0;
         name=n;
@@ -256,7 +256,7 @@ public class Player
     }
 
     public void buyDevelopment() {
-        developmentCards.add(BoardGame.getDevelopmentCardDeck().drawCard());
+        developmentCardsBoughtThisTurn.add(BoardGame.getDevelopmentCardDeck().drawCard());
         changeCards(Resource.WOOL, -1);
         changeCards(Resource.WHEAT, -1);
         changeCards(Resource.ORE, -1);
@@ -285,7 +285,7 @@ public class Player
     }
 
     public boolean canBuyDevelopment(){
-        return resources.get(Resource.WOOL) >= 1 && resources.get(Resource.ORE) >= 1 && resources.get(Resource.WHEAT) >= 1 && BoardGame.getDevelopmentCardDeck().isEmpty();
+        return resources.get(Resource.WOOL) >= 1 && resources.get(Resource.ORE) >= 1 && resources.get(Resource.WHEAT) >= 1 && !BoardGame.getDevelopmentCardDeck().isEmpty();
     }
 
     public BufferedImage getPawn() {
@@ -306,5 +306,14 @@ public class Player
 
     public void addKnight() {
         knights++;
+    }
+
+    public List<DevelopmentCard> getDevelopmentCardsBoughtThisTurn() {
+        return developmentCardsBoughtThisTurn;
+    }
+
+    public void nextTurn(){
+        developmentCards.addAll(developmentCardsBoughtThisTurn);
+        developmentCardsBoughtThisTurn.clear();
     }
 }

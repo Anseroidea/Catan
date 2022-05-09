@@ -15,6 +15,8 @@ import java.util.*;
 public class CatanApplication extends Application {
 
     private static Stage primaryStage;
+    private static Win win;
+
 
     public static void initializeGame(Player[] p){
         BoardGame.initializePlayers(p);
@@ -38,6 +40,8 @@ public class CatanApplication extends Application {
                 } else if (s.name().equals("SETTLEMENT")) {
                     SettlementSelect.initialize(fl.getController());
                     s.setPane(ap);
+                } else if (s.name().equals("WIN")){
+                    win = fl.getController();
                 } else {
                     s.setPane(ap);
                 }
@@ -82,6 +86,8 @@ public class CatanApplication extends Application {
         primaryStage.setScene(new Scene(ProgramState.getCurrentState().getPane(), 1920, 1080));
         if (ProgramState.getCurrentState().equals(ProgramState.BOARD)){
             GraphicsManager.refreshDisplay();
+        } else if (ProgramState.getCurrentState().equals(ProgramState.WIN)){
+            win.initWin();
         }
         primaryStage.setFullScreen(true);
     }

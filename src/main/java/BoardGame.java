@@ -13,6 +13,8 @@ public class BoardGame {
     private static Player largestArmy = null;
 
     public static List<Harbor> harbors = new ArrayList<Harbor>();
+    private static Robber robber;
+
     public static void initializePlayers(Player[] players){
         TurnManager.initialize(players);
     }
@@ -47,7 +49,11 @@ public class BoardGame {
         List<Tile> tiles = new ArrayList<>();
         for (int i = 0; i <= 5; i++) {
             for (int j = 0; j < (i <= 4 ? (i == 0 || i == 2) ? 3 : 4: 1); j++){
-                tiles.add(new Tile(i));
+                Tile e = new Tile(i);
+                if (i == 5){
+                    robber = new Robber(e);
+                }
+                tiles.add(e);
             }
         }
         tiles.stream().map(Tile::getType).forEach(System.out::println);
@@ -171,16 +177,31 @@ public class BoardGame {
 
     public static void rollDice(){
         int sum = (int) (Math.random() * 6) + (int) (Math.random() * 6) + 2;
+        if (sum == 7){
+            for (Player p : TurnManager.getPlayerList()){
+                if (p.getResources().values().stream().reduce(0, Integer::sum) > 7){
+                    PopUp.DISCARD.loadDiscard(p);
+                }
+            }
+            PopUp.ROBBERSELECT.loadRobber(false);
+        }
         TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " rolled a " + sum);
         TurnManager.setHasRolledDice(true);
         for (Tile t : hexGridPane.getTiles()){
-            if (t.getWeight() == sum){
+            if (t.getWeight() == sum && !robber.getTile().equals(t)){
+                Map<Player, Integer> gottenResources = new HashMap<>();
                 for (Vertex v : t.getAdjacentVertices().values()){
                     if (v.getSettlement() != null){
-                        v.getSettlement().getPlayer().changeCards(t.getResource(), 1);
+                        gottenResources.putIfAbsent(v.getSettlement().getPlayer(), 0);
+                        gottenResources.put(v.getSettlement().getPlayer(), gottenResources.get(v.getSettlement().getPlayer()) + 1);
                         if (!v.getSettlement().isSettlement()) {
-                            v.getSettlement().getPlayer().changeCards(t.getResource(), 1);
+                            gottenResources.put(v.getSettlement().getPlayer(), gottenResources.get(v.getSettlement().getPlayer()) + 1);
                         }
+                    }
+                }
+                if (gottenResources.values().stream().reduce(0, Integer::sum) < resourceDeck.getCount(t.getResource()) || gottenResources.keySet().size() == 1){
+                    for (Player p : gottenResources.keySet()){
+                        p.changeCards(t.getResource(), gottenResources.get(p));
                     }
                 }
             }
@@ -230,6 +251,10 @@ public class BoardGame {
         if (TurnManager.getCurrentPlayer().getPrivateVictoryPoints() == 10){
             ProgramState.setCurrentState(ProgramState.WIN);
         }
+    }
+
+    public static Robber getRobber() {
+        return robber;
     }
 }
 

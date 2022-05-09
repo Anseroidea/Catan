@@ -1,13 +1,17 @@
+import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.Optional;
 
 public enum PopUp {
-    TRADEBANK, TRADE, MONOPOLY, ROADBUILDING, TRADEOTHERS, YEAROFPLENTY, ROBBER;
+    TRADEBANK, TRADE, MONOPOLY, ROADBUILDING, TRADEOTHERS, YEAROFPLENTY, ROBBERSELECT, DISCARD;
 
     private static boolean lastPopUpCancelled = false;
 
@@ -43,16 +47,33 @@ public enum PopUp {
     }
 
     public void load(double w, double h){
+        load(w, h, false);
+    }
+
+    public void load(double w, double h, boolean cannotClose){
         lastPopUpCancelled = false;
         Stage pop = new Stage();
         pop.initModality(Modality.APPLICATION_MODAL);
         pop.setScene(new Scene(pane, w, h));
         pop.setOnCloseRequest((event) -> {
-            lastPopUpCancelled = true;
-            pop.getScene().setRoot(new AnchorPane());
+            if (cannotClose){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Close Confirmation");
+                alert.setHeaderText("Closing this dialog will close the entire application. Are you sure you want to quit?");
+                alert.initOwner(pop);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    Platform.exit();
+                    System.exit(0);
+                }
+                event.consume();
+            } else {
+                lastPopUpCancelled = true;
+                pop.getScene().setRoot(new AnchorPane());
+            }
         });
         pop.setResizable(false);
-        pop.show();
+        pop.showAndWait();
     }
 
     public void loadTrade()
@@ -102,5 +123,23 @@ public enum PopUp {
         }
         ((RoadBuilding) controller).initPopUp();
         load(1600, 1080);
+    }
+
+    public void loadRobber(boolean knight){
+        if (this != ROBBERSELECT) {
+            System.out.println("This is robber");
+            return;
+        }
+        ((RobberSelect) controller).initPopUp(knight);
+        load(1600, 1080, true);
+    }
+
+    public void loadDiscard(Player p) {
+        if (this != DISCARD){
+            System.out.println("This is discard");
+            return;
+        }
+        ((Discard) controller).initPopUp(p);
+        load(1280, 673, true);
     }
 }
