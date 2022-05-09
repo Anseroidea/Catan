@@ -357,7 +357,7 @@ public class PlayerGraphics {
             l.setStroke(Color.TRANSPARENT);
             l.setStrokeWidth(5);
             l.setOnMouseClicked((event) -> {
-                if (!TurnManager.hasRolledDice()){
+                if (!TurnManager.hasRolledDice() || isRobbing){
                     return;
                 }
                 if (TurnManager.getCurrentPlayer().getBuildableEdges().contains(e)){
@@ -383,7 +383,8 @@ public class PlayerGraphics {
                 //System.out.println("v1, v2:" + e.getAdjacentTiles().values().stream().map(Tile::getWeight).collect(Collectors.toList()));
             });
             l.setOnMouseEntered((event) -> {
-                l.setStroke(Color.BLACK);
+                if(!isRobbing)
+                    l.setStroke(Color.BLACK);
             });
             l.setOnMouseExited((event) -> {
                 l.setStroke(Color.TRANSPARENT);
@@ -398,7 +399,7 @@ public class PlayerGraphics {
             Circle circle = new Circle(vertRadius, Color.TRANSPARENT);
             StackPane sp = new StackPane(circle);
             circle.setOnMouseClicked((event) -> {
-                if (!TurnManager.hasRolledDice()){
+                if (!TurnManager.hasRolledDice() || isRobbing){
                     return;
                 }
                 ContextMenu menu = new ContextMenu();
@@ -427,7 +428,8 @@ public class PlayerGraphics {
                 menu.show(sp, Side.BOTTOM, 0, 0);
             });
             circle.setOnMouseEntered(event -> {
-                circle.setFill(Color.BLACK);
+                if(!isRobbing)
+                    circle.setFill(Color.BLACK);
             });
             circle.setOnMouseExited(event -> {
                 circle.setFill(Color.TRANSPARENT);
@@ -574,9 +576,20 @@ public class PlayerGraphics {
         refreshDisplay();
     }
 
+    private void disableButtons()
+    {
+        tradeButton.setDisable(true);
+        bankTradeButton.setDisable(true);
+        buyDevelopmentButton.setDisable(true);
+        developmentCardsButton.setDisable(true);
+        rollDiceButton.setDisable(true);
+        nextRoundButton.setDisable(true);
+    }
+
     public void robber(ActionEvent actionEvent)
     {
         isRobbing = true;
+        disableButtons();
         heading.setText("Choose a tile to move the robber to");
         heading.setVisible(true);
         HexGridPane hexGridPane = BoardGame.getHexGridPane();
