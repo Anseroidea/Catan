@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public enum PopUp {
-    TRADEBANK, TRADE, MONOPOLY, ROAD, TRADEOTHERS;
+    TRADEBANK, TRADE, MONOPOLY, ROADBUILDING, TRADEOTHERS, YEAROFPLENTY;
 
     private static boolean lastPopUpCancelled = false;
 
@@ -84,5 +84,23 @@ public enum PopUp {
         }
         ((Monopoly) controller).initPlayerInfo();
         load(600, 400);
+    }
+
+    public void loadYearOfPlenty(){
+        if (this != YEAROFPLENTY){
+            System.out.println("This is year of plenty");
+            return;
+        }
+        ((YearOfPlenty) controller).initPopUp();
+        load(1280, 673);
+    }
+
+    public void loadRoadBuilding(){
+        if (this != ROADBUILDING){
+            System.out.println("This is roadbuilding");
+            return;
+        }
+        ((YearOfPlenty) controller).initPopUp();
+        load(1600, 1080);
     }
 }

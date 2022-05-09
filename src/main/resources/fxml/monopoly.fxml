@@ -75,7 +75,7 @@
       </VBox>
       <HBox alignment="CENTER" layoutX="48.0" layoutY="36.0" prefHeight="100.0" prefWidth="504.0" spacing="10.0">
          <children>
-            <Button fx:id="confirm" mnemonicParsing="false" onAction="#confirmRob" prefHeight="63.0" prefWidth="115.0" text="Back">
+            <Button mnemonicParsing="false" onAction="#back" prefHeight="63.0" prefWidth="115.0" text="Back">
                <font>
                   <Font size="25.0" />
                </font></Button>
@@ -84,7 +84,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="back" layoutX="42.0" layoutY="29.0" mnemonicParsing="false" onAction="#back" prefHeight="63.0" prefWidth="115.0" text="Back">
+            <Button fx:id="confirm" layoutX="42.0" layoutY="29.0" mnemonicParsing="false" onAction="#confirmRob" prefHeight="63.0" prefWidth="133.0" text="Confirm">
                <font>
                   <Font size="25.0" />
                </font>

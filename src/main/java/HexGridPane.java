@@ -11,6 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 import java.util.*;
 import java.util.concurrent.TimeoutException;
@@ -55,6 +56,7 @@ public class HexGridPane extends HexGrid{
                         int weight = map.get(r).get(c).getWeight();
                         Color col = (weight == 6 || weight == 8) ? Color.RED : Color.BLACK;
                         Label l = new Label("" + weight);
+                        l.setFont(Font.font(30));
                         l.setTextFill(col);
                         HBox h = new HBox();
                         for (int ind = 0; ind < 6 - Math.abs(7 - weight); ind++){
@@ -89,8 +91,12 @@ public class HexGridPane extends HexGrid{
                         res.setFitWidth(image.getWidth() * factor);
                         sp.getChildren().add(res);
                     } else {
-                        Label l = new Label("?");
-                        sp.getChildren().add(l);
+                        WritableImage image = SwingFXUtils.toFXImage(Harbor.getThreeToOne(), null);
+                        ImageView res = new ImageView(image);
+                        factor = radius/ 1.5 / image.getHeight();
+                        res.setFitHeight(radius/1.5);
+                        res.setFitWidth(image.getWidth() * factor);
+                        sp.getChildren().add(res);
                     }
                     ap.getChildren().add(sp);
                 }

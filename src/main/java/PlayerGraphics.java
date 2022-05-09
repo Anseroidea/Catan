@@ -99,9 +99,18 @@ public class PlayerGraphics {
             ImageView im = new ImageView(SwingFXUtils.toFXImage(dc.getGraphic(), null));
             im.setFitWidth(150);
             im.setFitHeight(200);
+            final int id1 = dc.getId();
             if (dc.getId() > 4){
                 im.setOnMouseClicked((event) -> {
-
+                    if (id1 == 5){
+                        TurnManager.getCurrentPlayer().addKnight();
+                    } else if (id1 == 6){
+                        PopUp.ROADBUILDING.loadRoadBuilding();
+                    } else if (id1 == 7){
+                        PopUp.YEAROFPLENTY.loadYearOfPlenty();
+                    } else {
+                        PopUp.MONOPOLY.loadMonopoly();
+                    }
                 });
             }
             h.getChildren().add(im);
@@ -111,9 +120,18 @@ public class PlayerGraphics {
                 im = new ImageView(SwingFXUtils.toFXImage(dc.getGraphic(), null));
                 im.setFitWidth(150);
                 im.setFitHeight(200);
-                if (dc.getId() > 4){
+                final int id = dc.getId();
+                if (id > 4){
                     im.setOnMouseClicked((event) -> {
-
+                        if (id == 5){
+                            TurnManager.getCurrentPlayer().addKnight();
+                        } else if (id == 6){
+                            PopUp.ROADBUILDING.loadRoadBuilding();
+                        } else if (id == 7){
+                            PopUp.YEAROFPLENTY.loadYearOfPlenty();
+                        } else {
+                            PopUp.MONOPOLY.loadMonopoly();
+                        }
                     });
                 }
                 h.getChildren().add(im);
@@ -172,6 +190,11 @@ public class PlayerGraphics {
         player1Icon.setImage(SwingFXUtils.toFXImage(player1.getPawn(), null));
         player1Label.setText(player1.getName() + " (VP: " + player1.getPublicVictoryPoints() + ")");
         cardsLabel1.setText(player1.getResources().values().stream().reduce(0, Integer::sum) + "");
+        if (player1.getResources().values().stream().reduce(0, Integer::sum) > 7){
+            cardsLabel1.setTextFill(Color.RED);
+        } else {
+            cardsLabel1.setTextFill(Color.BLACK);
+        }
         knightsLabel1.setText(player1.getKnights() + "");
         developmentCardsLabel1.setText(player1.getDevelopmentCards().size() + "");
         roadsLabel1.setText(player1.getLongestRoad() + "");
@@ -188,6 +211,11 @@ public class PlayerGraphics {
         player2Icon.setImage(SwingFXUtils.toFXImage(player2.getPawn(), null));
         player2Label.setText(player2.getName() + " (VP: " + player2.getPublicVictoryPoints() + ")");
         cardsLabel2.setText(player2.getResources().values().stream().reduce(0, Integer::sum) + "");
+        if (player2.getResources().values().stream().reduce(0, Integer::sum) > 7){
+            cardsLabel2.setTextFill(Color.RED);
+        } else {
+            cardsLabel2.setTextFill(Color.BLACK);
+        }
         knightsLabel2.setText(player2.getKnights() + "");
         developmentCardsLabel2.setText(player2.getDevelopmentCards().size() + "");
         roadsLabel2.setText(player2.getLongestRoad() + "");
@@ -205,6 +233,11 @@ public class PlayerGraphics {
             player3Icon.setImage(SwingFXUtils.toFXImage(player3.getPawn(), null));
             player3Label.setText(player3.getName() + " (VP: " + player3.getPublicVictoryPoints() + ")");
             cardsLabel3.setText(player3.getResources().values().stream().reduce(0, Integer::sum) + "");
+            if (player3.getResources().values().stream().reduce(0, Integer::sum) > 7){
+                cardsLabel3.setTextFill(Color.RED);
+            } else {
+                cardsLabel3.setTextFill(Color.BLACK);
+            }
             knightsLabel3.setText(player3.getKnights() + "");
             developmentCardsLabel3.setText(player3.getDevelopmentCards().size() + "");
             roadsLabel3.setText(player3.getLongestRoad() + "");
@@ -224,6 +257,11 @@ public class PlayerGraphics {
         playerPawn.setImage(SwingFXUtils.toFXImage(currentPlayer.getPawn(), null));
         playerNameLabel.setText(TurnManager.getCurrentPlayer().getName());
         cardsLabel.setText(currentPlayer.getResources().values().stream().reduce(0, Integer::sum) + "");
+        if (currentPlayer.getResources().values().stream().reduce(0, Integer::sum) > 7){
+            cardsLabel.setTextFill(Color.RED);
+        } else {
+            cardsLabel.setTextFill(Color.BLACK);
+        }
         knightsLabel.setText(currentPlayer.getKnights() + "");
         developmentCardsLabel.setText(currentPlayer.getDevelopmentCards().size() + "");
         roadsLabel.setText(currentPlayer.getLongestRoad() + "");
@@ -238,6 +276,37 @@ public class PlayerGraphics {
         e5.setStrokeWidth(5);
         cityPicture.getChildren().add(e5);
         vpLabel.setText("VP: " + currentPlayer.getPrivateVictoryPoints());
+        roadsLabel.setBackground(Background.EMPTY);
+        roadsLabel1.setBackground(Background.EMPTY);
+        roadsLabel2.setBackground(Background.EMPTY);
+        roadsLabel3.setBackground(Background.EMPTY);
+        knightsLabel.setBackground(Background.EMPTY);
+        knightsLabel1.setBackground(Background.EMPTY);
+        knightsLabel2.setBackground(Background.EMPTY);
+        knightsLabel3.setBackground(Background.EMPTY);
+        if (BoardGame.getLongestRoad() != null){
+            if (player1.equals(BoardGame.getLongestRoad())){
+                roadsLabel1.setBackground(Background.fill(Color.GOLD));
+            } else if (player2.equals(BoardGame.getLongestRoad())) {
+                roadsLabel2.setBackground(Background.fill(Color.GOLD));
+            } else if (player3 != null && player3.equals(BoardGame.getLongestRoad())){
+                roadsLabel3.setBackground(Background.fill(Color.GOLD));
+            } else {
+                roadsLabel.setBackground(Background.fill(Color.GOLD));
+            }
+        }
+        if (BoardGame.getLargestArmy() != null){
+            if (player1.equals(BoardGame.getLargestArmy())){
+                knightsLabel1.setBackground(Background.fill(Color.GOLD));
+            } else if (player2.equals(BoardGame.getLargestArmy())) {
+                knightsLabel2.setBackground(Background.fill(Color.GOLD));
+            } else if (player3 != null && player3.equals(BoardGame.getLargestArmy())){
+                knightsLabel3.setBackground(Background.fill(Color.GOLD));
+            } else {
+                knightsLabel.setBackground(Background.fill(Color.GOLD));
+            }
+        }
+
     }
 
     private void refreshText() {
@@ -267,13 +336,15 @@ public class PlayerGraphics {
                 if (!TurnManager.hasRolledDice()){
                     return;
                 }
-                ContextMenu menu = new ContextMenu();
                 if (TurnManager.getCurrentPlayer().getBuildableEdges().contains(e)){
+                    ContextMenu menu = new ContextMenu();
                     StackPane build_road = new StackPane(new Label("Build Road"));
                     CustomMenuItem mi = new CustomMenuItem(build_road);
                     mi.setOnAction((event1) -> {
                         TurnManager.getCurrentPlayer().buildRoad(e);
+                        TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " built a road.");
                         BoardGame.updateLongestRoad();
+                        BoardGame.checkWin();
                         refreshDisplay();
                     });
                     if (!TurnManager.getCurrentPlayer().canBuildRoad()){
@@ -283,13 +354,8 @@ public class PlayerGraphics {
                     Tooltip t = new Tooltip("hi!");
                     t.setShowDelay(Duration.millis(200));
                     Tooltip.install(build_road, t);
+                    menu.show(l, Side.BOTTOM, 0, 0);
                 }
-                MenuItem mi = new MenuItem("Edge Properties");
-                mi.setOnAction((event1) -> {
-                    System.out.println("hi");
-                });
-                menu.getItems().add(mi);
-                menu.show(l, Side.BOTTOM, 0, 0);
                 //System.out.println("v1, v2:" + e.getAdjacentTiles().values().stream().map(Tile::getWeight).collect(Collectors.toList()));
             });
             l.setOnMouseEntered((event) -> {
@@ -317,6 +383,8 @@ public class PlayerGraphics {
                     CustomMenuItem mi = new CustomMenuItem(build_settlement);
                     mi.setOnAction((event1) -> {
                         TurnManager.getCurrentPlayer().buildSettlement(v);
+                        TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " built a settlement.");
+                        BoardGame.checkWin();
                         refreshDisplay();
                     });
                     if (!TurnManager.getCurrentPlayer().canBuildSettlement()){
@@ -345,6 +413,22 @@ public class PlayerGraphics {
             boardPane.getChildren().add(sp);
         }
         for (Player p : TurnManager.getPlayerList()){
+            for (Road r : p.getRoads()){
+                List<Vertex> vertices = new ArrayList<>(r.getEdge().getAdjacentVertices().values());
+                Vertex v1 = vertices.get(0);
+                Vertex v2 = vertices.get(1);
+                double x1 = getX(v1, radius);
+                double x2 = getX(v2, radius);
+                double y1 = getY(v1, radius);
+                double y2 = getY(v2, radius);
+                Line l = new Line(x1, y1, x2, y2);
+                Line b = new Line(x1, y1, x2, y2);
+                l.setStroke(p.getColor());
+                l.setStrokeWidth(7);
+                b.setStroke(Color.BLACK);
+                b.setStrokeWidth(10);
+                boardPane.getChildren().addAll(b,l);
+            }
             for (Settlement s : p.getSettlements()){
                 double x = getX(s.getVertex(), radius);
                 double y = getY(s.getVertex(), radius);
@@ -357,27 +441,26 @@ public class PlayerGraphics {
 
                 StackPane sp = new StackPane();
                 if (s.isSettlement()){
-                    sp.getChildren().add(new Circle(10, p.getColor()));
+                    Circle e = new Circle(10, p.getColor());
+                    e.setStroke(Color.BLACK);
+                    e.setStrokeWidth(2);
+                    sp.getChildren().add(e);
                 } else {
-                    sp.setBackground(Background.fill(p.getColor()));
+                    Rectangle e = new Rectangle(20, 20, p.getColor());
+                    e.setStrokeWidth(2);
+                    e.setStroke(Color.BLACK);
+                    sp.getChildren().add(e);
                 }
-
-
                 sp.setOnMouseClicked((event) -> {
                     ContextMenu menu = new ContextMenu();
-                    if (s.isSettlement()){
-                        MenuItem mi = new MenuItem("Settlement Properties");
-                        menu.getItems().add(mi);
-                    } else {
-                        MenuItem mi = new MenuItem("City Properties");
-                        menu.getItems().add(mi);
-                    }
                     if (p == TurnManager.getCurrentPlayer()){
                         if (TurnManager.hasRolledDice()){
                             StackPane build_city = new StackPane(new Label("Build City"));
                             CustomMenuItem mi = new CustomMenuItem(build_city);
                             mi.setOnAction((event1) -> {
                                 TurnManager.getCurrentPlayer().buildCity(s);
+                                TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " upgraded a settlement to a city.");
+                                BoardGame.checkWin();
                                 refreshDisplay();
                             });
                             if (!TurnManager.getCurrentPlayer().canBuildCity()){
@@ -394,19 +477,6 @@ public class PlayerGraphics {
                 sp.setLayoutX(x - 10);
                 sp.setLayoutY(y - 10);
                 boardPane.getChildren().add(sp);
-            }
-            for (Road r : p.getRoads()){
-                List<Vertex> vertices = new ArrayList<>(r.getEdge().getAdjacentVertices().values());
-                Vertex v1 = vertices.get(0);
-                Vertex v2 = vertices.get(1);
-                double x1 = getX(v1, radius);
-                double x2 = getX(v2, radius);
-                double y1 = getY(v1, radius);
-                double y2 = getY(v2, radius);
-                Line l = new Line(x1, y1, x2, y2);
-                l.setStroke(p.getColor());
-                l.setStrokeWidth(5);
-                boardPane.getChildren().add(l);
             }
         }
 
@@ -449,16 +519,17 @@ public class PlayerGraphics {
 
     public void nextRound(ActionEvent actionEvent) {
         TurnManager.nextTurn();
+        BoardGame.checkWin();
         refreshDisplay();
     }
 
     public void trade(){
         PopUp.TRADE.loadTrade();
+        refreshDisplay();
     }
 
     public void bankTrade(ActionEvent actionEvent) {
-        PopUp.MONOPOLY.loadMonopoly();
-        //PopUp.TRADEBANK.loadTradeBank();
+        PopUp.TRADEBANK.loadTradeBank();
         refreshDisplay();
     }
 
@@ -474,6 +545,8 @@ public class PlayerGraphics {
 
     public void buyDevelopment(ActionEvent actionEvent) {
         TurnManager.getCurrentPlayer().buyDevelopment();
+        TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " bought a development card.");
+        BoardGame.checkWin();
         refreshDisplay();
     }
 }

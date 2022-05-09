@@ -232,7 +232,7 @@ public class Player
     }
 
     public boolean canBuildRoad(){
-        return resources.get(Resource.BRICK) >= 1 && resources.get(Resource.LUMBER) >= 1;
+        return resources.get(Resource.BRICK) >= 1 && resources.get(Resource.LUMBER) >= 1 && roads.size() < 15;
     }
 
     public void buildRoad(Edge e){
@@ -277,15 +277,15 @@ public class Player
     }
 
     public boolean canBuildSettlement() {
-        return resources.get(Resource.LUMBER) >= 1 && resources.get(Resource.BRICK) >= 1 && resources.get(Resource.WHEAT) >=1 && resources.get(Resource.WOOL) >=1;
+        return resources.get(Resource.LUMBER) >= 1 && resources.get(Resource.BRICK) >= 1 && resources.get(Resource.WHEAT) >=1 && resources.get(Resource.WOOL) >= 1 && settlements.stream().filter(Settlement::isSettlement).count() < 5;
     }
 
     public boolean canBuildCity(){
-        return resources.get(Resource.WHEAT) >= 2 && resources.get(Resource.ORE) >= 3;
+        return resources.get(Resource.WHEAT) >= 2 && resources.get(Resource.ORE) >= 3 && settlements.stream().filter(s -> !s.isSettlement()).count() < 4;
     }
 
     public boolean canBuyDevelopment(){
-        return resources.get(Resource.WOOL) >= 1 && resources.get(Resource.ORE) >= 1 && resources.get(Resource.WHEAT) >= 1;
+        return resources.get(Resource.WOOL) >= 1 && resources.get(Resource.ORE) >= 1 && resources.get(Resource.WHEAT) >= 1 && BoardGame.getDevelopmentCardDeck().isEmpty();
     }
 
     public BufferedImage getPawn() {
@@ -302,5 +302,9 @@ public class Player
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
         return Objects.equals(name, player.name);
+    }
+
+    public void addKnight() {
+        knights++;
     }
 }

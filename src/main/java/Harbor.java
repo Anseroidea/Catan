@@ -11,11 +11,13 @@ public class Harbor {
     public Resource resource;
     public Tile tile;
     public static BufferedImage harborImage;
+    private static BufferedImage threeToOne;
     public int rotation;
 
     static {
         try {
             harborImage = ImageIO.read(Harbor.class.getClassLoader().getResourceAsStream("images/resources/harbor.png"));
+            threeToOne = ImageIO.read(Harbor.class.getClassLoader().getResourceAsStream("images/resources/three.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -26,6 +28,10 @@ public class Harbor {
         resource = r;
         tile = t;
         this.rotation = rotation;
+    }
+
+    public static BufferedImage getThreeToOne() {
+        return threeToOne;
     }
 
     public Resource getResource() {

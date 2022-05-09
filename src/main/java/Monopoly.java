@@ -60,6 +60,7 @@ public class Monopoly
         p.changeCards(new Resource("ore"), 4);
         p.changeCards(new Resource("sheep"), 4);*/
 
+        TurnManager.getCurrentPlayer().useDevelopment(TurnManager.getCurrentPlayer().getDevelopmentCards().stream().filter(d -> d.getId() == 8).findFirst().get());
         Resource gain = get;
         int total = 0;
         for(Player victim : TurnManager.getPlayerList())

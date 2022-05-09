@@ -152,7 +152,22 @@ public class TradeOthers
                 t.back(event);
 
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
+                StringBuilder s = new StringBuilder();
+                s.append(TurnManager.getCurrentPlayer().getName()).append(" traded ");
+                StringJoiner giveString = new StringJoiner(", ");
+                StringJoiner getString = new StringJoiner(", ");
+                for (Resource r : Resource.getResourceList()){
+                    if (give.get(r) > 0){
+                        giveString.add(give.get(r) + " " + r.getResource());
+                    }
+                    if (get.get(r) > 0) {
+                        getString.add(get.get(r) + " " + r.getResource());
+                    }
+                }
+                s.append(giveString).append(" to ").append(partner.getName()).append(" for ").append(getString);
+                TurnManager.addAction(s.toString());
                 a.setContentText("Trade successful!");
+                GraphicsManager.refreshDisplay();
                 a.show();
             }
         };
