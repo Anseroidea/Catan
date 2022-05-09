@@ -171,7 +171,7 @@ public class BoardGame {
 
     public static void rollDice(){
         int sum = (int) (Math.random() * 6) + (int) (Math.random() * 6) + 2;
-        TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " has rolled a " + sum);
+        TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " rolled a " + sum);
         TurnManager.setHasRolledDice(true);
         for (Tile t : hexGridPane.getTiles()){
             if (t.getWeight() == sum){
@@ -196,6 +196,7 @@ public class BoardGame {
     }
 
     public static Player getLargestArmy() {
+        updateLargestArmy();
         return largestArmy;
     }
 
@@ -210,7 +211,8 @@ public class BoardGame {
     }
 
     public static Player getLongestRoad() {
-        return longestRoad;
+        updateLongestRoad();
+        return (longestRoad.getRoads().size() >= 3) ? longestRoad : null;
     }
 
     public static void updateLongestRoad() {
@@ -222,6 +224,12 @@ public class BoardGame {
             }
         }
         longestRoad = longest;
+    }
+
+    public static void checkWin() {
+        if (TurnManager.getCurrentPlayer().getPrivateVictoryPoints() == 10){
+            ProgramState.setCurrentState(ProgramState.WIN);
+        }
     }
 }
 

@@ -22,6 +22,7 @@ public class DevelopmentCardDeck {
     }
 
 
-
-
+    public boolean isEmpty() {
+        return deck.size() == 0;
+    }
 }

@@ -15,10 +15,7 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class TradeBank
 {
@@ -86,6 +83,7 @@ public class TradeBank
     }
     public void initPopUp()
     {
+        confirm.setDisable(true);
         numCardsAvailable = 0;
         for (Resource r : Resource.getResourceList()){
             give.put(r, 0);
@@ -180,6 +178,7 @@ public class TradeBank
     }
 
     public void refreshButtons(){
+        confirm.setDisable(give.values().stream().reduce(0, Integer::sum) == 0 || get.values().stream().reduce(0, Integer::sum) == 0);
         Map<Resource, Integer> owned = TurnManager.getCurrentPlayer().getResources();
         offRemBrickButton.setDisable(false);
         offAddBrickButton.setDisable(false);
@@ -221,19 +220,19 @@ public class TradeBank
         if (owned.get(Resource.WOOL).intValue()/conversion.get(Resource.WOOL) * conversion.get(Resource.WOOL) == give.get(Resource.WOOL)){
             offAddWoolButton.setDisable(true);
         }
-        if (get.get(Resource.BRICK) == 0){
+        if (get.get(Resource.BRICK) == 0 || get.get(Resource.BRICK) == BoardGame.getResourceDeck().getCount(Resource.BRICK)){
             reqRemBrickButton.setDisable(true);
         }
-        if (get.get(Resource.LUMBER) == 0){
+        if (get.get(Resource.LUMBER) == 0 || get.get(Resource.LUMBER) == BoardGame.getResourceDeck().getCount(Resource.LUMBER)){
             reqRemLumberButton.setDisable(true);
         }
-        if (get.get(Resource.ORE) == 0){
+        if (get.get(Resource.ORE) == 0 || get.get(Resource.ORE) == BoardGame.getResourceDeck().getCount(Resource.ORE)){
             reqRemOreButton.setDisable(true);
         }
-        if (get.get(Resource.WHEAT) == 0){
+        if (get.get(Resource.WHEAT) == 0 || get.get(Resource.ORE) == BoardGame.getResourceDeck().getCount(Resource.ORE)){
             reqRemWheatButton.setDisable(true);
         }
-        if (get.get(Resource.WOOL) == 0){
+        if (get.get(Resource.WOOL) == 0 || get.get(Resource.ORE) == BoardGame.getResourceDeck().getCount(Resource.ORE)){
             reqRemWoolButton.setDisable(true);
         }
         if (numCardsAvailable <= 0){
@@ -260,9 +259,24 @@ public class TradeBank
 
     public void confirmTrade(ActionEvent actionEvent) {
         for (Resource r : Resource.getResourceList()){
-            get.put(r, 0);
-            give.put(r, 0);
+            TurnManager.getCurrentPlayer().changeCards(r, get.get(r) - give.get(r));
         }
+        StringBuilder s = new StringBuilder();
+        s.append(TurnManager.getCurrentPlayer().getName()).append(" traded ");
+        StringJoiner giveString = new StringJoiner(", ");
+        StringJoiner getString = new StringJoiner(", ");
+        for (Resource r : Resource.getResourceList()){
+            if (give.get(r) > 0){
+                giveString.add(give.get(r) + " " + r.getResource());
+            }
+            if (get.get(r) > 0) {
+                getString.add(get.get(r) + " " + r.getResource());
+            }
+        }
+        s.append(giveString).append(" to the bank for ").append(getString);
+        TurnManager.addAction(s.toString());
+        GraphicsManager.refreshDisplay();
+        back(null);
     }
 
     public void minBrick(ActionEvent actionEvent) {

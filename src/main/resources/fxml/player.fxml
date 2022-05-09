@@ -205,7 +205,7 @@
                      <VBox.margin>
                         <Insets left="50.0" />
                      </VBox.margin>
-                     <ImageView fx:id="player3Icon1" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" />
+                     <ImageView fx:id="player3Icon" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" />
                      <Label fx:id="player3Label" text="Player Name">
                         <font>
                            <Font size="30.0" />

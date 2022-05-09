@@ -28,7 +28,6 @@ public class Trade
     public Button reqAddBrickButton;
     public Button reqRemLumberButton;
     public Label lumberLabel;
-    public Button reqAddLumber;
     public Button reqRemOreButton;
     public Label oreLabel;
     public Button reqAddOreButton;
@@ -39,7 +38,6 @@ public class Trade
     public Button reqAddWoolButton;
     public Button offRemBrickButton;
     public Label brickLabelOff;
-    public Button reqAddBrickButton1;
     public VBox offLumber;
     public Button offRemLumberButton;
     public Label lumberLabelOff;
@@ -358,6 +356,7 @@ public class Trade
     }
     
     public void refreshButtons(){
+        confirm.setDisable(request.values().stream().reduce(0, Integer::sum) == 0 || offer.values().stream().reduce(0, Integer::sum) == 0);
         Map<Resource, Integer> owned = TurnManager.getCurrentPlayer().getResources();
         offRemBrickButton.setDisable(false);
         offAddBrickButton.setDisable(false);
