@@ -367,6 +367,7 @@ public class PlayerGraphics {
                     mi.setOnAction((event1) -> {
                         TurnManager.getCurrentPlayer().buildRoad(e);
                         TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " built a road.");
+                        TurnManager.setHasBuilt(true);
                         BoardGame.updateLongestRoad();
                         BoardGame.checkWin();
                         refreshDisplay();
@@ -409,6 +410,7 @@ public class PlayerGraphics {
                     mi.setOnAction((event1) -> {
                         TurnManager.getCurrentPlayer().buildSettlement(v);
                         TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " built a settlement.");
+                        TurnManager.setHasBuilt(true);
                         BoardGame.checkWin();
                         refreshDisplay();
                     });
@@ -420,11 +422,6 @@ public class PlayerGraphics {
                     t.setShowDelay(Duration.millis(200));
                     Tooltip.install(build_settlement, t);
                 }
-                MenuItem mi = new MenuItem("Vertex Properties");
-                mi.setOnAction((event1) -> {
-                    System.out.println("hi");
-                });
-                menu.getItems().add(mi);
                 menu.show(sp, Side.BOTTOM, 0, 0);
             });
             circle.setOnMouseEntered(event -> {
@@ -486,6 +483,7 @@ public class PlayerGraphics {
                             mi.setOnAction((event1) -> {
                                 TurnManager.getCurrentPlayer().buildCity(s);
                                 TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " upgraded a settlement to a city.");
+                                TurnManager.setHasBuilt(true);
                                 BoardGame.checkWin();
                                 refreshDisplay();
                             });

@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainMenu">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainMenu">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0">
          <StackPane.margin>
@@ -20,11 +19,6 @@
                </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#rules" prefWidth="376.0" text="Rules">
-               <font>
-                  <Font size="46.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#credits" prefWidth="376.0" text="Credits">
                <font>
                   <Font size="46.0" />
                </font>

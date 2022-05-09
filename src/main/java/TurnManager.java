@@ -54,4 +54,8 @@ public class TurnManager {
     public static void setHasRolledDice(boolean hasRolledDice) {
         TurnManager.hasRolledDice = hasRolledDice;
     }
+
+    public static void setHasBuilt(boolean b) {
+        hasBuilt = b;
+    }
 }
