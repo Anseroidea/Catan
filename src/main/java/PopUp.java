@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public enum PopUp {
-    TRADEBANK, TRADE, MONOPOLY, ROADBUILDING, TRADEOTHERS, YEAROFPLENTY;
+    TRADEBANK, TRADE, MONOPOLY, ROADBUILDING, TRADEOTHERS, YEAROFPLENTY, ROBBER;
 
     private static boolean lastPopUpCancelled = false;
 
