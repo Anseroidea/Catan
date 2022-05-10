@@ -54,6 +54,7 @@ public class YearOfPlenty {
             }
         }
         TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " played a Year of Plenty Card.");
+        back(null);
         GraphicsManager.refreshDisplay();
     }
 

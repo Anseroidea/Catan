@@ -113,6 +113,13 @@ public class TradeOthers
                 playerStatus.put(p, 1);
                 refreshButtons();
             });
+            boolean canAccept = true;
+            for (Resource r : get.keySet()){
+                if (p.getResources().get(r) <= get.get(r)) {
+                    canAccept = false;
+                }
+            }
+            accept.setDisable(!canAccept);
             Button reject = new Button();
             ImageView re = new ImageView(SwingFXUtils.toFXImage(cross, null));
             re.setFitHeight(200);

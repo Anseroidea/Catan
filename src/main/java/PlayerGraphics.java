@@ -153,7 +153,7 @@ public class PlayerGraphics {
             if (i >= availableDevelopmentCards){
                 im.setDisable(true);
             }
-            if (dc.getId() > 4 && 1 < availableDevelopmentCards){
+            if (dc.getId() > 4 && i < availableDevelopmentCards){
                 im.setOnMouseClicked((event) -> {
                     if (id1 == 5){
                         TurnManager.getCurrentPlayer().addKnight();
