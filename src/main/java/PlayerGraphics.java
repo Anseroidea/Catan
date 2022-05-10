@@ -89,14 +89,26 @@ public class PlayerGraphics {
     public Label bankLumberLabel;
     public Label bankBrickLabel;
 
+    private static BufferedImage[] dice = new BufferedImage[6];
+    private static int diceValOne, diceValTwo;
 
-    @FXML
-    public void initialize()
-    {
+    static {
+        try {
+            for (int i = 1; i <= 6; i++){
+                dice[i-1] = ImageIO.read(Objects.requireNonNull(PlayerGraphics.class.getResourceAsStream("images/player/dice" + i + ".png")));
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
+    public ImageView diceOne;
+    public ImageView diceTwo;
+
     public void refreshDisplay() {
+        refreshDice();
         refreshLabels();
         refreshPlayerInfo();
         refreshButtons();
@@ -358,8 +370,9 @@ public class PlayerGraphics {
         scrollPane.setContent(value);
     }
 
-    private void refreshDice(int one, int two){
-        
+    private void refreshDice(){
+        diceOne.setImage(SwingFXUtils.toFXImage(dice[diceValOne - 1], null));
+        diceTwo.setImage(SwingFXUtils.toFXImage(dice[diceValTwo - 1], null));
     }
 
     private void refreshBoardInteractives() {
@@ -558,12 +571,16 @@ public class PlayerGraphics {
     }
 
     public void rollDice(ActionEvent actionEvent) {
-        BoardGame.rollDice();
+        diceValOne = (int) (Math.random() * 6) + 1;
+        diceValTwo = (int) (Math.random() * 6) + 1;
+        BoardGame.rollDice(diceValOne + diceValTwo);
         refreshDisplay();
     }
 
     public void nextRound(ActionEvent actionEvent) {
         resourcesBox.setVisible(true);
+        resourceButton.setText("Hide Resources");
+        vpLabel.setText("VP: " + TurnManager.getCurrentPlayer().getPrivateVictoryPoints());
         TurnManager.nextTurn();
         BoardGame.checkWin();
         refreshDisplay();

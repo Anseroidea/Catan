@@ -175,8 +175,7 @@ public class BoardGame {
         return result;
     }
 
-    public static void rollDice(){
-        int sum = (int) (Math.random() * 6) + (int) (Math.random() * 6) + 2;
+    public static void rollDice(int sum){
         if (sum == 7){
             for (Player p : TurnManager.getPlayerList()){
                 if (p.getResources().values().stream().reduce(0, Integer::sum) > 7){
