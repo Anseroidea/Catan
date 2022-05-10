@@ -7,6 +7,7 @@ public class TurnManager {
     private static StringBuilder allActionLog;
     private static boolean hasRolledDice;
     private static boolean hasBuilt;
+    private static boolean hasPlayedDevelopmentCard;
 
     public static void nextTurn(){
         getCurrentPlayer().nextTurn();
@@ -58,5 +59,13 @@ public class TurnManager {
 
     public static void setHasBuilt(boolean b) {
         hasBuilt = b;
+    }
+
+    public static boolean isHasPlayedDevelopmentCard() {
+        return hasPlayedDevelopmentCard;
+    }
+
+    public static void setHasPlayedDevelopmentCard(boolean hasPlayedDevelopmentCard) {
+        TurnManager.hasPlayedDevelopmentCard = hasPlayedDevelopmentCard;
     }
 }

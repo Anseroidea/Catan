@@ -160,6 +160,23 @@ public class BoardGame {
         }
     }
 
+    public static List<Tile> getTilesWithSettlementsWithoutOnlyPlayer(Player p){
+        List<Tile> result = new ArrayList<>();
+        for (Tile t : hexGridPane.getTiles()){
+            boolean hasSettlements = false;
+            Set<Player> players = new HashSet<>();
+            for (Vertex v : t.getAdjacentVertices().values()){
+                if (v.getSettlement() != null){
+                    hasSettlements = true;
+                    players.add(v.getSettlement().getPlayer());
+                }
+            }
+            if (hasSettlements && (players.size() > 1 || players.size() == 1 && !players.contains(p))){
+                result.add(t);
+            }
+        }
+        return result;
+    }
 
     public static HexGridPane getHexGridPane() {
         return hexGridPane;

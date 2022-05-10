@@ -153,8 +153,9 @@ public class PlayerGraphics {
             if (i >= availableDevelopmentCards){
                 im.setDisable(true);
             }
-            if (dc.getId() > 4 && i < availableDevelopmentCards){
+            if (dc.getId() > 4 && i < availableDevelopmentCards && !TurnManager.isHasPlayedDevelopmentCard()){
                 im.setOnMouseClicked((event) -> {
+                    TurnManager.setHasPlayedDevelopmentCard(true);
                     if (id1 == 5){
                         TurnManager.getCurrentPlayer().addKnight();
                         PopUp.ROBBERSELECT.loadRobber(true);
@@ -175,8 +176,9 @@ public class PlayerGraphics {
                 im.setFitWidth(150);
                 im.setFitHeight(200);
                 final int id = dc.getId();
-                if (id > 4){
+                if (id > 4 && !TurnManager.isHasPlayedDevelopmentCard()){
                     im.setOnMouseClicked((event) -> {
+                        TurnManager.setHasPlayedDevelopmentCard(true);
                         if (id == 5){
                             TurnManager.getCurrentPlayer().addKnight();
                             PopUp.ROBBERSELECT.loadRobber(true);

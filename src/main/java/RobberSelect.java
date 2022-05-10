@@ -112,43 +112,49 @@ public class RobberSelect {
         robberSP.getChildren().add(e);
         ap.getChildren().add(robberSP);
         if (isSelectingTile) {
-            for (Integer r : map.keySet()){
-                for (int c = (0); c < map.get(r).size(); c++){
-                    if (map.get(r).get(c) != null && (showWater || map.get(r).get(c).getId() != 6)){
-                        double rowCoord = (r + maxR) * (radius + radius/2.) + radius/Math.sqrt(3) * 2 - 70;
-                        double colCoord = Math.abs(r) * radius * Math.sqrt(3)/2. + radius * Math.sqrt(3) * (c - (showWater ? 0 : 1)) + radius/2 * Math.sqrt(3) - 54;
-                        StackPane sp = new StackPane();
-                        if (!map.get(r).get(c).equals(robberTile)){
-                            Circle cir = new Circle(radius/2., new Color(0.1,0.7, 0, .7));
-                            int finalC = c;
-                            cir.setOnMouseClicked((event) -> {
-                                isSelectingTile = false;
-                                robberTile = map.get(r).get(finalC);
-                                boolean settlementsNearby = false;
-                                for (Vertex v : robberTile.getAdjacentVertices().values()){
-                                    if (v.getSettlement() != null && !v.getSettlement().getPlayer().equals(TurnManager.getCurrentPlayer())){
-                                        settlementsNearby = true;
-                                    }
+            for (Tile t : BoardGame.getTilesWithSettlementsWithoutOnlyPlayer(TurnManager.getCurrentPlayer())){
+                if (t.getWeightLetter() == null){
+                    continue;
+                }
+                int r = t.getR();
+                int c = t.getC();
+                if (map.get(r).get(c) != null && (showWater || map.get(r).get(c).getId() != 6)){
+                    double rowCoord = (r + maxR) * (radius + radius/2.) + radius/Math.sqrt(3) * 2 - 70;
+                    double colCoord = Math.abs(r) * radius * Math.sqrt(3)/2. + radius * Math.sqrt(3) * (c - (showWater ? 0 : 1)) + radius/2 * Math.sqrt(3) - 54;
+                    StackPane sp = new StackPane();
+                    if (!map.get(r).get(c).equals(robberTile)){
+                        Circle cir = new Circle(radius/2., new Color(0.1,0.7, 0, .7));
+                        int finalC = c;
+                        cir.setOnMouseClicked((event) -> {
+                            isSelectingTile = false;
+                            robberTile = map.get(r).get(finalC);
+                            boolean settlementsNearby = false;
+                            for (Vertex v : robberTile.getAdjacentVertices().values()){
+                                if (v.getSettlement() != null && !v.getSettlement().getPlayer().equals(TurnManager.getCurrentPlayer())){
+                                    settlementsNearby = true;
                                 }
-                                if (settlementsNearby){
-                                    refreshAll();
-                                } else {
-                                    BoardGame.getRobber().setTile(robberTile);
-                                    GraphicsManager.refreshDisplay();
-                                    back(null);
-                                }
-                            });
-                            sp.getChildren().add(cir);
-                        }
-                        sp.setLayoutY(rowCoord);
-                        sp.setLayoutX(colCoord);
-                        ap.getChildren().add(sp);
+                            }
+                            if (settlementsNearby){
+                                refreshAll();
+                            } else {
+                                BoardGame.getRobber().setTile(robberTile);
+                                GraphicsManager.refreshDisplay();
+                                back(null);
+                            }
+                        });
+                        sp.getChildren().add(cir);
                     }
+                    sp.setLayoutY(rowCoord);
+                    sp.setLayoutX(colCoord);
+                    ap.getChildren().add(sp);
                 }
             }
         } else {
             for (Vertex v : robberTile.getAdjacentVertices().values()){
                 if (v.getSettlement() != null){
+                    if (v.getSettlement().getPlayer().equals(TurnManager.getCurrentPlayer())){
+                        continue;
+                    }
                     double rowCoord = maxR * (radius + radius/2.) + radius + v.getR() * radius/2. + v.getR() / (double) Math.abs(v.getR()) * (v.getC() % 2 + (Math.abs(v.getR()) - 1) * 2) * radius/2. - 15;
                     double colCoord = (showWater ? 1 : 0) * radius * Math.sqrt(3) + (Math.abs(v.getR()) - 1 + v.getC()) * radius * Math.sqrt(3) / 2. - 15;
                     Circle circle = new Circle(15, new Color(0.1,0.7, 0, .7));
@@ -161,6 +167,9 @@ public class RobberSelect {
                         }
                         resourceDisplay.setVisible(true);
                         System.out.println("hi!!!!");
+                        if (knight){
+                            TurnManager.getCurrentPlayer().useDevelopment(TurnManager.getCurrentPlayer().getDevelopmentCards().stream().filter(d -> d.getId() == 5).findFirst().get());
+                        }
                         if (resources.isEmpty()) {
                             if (knight) {
                                 TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " used a knight.");
@@ -179,6 +188,7 @@ public class RobberSelect {
                             }
                             stealLabel.setText("You stole a " + stolen.getResource());
                         }
+                        BoardGame.getRobber().setTile(robberTile);
                     });
                     StackPane sp = new StackPane(circle);
                     sp.setLayoutY(rowCoord);
@@ -213,9 +223,6 @@ public class RobberSelect {
 
     public void confirm(ActionEvent actionEvent) {
         back(null);
-        if (knight){
-            TurnManager.getCurrentPlayer().useDevelopment(TurnManager.getCurrentPlayer().getDevelopmentCards().stream().filter(d -> d.getId() == 5).findFirst().get());
-        }
         GraphicsManager.refreshDisplay();
     }
 }

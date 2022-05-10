@@ -115,7 +115,10 @@ public class TradeOthers
             });
             boolean canAccept = true;
             for (Resource r : get.keySet()){
-                if (p.getResources().get(r) <= get.get(r)) {
+                if (p.getResources().get(r) < get.get(r)) {
+                    System.out.println(r.getResource());
+                    System.out.println(get);
+                    System.out.println(p.getResources());
                     canAccept = false;
                 }
             }
