@@ -8,10 +8,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public enum PopUp {
-    TRADEBANK, TRADE, MONOPOLY, ROADBUILDING, TRADEOTHERS, YEAROFPLENTY, ROBBERSELECT, DISCARD;
+    TRADEBANK, TRADE, MONOPOLY, ROADBUILDING, TRADEOTHERS, YEAROFPLENTY, ROBBERSELECT, DISCARD, BUILDINGS;
 
     private static boolean lastPopUpCancelled = false;
 
@@ -141,5 +142,22 @@ public enum PopUp {
         }
         ((Discard) controller).initPopUp(p);
         load(1280, 673, true);
+    }
+
+    public void loadBuildings(){
+        if (this != BUILDINGS){
+            System.out.println("This is buildings");
+        }
+        ((Buildings) controller).initPopUp();
+        load(600, 400);
+    }
+
+    public void loadTradeOthers(Map<Resource, Integer> request, Map<Resource, Integer> offer, Trade t){
+        if (this != TRADEOTHERS){
+            System.out.println("This is trade others");
+
+        }
+        ((TradeOthers) controller).initPopUp(request, offer, t);
+        load(1920, 1080);
     }
 }

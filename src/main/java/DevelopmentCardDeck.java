@@ -10,7 +10,7 @@ public class DevelopmentCardDeck {
 
     public DevelopmentCardDeck(){
         for (int i = 0; i < 9; i++){
-            for (int j = 0; j < ((i <= 4) ? 1 : (i == 5) ? 14 : 3); j++){
+            for (int j = 0; j < ((i <= 4) ? 1 : (i == 5) ? 14 : 2); j++){
                 deck.add(new DevelopmentCard(i));
             }
         }
@@ -24,5 +24,9 @@ public class DevelopmentCardDeck {
 
     public boolean isEmpty() {
         return deck.size() == 0;
+    }
+
+    public int getSize() {
+        return deck.size();
     }
 }

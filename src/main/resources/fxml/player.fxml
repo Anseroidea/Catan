@@ -372,12 +372,21 @@
                </Button>
             </children>
          </HBox>
-         <Button fx:id="buyDevelopmentButton" layoutX="10.0" layoutY="96.0" mnemonicParsing="false" onAction="#buyDevelopment" prefHeight="51.0" prefWidth="357.0" text="Buy Development">
-            <font>
-               <Font size="24.0" />
-            </font>
-         </Button>
-         <Button fx:id="developmentCardsButton" layoutX="10.0" layoutY="182.0" mnemonicParsing="false" onAction="#goToDevelopment" prefHeight="51.0" prefWidth="352.0" text="Development Cards">
+         <HBox>
+            <children>
+               <Button fx:id="buyDevelopmentButton" mnemonicParsing="false" onAction="#buyDevelopment" prefHeight="51.0" prefWidth="350.0" text="Buy Dev Card" textAlignment="CENTER" wrapText="true">
+                  <font>
+                     <Font size="23.0" />
+                  </font>
+               </Button>
+               <Button fx:id="developmentCardsButton" mnemonicParsing="false" onAction="#goToDevelopment" prefHeight="51.0" prefWidth="352.0" text="See Dev Card">
+                  <font>
+                     <Font size="24.0" />
+                  </font>
+               </Button>
+            </children>
+         </HBox>
+         <Button fx:id="seeBuildingsLeft" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#seeBuildingsLeft" prefHeight="51.0" prefWidth="357.0" text="See Buildings Left">
             <font>
                <Font size="24.0" />
             </font>
@@ -399,7 +408,7 @@
                                  <Image url="@../images/resources/brick.png" />
                               </image>
                            </ImageView>
-                           <Label fx:id="bankOreLabel" prefWidth="30.0" text="0">
+                           <Label fx:id="bankBrickLabel" prefWidth="30.0" text="0">
                               <font>
                                  <Font size="24.0" />
                               </font>
@@ -409,7 +418,7 @@
                                  <Image url="@../images/resources/lumber.png" />
                               </image>
                            </ImageView>
-                           <Label fx:id="bankWoolLabel" layoutX="156.0" layoutY="22.0" prefWidth="30.0" text="0">
+                           <Label fx:id="bankLumberLabel" layoutX="251.0" layoutY="22.0" prefWidth="30.0" text="0" textOverrun="CLIP">
                               <font>
                                  <Font size="24.0" />
                               </font>
@@ -419,7 +428,7 @@
                                  <Image url="@../images/resources/ore.png" />
                               </image>
                            </ImageView>
-                           <Label fx:id="bankLumberLabel" layoutX="251.0" layoutY="22.0" prefWidth="30.0" text="0" textOverrun="CLIP">
+                           <Label fx:id="bankOreLabel" prefWidth="30.0" text="0">
                               <font>
                                  <Font size="24.0" />
                               </font>
@@ -433,7 +442,7 @@
                         <children>
                            <ImageView fitHeight="70.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                               <image>
-                                 <Image url="@../images/resources/wool.png" />
+                                 <Image url="@../images/resources/wheat.png" />
                               </image>
                            </ImageView>
                            <Label fx:id="bankWheatLabel" prefWidth="30.0" text="0">
@@ -443,10 +452,10 @@
                            </Label>
                            <ImageView fitHeight="70.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                               <image>
-                                 <Image url="@../images/resources/wheat.png" />
+                                 <Image url="@../images/resources/wool.png" />
                               </image>
                            </ImageView>
-                           <Label fx:id="bankBrickLabel" layoutX="156.0" layoutY="22.0" prefWidth="30.0" text="0">
+                           <Label fx:id="bankWoolLabel" prefWidth="30.0" text="0">
                               <font>
                                  <Font size="24.0" />
                               </font>
@@ -579,4 +588,10 @@
          <Font size="38.0" />
       </font>
    </Label>
+   <HBox layoutX="370.0" layoutY="30.0" prefHeight="120.0" prefWidth="240.0">
+      <children>
+         <ImageView fx:id="diceOne" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+         <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+      </children>
+   </HBox>
 </AnchorPane>

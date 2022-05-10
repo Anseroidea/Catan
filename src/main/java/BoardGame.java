@@ -27,7 +27,7 @@ public class BoardGame {
             3 2 240 3 3 3 4
             3 0 300 3 0 3 1
             1 0 0 2 0 1 0
-            -1 0 0 -1 0 -2 0
+            -1 0 0 -1 1 -2 0
             """;
 
     public static List<Vertex> getBuildableVertices(){
@@ -141,7 +141,7 @@ public class BoardGame {
             hexGridPane.add(new Tile(6), i, 7 - Math.abs(i) - 1);
         }
 
-        List<Integer> resourceIntList = new ArrayList<>(Arrays.stream("0 1 2 3 4 5 5 5 5 5".split(" ")).map(Integer::valueOf).toList());
+        List<Integer> resourceIntList = new ArrayList<>(Arrays.stream("0 1 2 3 4 5 5 5 5".split(" ")).map(Integer::valueOf).toList());
         Collections.shuffle(resourceIntList);
         List<Resource> resourceList = resourceIntList.stream().map(i -> i >= 5 ? null : Resource.getResourceList().get(i)).collect(Collectors.toList());
         System.out.println("resourceList = " + resourceList);
@@ -233,7 +233,7 @@ public class BoardGame {
 
     public static Player getLongestRoad() {
         updateLongestRoad();
-        return (longestRoad.getRoads().size() >= 3) ? longestRoad : null;
+        return (longestRoad.getRoads().size() >= 5) ? longestRoad : null;
     }
 
     public static void updateLongestRoad() {

@@ -552,19 +552,6 @@ public class Trade
     }
 
     public void toTradeOthers(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fl = new FXMLLoader(CatanApplication.class.getResource("/fxml/" + PopUp.TRADEOTHERS.name().toLowerCase() + ".fxml"));
-        AnchorPane ap = fl.load();
-        PopUp.TRADEOTHERS.setPane(ap);
-        PopUp.TRADEOTHERS.setController(fl.getController());
-        PopUp.TRADEOTHERS.load();
-
-        ((TradeOthers)PopUp.TRADEOTHERS.getController()).temp(this);
-
-        ((TradeOthers)PopUp.TRADEOTHERS.getController()).setGet(request);
-
-        ((TradeOthers)PopUp.TRADEOTHERS.getController()).setGive(offer);
-
-        ((TradeOthers)PopUp.TRADEOTHERS.getController()).setBasics();
-        //((Stage) ((Button) actionEvent.getSource()).getScene().getWindow()).close();
+        PopUp.TRADEOTHERS.loadTradeOthers(request, offer, this);
     }
 }

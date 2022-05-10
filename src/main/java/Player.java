@@ -222,7 +222,7 @@ public class Player
         {
             if(cur == null)
                 cur = 0;
-            BoardGame.getResourceDeck().changeCount(r, num);
+            BoardGame.getResourceDeck().changeCount(r, -1 * num);
             resources.put(r, cur + num);
         }
     }
@@ -263,17 +263,7 @@ public class Player
     }
 
     public void useDevelopment(DevelopmentCard dc){
-        if (dc.getId() == 6){
-
-        } else if (dc.getId() == 7){
-
-        } else if (dc.getId() == 8){
-
-        } else {
-
-        }
-        developmentCards.remove(dc);
-        TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " placed on a " + dc.getType() + " card.");
+        developmentCards.remove(dc);;
     }
 
     public boolean canBuildSettlement() {

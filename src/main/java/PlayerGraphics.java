@@ -33,7 +33,6 @@ public class PlayerGraphics {
     public Button developmentCardsButton;
     public Button nextRoundButton;
     public Button bankTradeButton;
-    public Button rob;
     public StackPane developmentPanel;
     public VBox developmentCardBox;
     public ImageView player1Icon;
@@ -79,13 +78,26 @@ public class PlayerGraphics {
     public Label cardsLabel;
     public Label vpLabel;
     public Label heading;
+    public Label oreLabel;
+    public Label woolLabel;
+    public Label lumberLabel;
+    public Button seeBuildingsLeft;
+    public Label bankOreLabel;
+    public Label bankWheatLabel;
+    public Label bankWoolLabel;
+    public Label bankDevelopmentLabel;
+    public Label bankLumberLabel;
+    public Label bankBrickLabel;
+
 
     @FXML
     public void initialize()
     {
+
     }
 
     public void refreshDisplay() {
+        refreshLabels();
         refreshPlayerInfo();
         refreshButtons();
         refreshText();
@@ -95,6 +107,15 @@ public class PlayerGraphics {
         }
     }
 
+    private void refreshLabels() {
+        bankBrickLabel.setText(BoardGame.getResourceDeck().getCount(Resource.BRICK) + "");
+        bankLumberLabel.setText(BoardGame.getResourceDeck().getCount(Resource.LUMBER) + "");
+        bankOreLabel.setText(BoardGame.getResourceDeck().getCount(Resource.ORE) + "");
+        bankWheatLabel.setText(BoardGame.getResourceDeck().getCount(Resource.WHEAT) + "");
+        bankWoolLabel.setText(BoardGame.getResourceDeck().getCount(Resource.WOOL) + "");
+        bankDevelopmentLabel.setText(BoardGame.getDevelopmentCardDeck().getSize() + "");
+    }
+
     private void refreshDevelopment() {
         VBox v = developmentCardBox;
         for (int i = v.getChildren().size() - 1; i >= 1; i--){
@@ -102,7 +123,12 @@ public class PlayerGraphics {
         }
         int availableDevelopmentCards = TurnManager.getCurrentPlayer().getDevelopmentCards().size();
         for (int i = 0; i < availableDevelopmentCards + TurnManager.getCurrentPlayer().getDevelopmentCardsBoughtThisTurn().size(); i++){
-            DevelopmentCard dc = TurnManager.getCurrentPlayer().getDevelopmentCards().get(i);
+            DevelopmentCard dc = null;
+            if (i < availableDevelopmentCards)
+                dc = TurnManager.getCurrentPlayer().getDevelopmentCards().get(i);
+            else {
+                dc = TurnManager.getCurrentPlayer().getDevelopmentCardsBoughtThisTurn().get(i - availableDevelopmentCards);
+            }
             HBox h = new HBox();
             h.setSpacing(30);
             ImageView im = new ImageView(SwingFXUtils.toFXImage(dc.getGraphic(), null));
@@ -116,6 +142,7 @@ public class PlayerGraphics {
                 im.setOnMouseClicked((event) -> {
                     if (id1 == 5){
                         TurnManager.getCurrentPlayer().addKnight();
+                        PopUp.ROBBERSELECT.loadRobber(true);
                     } else if (id1 == 6){
                         PopUp.ROADBUILDING.loadRoadBuilding();
                     } else if (id1 == 7){
@@ -136,6 +163,7 @@ public class PlayerGraphics {
                 if (id > 4){
                     im.setOnMouseClicked((event) -> {
                         if (id == 5){
+                            TurnManager.getCurrentPlayer().addKnight();
                             PopUp.ROBBERSELECT.loadRobber(true);
                         } else if (id == 6){
                             PopUp.ROADBUILDING.loadRoadBuilding();
@@ -165,6 +193,7 @@ public class PlayerGraphics {
             developmentCardsButton.setDisable(false);
             rollDiceButton.setDisable(true);
             nextRoundButton.setDisable(false);
+            seeBuildingsLeft.setDisable(false);
         } else {
             tradeButton.setDisable(true);
             bankTradeButton.setDisable(true);
@@ -172,6 +201,7 @@ public class PlayerGraphics {
             developmentCardsButton.setDisable(true);
             rollDiceButton.setDisable(false);
             nextRoundButton.setDisable(true);
+            seeBuildingsLeft.setDisable(true);
         }
     }
 
@@ -195,6 +225,7 @@ public class PlayerGraphics {
             }
             nonPlayingPlayers[ind++] = p;
         }
+
         Player player1 = nonPlayingPlayers[0];
         Player player2 = nonPlayingPlayers[1];
         Player player3 = nonPlayingPlayers[2];
@@ -215,7 +246,7 @@ public class PlayerGraphics {
         e.setStrokeWidth(5);
         e.setStroke(Color.BLACK);
         settlementPicture1.getChildren().add(e);
-        cityLabel1.setText((int) player1.getSettlements().stream().filter(Settlement::isSettlement).count() + "");
+        cityLabel1.setText((int) player1.getSettlements().stream().filter(se -> !se.isSettlement()).count() + "");
         Rectangle e1 = new Rectangle(50, 50, player1.getColor());
         e1.setStrokeWidth(5);
         e1.setStroke(Color.BLACK);
@@ -236,7 +267,7 @@ public class PlayerGraphics {
         e2.setStrokeWidth(5);
         e2.setStroke(Color.BLACK);
         settlementPicture2.getChildren().add(e2);
-        cityLabel2.setText((int) player2.getSettlements().stream().filter(Settlement::isSettlement).count() + "");
+        cityLabel2.setText((int) player2.getSettlements().stream().filter(se -> !se.isSettlement()).count() + "");
         Rectangle e3 = new Rectangle(50, 50, player2.getColor());
         e3.setStrokeWidth(5);
         e3.setStroke(Color.BLACK);
@@ -258,7 +289,7 @@ public class PlayerGraphics {
             e4.setStrokeWidth(5);
             e4.setStroke(Color.BLACK);
             settlementPicture3.getChildren().add(e4);
-            cityLabel3.setText((int) player3.getSettlements().stream().filter(Settlement::isSettlement).count() + "");
+            cityLabel3.setText((int) player3.getSettlements().stream().filter(se -> !se.isSettlement()).count() + "");
             Rectangle e5 = new Rectangle(50, 50, player3.getColor());
             e5.setStrokeWidth(5);
             e5.setStroke(Color.BLACK);
@@ -275,14 +306,14 @@ public class PlayerGraphics {
             cardsLabel.setTextFill(Color.BLACK);
         }
         knightsLabel.setText(currentPlayer.getKnights() + "");
-        developmentCardsLabel.setText(currentPlayer.getDevelopmentCards().size() + "");
+        developmentCardsLabel.setText(currentPlayer.getDevelopmentCards().size() + currentPlayer.getDevelopmentCardsBoughtThisTurn().size() + "");
         roadsLabel.setText(currentPlayer.getLongestRoad() + "");
         settlementLabel.setText(currentPlayer.getSettlements().size() + "");
         Circle e4 = new Circle(25, currentPlayer.getColor());
         e4.setStrokeWidth(5);
         e4.setStroke(Color.BLACK);
         settlementPicture.getChildren().add(e4);
-        cityLabel.setText((int) currentPlayer.getSettlements().stream().filter(Settlement::isSettlement).count() + "");
+        cityLabel.setText((int) currentPlayer.getSettlements().stream().filter(se -> !se.isSettlement()).count() + "");
         Rectangle e5 = new Rectangle(60, 60, currentPlayer.getColor());
         e5.setStroke(Color.BLACK);
         e5.setStrokeWidth(5);
@@ -325,6 +356,10 @@ public class PlayerGraphics {
         Label value = new Label(TurnManager.getAllActions());
         value.setBackground(Background.fill(Color.TRANSPARENT));
         scrollPane.setContent(value);
+    }
+
+    private void refreshDice(int one, int two){
+        
     }
 
     private void refreshBoardInteractives() {
@@ -528,6 +563,7 @@ public class PlayerGraphics {
     }
 
     public void nextRound(ActionEvent actionEvent) {
+        resourcesBox.setVisible(true);
         TurnManager.nextTurn();
         BoardGame.checkWin();
         refreshDisplay();
@@ -568,6 +604,10 @@ public class PlayerGraphics {
         developmentCardsButton.setDisable(true);
         rollDiceButton.setDisable(true);
         nextRoundButton.setDisable(true);
+    }
+
+    public void seeBuildingsLeft(ActionEvent actionEvent) {
+        PopUp.BUILDINGS.loadBuildings();
     }
 
     /*
