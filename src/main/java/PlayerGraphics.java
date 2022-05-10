@@ -108,7 +108,10 @@ public class PlayerGraphics {
     public ImageView diceTwo;
 
     public void refreshDisplay() {
-        refreshDice();
+        if (diceValOne != 0 && diceValTwo != 0) {
+            refreshDice();
+        }
+
         refreshLabels();
         refreshPlayerInfo();
         refreshButtons();
