@@ -160,7 +160,7 @@ public class PlayerGraphics {
                 if (!(i < availableDevelopmentCards)){
                     Tooltip t = new Tooltip("You can't play this card. (You bought it this turn)");
                     Tooltip.install(im, t);
-                } else if (!TurnManager.isHasPlayedDevelopmentCard()){
+                } else if (TurnManager.isHasPlayedDevelopmentCard()){
                     Tooltip t = new Tooltip("You can't play this card. (You've already played a development card)");
                     Tooltip.install(im, t);
                 } else {
@@ -191,7 +191,7 @@ public class PlayerGraphics {
                     if (!(i < availableDevelopmentCards)){
                         Tooltip t = new Tooltip("You can't play this card. (You bought it this turn)");
                         Tooltip.install(im, t);
-                    } else if (!TurnManager.isHasPlayedDevelopmentCard()){
+                    } else if (TurnManager.isHasPlayedDevelopmentCard()){
                         Tooltip t = new Tooltip("You can't play this card. (You've already played a development card)");
                         Tooltip.install(im, t);
                     } else {

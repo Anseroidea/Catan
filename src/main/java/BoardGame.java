@@ -264,7 +264,7 @@ public class BoardGame {
     }
 
     public static void checkWin() {
-        if (TurnManager.getCurrentPlayer().getPrivateVictoryPoints() == 10){
+        if (TurnManager.getCurrentPlayer().getPrivateVictoryPoints() >= 10){
             ProgramState.setCurrentState(ProgramState.WIN);
         }
     }

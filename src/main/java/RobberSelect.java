@@ -187,6 +187,7 @@ public class RobberSelect {
                                 TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " stole " + stolen.getResource());
                             }
                             stealLabel.setText("You stole a " + stolen.getResource());
+                            BoardGame.getRobber().setTile(robberTile);
                         }
                         BoardGame.getRobber().setTile(robberTile);
                     });
