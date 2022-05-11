@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -96,6 +97,7 @@ public class PlayerGraphics {
     private static int diceValOne, diceValTwo;
 
     static {
+        ToolTipManager.sharedInstance().setInitialDelay(200);
         try {
             for (int i = 1; i <= 6; i++){
                 dice[i-1] = ImageIO.read(Objects.requireNonNull(PlayerGraphics.class.getResourceAsStream("images/player/dice" + i + ".png")));
@@ -156,13 +158,14 @@ public class PlayerGraphics {
             if (i >= availableDevelopmentCards){
                 im.setDisable(true);
             }
+            StackPane sp = new StackPane(im);
             if (dc.getId() > 4){
                 if (!(i < availableDevelopmentCards)){
                     Tooltip t = new Tooltip("You can't play this card. (You bought it this turn)");
-                    Tooltip.install(im, t);
+                    Tooltip.install(sp, t);
                 } else if (TurnManager.isHasPlayedDevelopmentCard()){
                     Tooltip t = new Tooltip("You can't play this card. (You've already played a development card)");
-                    Tooltip.install(im, t);
+                    Tooltip.install(sp, t);
                 } else {
                     im.setOnMouseClicked((event) -> {
                         TurnManager.setHasPlayedDevelopmentCard(true);
@@ -179,21 +182,22 @@ public class PlayerGraphics {
                     });
                 }
             }
-            h.getChildren().add(im);
+            h.getChildren().add(sp);
             i++;
             if (i < TurnManager.getCurrentPlayer().getDevelopmentCards().size()){
                 dc = TurnManager.getCurrentPlayer().getDevelopmentCards().get(i);
-                im = new ImageView(SwingFXUtils.toFXImage(dc.getGraphic(), null));
-                im.setFitWidth(150);
-                im.setFitHeight(200);
+                StackPane spim = new StackPane();
+                ImageView iv = new ImageView(SwingFXUtils.toFXImage(dc.getGraphic(), null));
+                iv.setFitWidth(150);
+                iv.setFitHeight(200);
                 final int id = dc.getId();
                 if (id > 4){
                     if (!(i < availableDevelopmentCards)){
                         Tooltip t = new Tooltip("You can't play this card. (You bought it this turn)");
-                        Tooltip.install(im, t);
+                        Tooltip.install(spim, t);
                     } else if (TurnManager.isHasPlayedDevelopmentCard()){
                         Tooltip t = new Tooltip("You can't play this card. (You've already played a development card)");
-                        Tooltip.install(im, t);
+                        Tooltip.install(spim, t);
                     } else {
                         im.setOnMouseClicked((event) -> {
                             TurnManager.setHasPlayedDevelopmentCard(true);
@@ -210,7 +214,8 @@ public class PlayerGraphics {
                         });
                     }
                 }
-                h.getChildren().add(im);
+                spim.getChildren().add(iv);
+                h.getChildren().add(spim);
             }
             v.getChildren().add(h);
         }
@@ -317,7 +322,7 @@ public class PlayerGraphics {
         knightsLabel1.setText(player1.getKnights() + "");
         developmentCardsLabel1.setText(player1.getDevelopmentCards().size() + "");
         roadsLabel1.setText(player1.getLongestRoad() + "");
-        settlementLabel1.setText(player1.getSettlements().size() + "");
+        settlementLabel1.setText((int) player1.getSettlements().stream().filter(Settlement::isSettlement).count() + "");
         Circle e = new Circle(25, player1.getColor());
         e.setStrokeWidth(5);
         e.setStroke(Color.BLACK);
@@ -338,7 +343,7 @@ public class PlayerGraphics {
         knightsLabel2.setText(player2.getKnights() + "");
         developmentCardsLabel2.setText(player2.getDevelopmentCards().size() + "");
         roadsLabel2.setText(player2.getLongestRoad() + "");
-        settlementLabel2.setText(player2.getSettlements().size() + "");
+        settlementLabel2.setText((int) player2.getSettlements().stream().filter(Settlement::isSettlement).count() + "");
         Circle e2 = new Circle(25, player2.getColor());
         e2.setStrokeWidth(5);
         e2.setStroke(Color.BLACK);
@@ -360,7 +365,7 @@ public class PlayerGraphics {
             knightsLabel3.setText(player3.getKnights() + "");
             developmentCardsLabel3.setText(player3.getDevelopmentCards().size() + "");
             roadsLabel3.setText(player3.getLongestRoad() + "");
-            settlementLabel3.setText(player3.getSettlements().size() + "");
+            settlementLabel3.setText((int) player3.getSettlements().stream().filter(Settlement::isSettlement).count() + "");
             Circle e4 = new Circle(25, player3.getColor());
             e4.setStrokeWidth(5);
             e4.setStroke(Color.BLACK);
@@ -384,7 +389,7 @@ public class PlayerGraphics {
         knightsLabel.setText(currentPlayer.getKnights() + "");
         developmentCardsLabel.setText(currentPlayer.getDevelopmentCards().size() + currentPlayer.getDevelopmentCardsBoughtThisTurn().size() + "");
         roadsLabel.setText(currentPlayer.getLongestRoad() + "");
-        settlementLabel.setText(currentPlayer.getSettlements().size() + "");
+        settlementLabel.setText((int) currentPlayer.getSettlements().stream().filter(Settlement::isSettlement).count() + "");
         Circle e4 = new Circle(25, currentPlayer.getColor());
         e4.setStrokeWidth(5);
         e4.setStroke(Color.BLACK);

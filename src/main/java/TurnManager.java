@@ -11,6 +11,7 @@ public class TurnManager {
 
     public static void nextTurn(){
         getCurrentPlayer().nextTurn();
+        hasPlayedDevelopmentCard = false;
         hasRolledDice = false;
         hasBuilt = false;
         playerQueue.add(playerQueue.remove());
