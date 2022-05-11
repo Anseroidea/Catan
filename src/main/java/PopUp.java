@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public enum PopUp {
-    TRADEBANK, TRADE, MONOPOLY, ROADBUILDING, TRADEOTHERS, YEAROFPLENTY, ROBBERSELECT, DISCARD, BUILDINGS;
+    TRADEBANK, TRADE, MONOPOLY, ROADBUILDING, TRADEOTHERS, YEAROFPLENTY, ROBBERSELECT, DISCARD, BUILDINGS, FINALBOARD;
 
     private static boolean lastPopUpCancelled = false;
 
@@ -147,6 +147,7 @@ public enum PopUp {
     public void loadBuildings(){
         if (this != BUILDINGS){
             System.out.println("This is buildings");
+            return;
         }
         ((Buildings) controller).initPopUp();
         load(600, 400);
@@ -155,9 +156,18 @@ public enum PopUp {
     public void loadTradeOthers(Map<Resource, Integer> request, Map<Resource, Integer> offer, Trade t){
         if (this != TRADEOTHERS){
             System.out.println("This is trade others");
-
+            return;
         }
         ((TradeOthers) controller).initPopUp(request, offer, t);
+        load(1920, 1080);
+    }
+
+    public void loadFinalBoard(){
+        if (this != FINALBOARD){
+            System.out.println("This is the final board");
+            return;
+        }
+        ((FinalBoard) controller).initPopUp();
         load(1920, 1080);
     }
 }

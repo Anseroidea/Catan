@@ -1,6 +1,7 @@
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -10,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import javax.imageio.ImageIO;
@@ -88,6 +90,7 @@ public class PlayerGraphics {
     public Label bankDevelopmentLabel;
     public Label bankLumberLabel;
     public Label bankBrickLabel;
+    public StackPane buyDevCardStackPane;
 
     private static BufferedImage[] dice = new BufferedImage[6];
     private static int diceValOne, diceValTwo;
@@ -153,20 +156,28 @@ public class PlayerGraphics {
             if (i >= availableDevelopmentCards){
                 im.setDisable(true);
             }
-            if (dc.getId() > 4 && i < availableDevelopmentCards && !TurnManager.isHasPlayedDevelopmentCard()){
-                im.setOnMouseClicked((event) -> {
-                    TurnManager.setHasPlayedDevelopmentCard(true);
-                    if (id1 == 5){
-                        TurnManager.getCurrentPlayer().addKnight();
-                        PopUp.ROBBERSELECT.loadRobber(true);
-                    } else if (id1 == 6){
-                        PopUp.ROADBUILDING.loadRoadBuilding();
-                    } else if (id1 == 7){
-                        PopUp.YEAROFPLENTY.loadYearOfPlenty();
-                    } else {
-                        PopUp.MONOPOLY.loadMonopoly();
-                    }
-                });
+            if (dc.getId() > 4){
+                if (!(i < availableDevelopmentCards)){
+                    Tooltip t = new Tooltip("You can't play this card. (You bought it this turn)");
+                    Tooltip.install(im, t);
+                } else if (!TurnManager.isHasPlayedDevelopmentCard()){
+                    Tooltip t = new Tooltip("You can't play this card. (You've already played a development card)");
+                    Tooltip.install(im, t);
+                } else {
+                    im.setOnMouseClicked((event) -> {
+                        TurnManager.setHasPlayedDevelopmentCard(true);
+                        if (id1 == 5){
+                            TurnManager.getCurrentPlayer().addKnight();
+                            PopUp.ROBBERSELECT.loadRobber(true);
+                        } else if (id1 == 6){
+                            PopUp.ROADBUILDING.loadRoadBuilding();
+                        } else if (id1 == 7){
+                            PopUp.YEAROFPLENTY.loadYearOfPlenty();
+                        } else {
+                            PopUp.MONOPOLY.loadMonopoly();
+                        }
+                    });
+                }
             }
             h.getChildren().add(im);
             i++;
@@ -176,20 +187,28 @@ public class PlayerGraphics {
                 im.setFitWidth(150);
                 im.setFitHeight(200);
                 final int id = dc.getId();
-                if (id > 4 && !TurnManager.isHasPlayedDevelopmentCard()){
-                    im.setOnMouseClicked((event) -> {
-                        TurnManager.setHasPlayedDevelopmentCard(true);
-                        if (id == 5){
-                            TurnManager.getCurrentPlayer().addKnight();
-                            PopUp.ROBBERSELECT.loadRobber(true);
-                        } else if (id == 6){
-                            PopUp.ROADBUILDING.loadRoadBuilding();
-                        } else if (id == 7){
-                            PopUp.YEAROFPLENTY.loadYearOfPlenty();
-                        } else {
-                            PopUp.MONOPOLY.loadMonopoly();
-                        }
-                    });
+                if (id > 4){
+                    if (!(i < availableDevelopmentCards)){
+                        Tooltip t = new Tooltip("You can't play this card. (You bought it this turn)");
+                        Tooltip.install(im, t);
+                    } else if (!TurnManager.isHasPlayedDevelopmentCard()){
+                        Tooltip t = new Tooltip("You can't play this card. (You've already played a development card)");
+                        Tooltip.install(im, t);
+                    } else {
+                        im.setOnMouseClicked((event) -> {
+                            TurnManager.setHasPlayedDevelopmentCard(true);
+                            if (id1 == 5){
+                                TurnManager.getCurrentPlayer().addKnight();
+                                PopUp.ROBBERSELECT.loadRobber(true);
+                            } else if (id1 == 6){
+                                PopUp.ROADBUILDING.loadRoadBuilding();
+                            } else if (id1 == 7){
+                                PopUp.YEAROFPLENTY.loadYearOfPlenty();
+                            } else {
+                                PopUp.MONOPOLY.loadMonopoly();
+                            }
+                        });
+                    }
                 }
                 h.getChildren().add(im);
             }
@@ -198,6 +217,32 @@ public class PlayerGraphics {
     }
 
     private void refreshButtons(){
+        VBox v = new VBox();
+        v.setAlignment(Pos.TOP_CENTER);
+        Tooltip value = new Tooltip();
+        HBox h = new HBox();
+        h.setSpacing(10);
+        ImageView ore = new ImageView(SwingFXUtils.toFXImage(Resource.ORE.getGraphic(), null));
+        ore.setFitHeight(50);
+        ore.setFitWidth(44);
+        Label oreL = new Label("1 ");
+        oreL.setFont(Font.font(20));
+        ImageView wheat = new ImageView(SwingFXUtils.toFXImage(Resource.WHEAT.getGraphic(), null));
+        wheat.setFitHeight(50);
+        wheat.setFitWidth(44);
+        Label wheatL = new Label("1 ");
+        wheatL.setFont(Font.font(20));
+        ImageView wool = new ImageView(SwingFXUtils.toFXImage(Resource.WOOL.getGraphic(), null));
+        wool.setFitHeight(50);
+        wool.setFitWidth(44);
+        Label woolL = new Label("1 ");
+        woolL.setFont(Font.font(20));
+        h.getChildren().addAll(ore, oreL, wheat, wheatL, wool, woolL);
+        h.setAlignment(Pos.CENTER);
+        value.setGraphic(h);
+        Label label = new Label("Cost: ");
+        label.setFont(Font.font(20));
+        v.getChildren().addAll(label, h);
         if(TurnManager.hasRolledDice()){
             if (TurnManager.hasBuilt()){
                 tradeButton.setDisable(true);
@@ -207,6 +252,15 @@ public class PlayerGraphics {
                 bankTradeButton.setDisable(false);
             }
             buyDevelopmentButton.setDisable(!TurnManager.getCurrentPlayer().canBuyDevelopment());
+            if (!TurnManager.getCurrentPlayer().canBuyDevelopment()){
+                Label l = new Label("You don't have enough!");
+                l.setFont(Font.font(20));
+                v.getChildren().add(l);
+            } else {
+                Label l = new Label("You have enough!");
+                l.setFont(Font.font(20));
+                v.getChildren().add(l);
+            }
             developmentCardsButton.setDisable(false);
             rollDiceButton.setDisable(true);
             nextRoundButton.setDisable(false);
@@ -219,7 +273,12 @@ public class PlayerGraphics {
             rollDiceButton.setDisable(false);
             nextRoundButton.setDisable(true);
             seeBuildingsLeft.setDisable(true);
+            Label l = new Label("Roll the dice first!");
+            l.setFont(Font.font(20));
+            v.getChildren().add(l);
         }
+        value.setGraphic(v);
+        Tooltip.install(buyDevCardStackPane, value);
     }
 
     private void refreshPlayerInfo() {
@@ -403,7 +462,24 @@ public class PlayerGraphics {
                 }
                 if (TurnManager.getCurrentPlayer().getBuildableEdges().contains(e)){
                     ContextMenu menu = new ContextMenu();
-                    StackPane build_road = new StackPane(new Label("Build Road"));
+                    VBox build_road = new VBox();
+                    build_road.getChildren().add(new StackPane(new Label("Build Road")));
+                    HBox h = new HBox();
+                    h.setAlignment(Pos.CENTER);
+                    h.setSpacing(10);
+                    ImageView brick = new ImageView(SwingFXUtils.toFXImage(Resource.BRICK.getGraphic(), null));
+                    brick.setFitHeight(50);
+                    brick.setFitWidth(44);
+                    Label brickL = new Label("1 ");
+                    brickL.setFont(Font.font(20));
+                    ImageView lumber = new ImageView(SwingFXUtils.toFXImage(Resource.LUMBER.getGraphic(), null));
+                    lumber.setFitHeight(50);
+                    lumber.setFitWidth(44);
+                    Label lumberL = new Label("1 ");
+                    lumberL.setFont(Font.font(20));
+                    h.getChildren().addAll(brick, brickL, lumber, lumberL);
+                    Label label = new Label("You have enough!");
+                    build_road.getChildren().addAll(h, label);
                     CustomMenuItem mi = new CustomMenuItem(build_road);
                     mi.setOnAction((event1) -> {
                         TurnManager.getCurrentPlayer().buildRoad(e);
@@ -415,11 +491,9 @@ public class PlayerGraphics {
                     });
                     if (!TurnManager.getCurrentPlayer().canBuildRoad()){
                         mi.setDisable(true);
+                        label.setText("You don't have enough!");
                     }
                     menu.getItems().add(mi);
-                    Tooltip t = new Tooltip("hi!");
-                    t.setShowDelay(Duration.millis(200));
-                    Tooltip.install(build_road, t);
                     menu.show(l, Side.BOTTOM, 0, 0);
                 }
                 //System.out.println("v1, v2:" + e.getAdjacentTiles().values().stream().map(Tile::getWeight).collect(Collectors.toList()));
@@ -445,8 +519,35 @@ public class PlayerGraphics {
                 }
                 ContextMenu menu = new ContextMenu();
                 if (TurnManager.getCurrentPlayer().getBuildableVertices().contains(v)){
-                    StackPane build_settlement = new StackPane(new Label("Build Settlement"));
+                    VBox build_settlement = new VBox();
+                    build_settlement.getChildren().add(new StackPane(new Label("Build Settlement")));
                     CustomMenuItem mi = new CustomMenuItem(build_settlement);
+                    HBox h = new HBox();
+                    h.setAlignment(Pos.CENTER);
+                    h.setSpacing(10);
+                    ImageView brick = new ImageView(SwingFXUtils.toFXImage(Resource.BRICK.getGraphic(), null));
+                    brick.setFitHeight(50);
+                    brick.setFitWidth(44);
+                    Label brickL = new Label("1 ");
+                    brickL.setFont(Font.font(20));
+                    ImageView lumber = new ImageView(SwingFXUtils.toFXImage(Resource.LUMBER.getGraphic(), null));
+                    lumber.setFitHeight(50);
+                    lumber.setFitWidth(44);
+                    Label lumberL = new Label("1 ");
+                    lumberL.setFont(Font.font(20));
+                    ImageView wheat = new ImageView(SwingFXUtils.toFXImage(Resource.WHEAT.getGraphic(), null));
+                    wheat.setFitHeight(50);
+                    wheat.setFitWidth(44);
+                    Label wheatL = new Label("1 ");
+                    wheatL.setFont(Font.font(20));
+                    ImageView wool = new ImageView(SwingFXUtils.toFXImage(Resource.WOOL.getGraphic(), null));
+                    wool.setFitHeight(50);
+                    wool.setFitWidth(44);
+                    Label woolL = new Label("1 ");
+                    woolL.setFont(Font.font(20));
+                    h.getChildren().addAll(brick, brickL, lumber, lumberL, wheat, wheatL, wool, woolL);
+                    Label label = new Label("You have enough!");
+                    build_settlement.getChildren().addAll(h, label);
                     mi.setOnAction((event1) -> {
                         TurnManager.getCurrentPlayer().buildSettlement(v);
                         TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " built a settlement.");
@@ -456,11 +557,9 @@ public class PlayerGraphics {
                     });
                     if (!TurnManager.getCurrentPlayer().canBuildSettlement()){
                         mi.setDisable(true);
+                        label.setText("You don't have enough!");
                     }
                     menu.getItems().add(mi);
-                    Tooltip t = new Tooltip("hi!");
-                    t.setShowDelay(Duration.millis(200));
-                    Tooltip.install(build_settlement, t);
                 }
                 menu.show(sp, Side.BOTTOM, 0, 0);
             });
@@ -517,7 +616,24 @@ public class PlayerGraphics {
                     ContextMenu menu = new ContextMenu();
                     if (p == TurnManager.getCurrentPlayer()){
                         if (TurnManager.hasRolledDice()){
-                            StackPane build_city = new StackPane(new Label("Build City"));
+                            VBox build_city = new VBox();
+                            build_city.getChildren().add(new StackPane(new Label("Build City")));
+                            HBox h = new HBox();
+                            h.setAlignment(Pos.CENTER);
+                            h.setSpacing(10);
+                            ImageView wheat = new ImageView(SwingFXUtils.toFXImage(Resource.WHEAT.getGraphic(), null));
+                            wheat.setFitHeight(50);
+                            wheat.setFitWidth(44);
+                            Label wheatL = new Label("2 ");
+                            wheatL.setFont(Font.font(20));
+                            ImageView ore = new ImageView(SwingFXUtils.toFXImage(Resource.ORE.getGraphic(), null));
+                            ore.setFitHeight(50);
+                            ore.setFitWidth(44);
+                            Label oreL = new Label("3 ");
+                            oreL.setFont(Font.font(20));
+                            h.getChildren().addAll(ore, oreL, wheat, wheatL);
+                            Label label = new Label("You have enough!");
+                            build_city.getChildren().addAll(h, label);
                             CustomMenuItem mi = new CustomMenuItem(build_city);
                             mi.setOnAction((event1) -> {
                                 TurnManager.getCurrentPlayer().buildCity(s);
@@ -528,11 +644,9 @@ public class PlayerGraphics {
                             });
                             if (!TurnManager.getCurrentPlayer().canBuildCity()){
                                 mi.setDisable(true);
+                                label.setText("You don't have enough!");
                             }
                             menu.getItems().add(mi);
-                            Tooltip t = new Tooltip("hi!");
-                            t.setShowDelay(Duration.millis(200));
-                            Tooltip.install(build_city, t);
                         }
                     }
                     menu.show(sp, Side.BOTTOM, 0, 0);

@@ -6,7 +6,8 @@ public enum ProgramState {
     BOARD,
     WIN,
     RULES,
-    SETTLEMENT;
+    SETTLEMENT,
+    USERMANUAL;
 
     private Pane p;
     private static ProgramState currentState;

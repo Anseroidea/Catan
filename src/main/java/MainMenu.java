@@ -22,4 +22,9 @@ public class MainMenu {
         Stage stage = (Stage) button.getScene().getWindow();
         stage.close();
     }
+
+    public void manual(ActionEvent actionEvent) {
+        ProgramState.setCurrentState(ProgramState.USERMANUAL);
+        CatanApplication.updateDisplay();
+    }
 }

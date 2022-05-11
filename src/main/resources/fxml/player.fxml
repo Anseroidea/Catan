@@ -372,11 +372,15 @@
          </HBox>
          <HBox>
             <children>
-               <Button fx:id="buyDevelopmentButton" mnemonicParsing="false" onAction="#buyDevelopment" prefHeight="51.0" prefWidth="350.0" text="Buy Dev Card" textAlignment="CENTER" wrapText="true">
-                  <font>
-                     <Font size="23.0" />
-                  </font>
-               </Button>
+               <StackPane fx:id="buyDevCardStackPane">
+                  <children>
+                     <Button fx:id="buyDevelopmentButton" mnemonicParsing="false" onAction="#buyDevelopment" prefHeight="51.0" prefWidth="350.0" text="Buy Dev Card" textAlignment="CENTER" wrapText="true">
+                        <font>
+                           <Font size="23.0" />
+                        </font>
+                     </Button>
+                  </children>
+               </StackPane>
                <Button fx:id="developmentCardsButton" mnemonicParsing="false" onAction="#goToDevelopment" prefHeight="51.0" prefWidth="352.0" text="See Dev Card">
                   <font>
                      <Font size="24.0" />

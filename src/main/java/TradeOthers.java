@@ -82,6 +82,7 @@ public class TradeOthers
             }
             Label name = new Label(p.getName());
             name.setFont(Font.font(30));
+            name.setStyle("-fx-background-color: white;-fx-border-color: black;-fx-border-width: 5");
             consider.getChildren().add(name);
             HBox h = new HBox();
             h.setAlignment(Pos.CENTER_LEFT);
@@ -177,9 +178,11 @@ public class TradeOthers
                 v1.getChildren().remove(1);
             }
             Label l1 = new Label(give.get(Resource.getResourceList().get(i)) + "");
-            l.setFont(Font.font(20));
+            l1.setFont(Font.font(20));
             v1.getChildren().add(l1);
         }
+        requestHbox.setStyle("-fx-background-color: white;-fx-border-color: black;-fx-border-width: 5");
+        offerHbox.setStyle("-fx-background-color: white;-fx-border-color: black;-fx-border-width: 5");
     }
 
 
