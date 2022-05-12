@@ -159,7 +159,8 @@ public class PlayerGraphics {
                 im.setDisable(true);
             }
             StackPane sp = new StackPane(im);
-            if (dc.getId() > 4){
+            if (id1 > 4){
+                System.out.println("ID: " + id1);
                 if (!(i < availableDevelopmentCards)){
                     Tooltip t = new Tooltip("You can't play this card. (You bought it this turn)");
                     Tooltip.install(sp, t);
@@ -168,30 +169,37 @@ public class PlayerGraphics {
                     Tooltip.install(sp, t);
                 } else {
                     im.setOnMouseClicked((event) -> {
-                        TurnManager.setHasPlayedDevelopmentCard(true);
                         if (id1 == 5){
-                            TurnManager.getCurrentPlayer().addKnight();
                             PopUp.ROBBERSELECT.loadRobber(true);
                         } else if (id1 == 6){
                             PopUp.ROADBUILDING.loadRoadBuilding();
                         } else if (id1 == 7){
                             PopUp.YEAROFPLENTY.loadYearOfPlenty();
-                        } else {
+                        } else if (id1 == 8){
                             PopUp.MONOPOLY.loadMonopoly();
+                        } else {
+                            System.out.println("This shouldn't be running...");
                         }
                     });
                 }
             }
             h.getChildren().add(sp);
             i++;
-            if (i < TurnManager.getCurrentPlayer().getDevelopmentCards().size()){
-                dc = TurnManager.getCurrentPlayer().getDevelopmentCards().get(i);
+            if (i < TurnManager.getCurrentPlayer().getDevelopmentCards().size() + TurnManager.getCurrentPlayer().getDevelopmentCardsBoughtThisTurn().size()){
+                System.out.println("ID: " + id1);
+                DevelopmentCard dc1 = null;
+                if (i < availableDevelopmentCards)
+                    dc1 = TurnManager.getCurrentPlayer().getDevelopmentCards().get(i);
+                else {
+                    dc1 = TurnManager.getCurrentPlayer().getDevelopmentCardsBoughtThisTurn().get(i - availableDevelopmentCards);
+                }
                 StackPane spim = new StackPane();
-                ImageView iv = new ImageView(SwingFXUtils.toFXImage(dc.getGraphic(), null));
+                ImageView iv = new ImageView(SwingFXUtils.toFXImage(dc1.getGraphic(), null));
                 iv.setFitWidth(150);
                 iv.setFitHeight(200);
-                final int id = dc.getId();
+                final int id = dc1.getId();
                 if (id > 4){
+                    System.out.println("2: " + id);
                     if (!(i < availableDevelopmentCards)){
                         Tooltip t = new Tooltip("You can't play this card. (You bought it this turn)");
                         Tooltip.install(spim, t);
@@ -199,17 +207,17 @@ public class PlayerGraphics {
                         Tooltip t = new Tooltip("You can't play this card. (You've already played a development card)");
                         Tooltip.install(spim, t);
                     } else {
-                        im.setOnMouseClicked((event) -> {
-                            TurnManager.setHasPlayedDevelopmentCard(true);
-                            if (id1 == 5){
-                                TurnManager.getCurrentPlayer().addKnight();
+                        iv.setOnMouseClicked((event) -> {
+                            if (id == 5){
                                 PopUp.ROBBERSELECT.loadRobber(true);
-                            } else if (id1 == 6){
+                            } else if (id == 6){
                                 PopUp.ROADBUILDING.loadRoadBuilding();
-                            } else if (id1 == 7){
+                            } else if (id == 7){
                                 PopUp.YEAROFPLENTY.loadYearOfPlenty();
-                            } else {
+                            } else if (id == 8){
                                 PopUp.MONOPOLY.loadMonopoly();
+                            } else {
+                                System.out.println("This shouldn't be running...");
                             }
                         });
                     }
@@ -274,7 +282,7 @@ public class PlayerGraphics {
             tradeButton.setDisable(true);
             bankTradeButton.setDisable(true);
             buyDevelopmentButton.setDisable(true);
-            developmentCardsButton.setDisable(true);
+            developmentCardsButton.setDisable(false);
             rollDiceButton.setDisable(false);
             nextRoundButton.setDisable(true);
             seeBuildingsLeft.setDisable(true);

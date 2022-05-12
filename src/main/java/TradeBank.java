@@ -230,10 +230,10 @@ public class TradeBank
         if (get.get(Resource.ORE) == 0 || get.get(Resource.ORE) == BoardGame.getResourceDeck().getCount(Resource.ORE)){
             reqRemOreButton.setDisable(true);
         }
-        if (get.get(Resource.WHEAT) == 0 || get.get(Resource.ORE) == BoardGame.getResourceDeck().getCount(Resource.ORE)){
+        if (get.get(Resource.WHEAT) == 0 || get.get(Resource.ORE) == BoardGame.getResourceDeck().getCount(Resource.WHEAT)){
             reqRemWheatButton.setDisable(true);
         }
-        if (get.get(Resource.WOOL) == 0 || get.get(Resource.ORE) == BoardGame.getResourceDeck().getCount(Resource.ORE)){
+        if (get.get(Resource.WOOL) == 0 || get.get(Resource.ORE) == BoardGame.getResourceDeck().getCount(Resource.WOOL)){
             reqRemWoolButton.setDisable(true);
         }
         if (numCardsAvailable <= 0){

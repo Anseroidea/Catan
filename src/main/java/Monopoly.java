@@ -65,6 +65,9 @@ public class Monopoly
         int total = 0;
         for(Player victim : TurnManager.getPlayerList())
         {
+            if (victim.equals(TurnManager.getCurrentPlayer())){
+                continue;
+            }
             Integer temp = victim.getResources().get(gain);
             if((temp > 0))
             {
@@ -72,6 +75,7 @@ public class Monopoly
                 victim.changeCards(gain, -temp);
             }
         }
+        TurnManager.setHasPlayedDevelopmentCard(true);
         p.changeCards(gain, total);
         if (total != 0){
             TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " stole all the " + gain.getResource() + ".");

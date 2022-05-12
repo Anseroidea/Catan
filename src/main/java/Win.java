@@ -17,6 +17,6 @@ public class Win {
     }
 
     public void finalBoard(ActionEvent actionEvent) {
-        PopUp.FINALBOARD.load();
+        PopUp.FINALBOARD.loadFinalBoard();
     }
 }

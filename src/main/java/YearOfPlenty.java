@@ -53,6 +53,7 @@ public class YearOfPlenty {
                 TurnManager.getCurrentPlayer().changeCards(r, request.get(r));
             }
         }
+        TurnManager.setHasPlayedDevelopmentCard(true);
         TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " played a Year of Plenty Card.");
         back(null);
         GraphicsManager.refreshDisplay();

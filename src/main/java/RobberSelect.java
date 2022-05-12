@@ -32,6 +32,7 @@ public class RobberSelect {
     public AnchorPane ap;
     private boolean knight;
     private boolean isSelectingTile;
+    private boolean hasStolen;
     private Tile robberTile;
 
     public void initPopUp(boolean knight){
@@ -40,6 +41,7 @@ public class RobberSelect {
         this.knight = knight;
         back.setVisible(knight);
         isSelectingTile = true;
+        hasStolen = false;
         robberTile = BoardGame.getRobber().getTile();
         resourceDisplay.setVisible(false);
         refreshAll();
@@ -159,6 +161,10 @@ public class RobberSelect {
                     double colCoord = (showWater ? 1 : 0) * radius * Math.sqrt(3) + (Math.abs(v.getR()) - 1 + v.getC()) * radius * Math.sqrt(3) / 2. - 15;
                     Circle circle = new Circle(15, new Color(0.1,0.7, 0, .7));
                     circle.setOnMouseClicked((event) -> {
+                        if (hasStolen){
+                            return;
+                        }
+                        hasStolen = true;
                         List<Resource> resources = new ArrayList<>();
                         for (Resource r : Resource.getResourceList()){
                             for (int i = 0; i < v.getSettlement().getPlayer().getResources().get(r); i++){
@@ -182,6 +188,8 @@ public class RobberSelect {
                             TurnManager.getCurrentPlayer().changeCards(stolen, 1);
                             resourceDisplay.setVisible(true);
                             if (knight) {
+                                TurnManager.setHasPlayedDevelopmentCard(true);
+                                TurnManager.getCurrentPlayer().addKnight();
                                 TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " used a knight and stole " + stolen.getResource());
                             } else {
                                 TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " stole " + stolen.getResource());

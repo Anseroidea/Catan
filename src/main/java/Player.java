@@ -256,7 +256,12 @@ public class Player
     }
 
     public void buyDevelopment() {
-        developmentCardsBoughtThisTurn.add(BoardGame.getDevelopmentCardDeck().drawCard());
+        DevelopmentCard dc = BoardGame.getDevelopmentCardDeck().drawCard();
+        if (dc.getId() <= 4){
+            developmentCards.add(dc);
+        } else {
+            developmentCardsBoughtThisTurn.add(dc);
+        }
         changeCards(Resource.WOOL, -1);
         changeCards(Resource.WHEAT, -1);
         changeCards(Resource.ORE, -1);

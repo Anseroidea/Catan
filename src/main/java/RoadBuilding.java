@@ -136,7 +136,9 @@ public class RoadBuilding {
         for (Edge e : selectedEdges){
             e.buildRoad(TurnManager.getCurrentPlayer());
         }
+        TurnManager.setHasPlayedDevelopmentCard(true);
         TurnManager.addAction(TurnManager.getCurrentPlayer().getName() + " played a Road Building Card.");
+        BoardGame.updateLongestRoad();
         Stage stage = (Stage) boardPane.getScene().getWindow();
         stage.getScene().setRoot(new AnchorPane());
         stage.close();

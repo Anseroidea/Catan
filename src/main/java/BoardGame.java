@@ -234,7 +234,7 @@ public class BoardGame {
 
     public static Player getLargestArmy() {
         updateLargestArmy();
-        return largestArmy;
+        return largestArmy.getKnights() >= 3 ? largestArmy : null;
     }
 
     public static void updateLargestArmy() {
@@ -244,7 +244,7 @@ public class BoardGame {
                 largest = p;
             }
         }
-
+        largestArmy = largest;
     }
 
     public static Player getLongestRoad() {
@@ -266,6 +266,7 @@ public class BoardGame {
     public static void checkWin() {
         if (TurnManager.getCurrentPlayer().getPrivateVictoryPoints() >= 10){
             ProgramState.setCurrentState(ProgramState.WIN);
+            CatanApplication.updateDisplay();
         }
     }
 
