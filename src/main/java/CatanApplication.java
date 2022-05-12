@@ -42,6 +42,7 @@ public class CatanApplication extends Application {
                     s.setPane(ap);
                 } else if (s.name().equals("WIN")){
                     win = fl.getController();
+                    s.setPane(ap);
                 } else {
                     s.setPane(ap);
                 }
